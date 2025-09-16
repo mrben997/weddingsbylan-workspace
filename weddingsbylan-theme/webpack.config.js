@@ -13,6 +13,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
       { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
       {
         test: /\.scss$/i,
@@ -38,35 +45,17 @@ module.exports = {
       }
     ]
   },
-  // Multiple entry points
+  // Entry point chính cho React app
   entry: {
-    home: './src/pages/home/index.js',
-    photography: './src/pages/photography/index.js'
-    // services: './src/pages/services/index.js',
-    // contact: './src/pages/contact/index.js'
+    main: './src/index.tsx'
   },
   plugins: [
-    // Tạo HTML cho từng trang
+    // HTML file chính cho React app
     new HtmlWebpackPlugin({
-      template: './src/pages/home/index.html',
-      filename: 'home.html',
-      chunks: ['home']
+      template: './public/index.html',
+      filename: 'index.html',
+      chunks: ['main']
     }),
-    new HtmlWebpackPlugin({
-      template: './src/pages/photography/index.html',
-      filename: 'photography.html',
-      chunks: ['photography']
-    }),
-    // new HtmlWebpackPlugin({
-    //   template: './src/pages/services/services.html',
-    //   filename: 'services.html',
-    //   chunks: ['services']
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: './src/pages/contact/contact.html',
-    //   filename: 'contact.html',
-    //   chunks: ['contact']
-    // }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
@@ -75,8 +64,11 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist'), // hoặc đơn giản là: to: 'public'
-          noErrorOnMissing: true
+          to: path.resolve(__dirname, 'dist'),
+          noErrorOnMissing: true,
+          globOptions: {
+            ignore: ['**/index.html'] // Ignore index.html since HtmlWebpackPlugin handles it
+          }
         }
       ]
     })
@@ -96,7 +88,10 @@ module.exports = {
     port: 8080,
     // open: true, // Chỉ cần open: true, không cần target
     hot: true,
-    historyApiFallback: false // Tắt historyApiFallback để không redirect
+    historyApiFallback: true // Bật để hỗ trợ React Router
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx']
   },
   mode: 'development' // đổi sang 'production' khi build thật
 }

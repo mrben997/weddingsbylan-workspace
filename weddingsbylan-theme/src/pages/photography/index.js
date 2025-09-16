@@ -1,7 +1,0 @@
-import '../../shared/styles/global.scss'
-import '../../shared/styles/header.scss'
-import '../../shared/styles/footer.scss'
-import '../../shared/styles/theme-dark.scss'
-import './about.scss'
-import './service.scss'
-import './index.scss'
