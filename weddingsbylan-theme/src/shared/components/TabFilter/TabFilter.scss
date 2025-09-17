@@ -1,0 +1,143 @@
+// Tab Filter Styles
+.tab-filter {
+  width: 100%;
+  margin: 2rem 0;
+  
+  .tab-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+    min-height: 52px;
+    
+    @media (max-width: 768px) {
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 8px;
+      background: transparent;
+      box-shadow: none;
+    }
+    
+    .tab-item {
+      background: transparent;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #6c757d;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      position: relative;
+      min-width: auto;
+      
+      @media (max-width: 768px) {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      &:hover {
+        color: #495057;
+        background: rgba(212, 175, 55, 0.1);
+        
+        @media (max-width: 768px) {
+          background: #f8f9fa;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+      }
+      
+      &.active {
+        background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        
+        @media (max-width: 768px) {
+          background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+        }
+        
+        &:hover {
+          background: linear-gradient(135deg, #c19b26 0%, #e6c332 100%);
+          color: #fff;
+        }
+      }
+      
+      // Focus styles for accessibility
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+      }
+    }
+  }
+}
+
+// Portfolio specific tab styling
+.portfolio-tabs {
+  .tab-list {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+// Animation for tab content changes
+.gallery-section {
+  .gallery-slider {
+    animation: fadeInUp 0.5s ease-out;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Loading state for tab changes
+.tab-loading {
+  .gallery-slider {
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+}
+
+// Empty state for filtered results
+.empty-gallery {
+  text-align: center;
+  padding: 4rem 2rem;
+  
+  .empty-message {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-description {
+    color: #adb5bd;
+    font-size: 0.95rem;
+  }
+}
