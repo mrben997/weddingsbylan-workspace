@@ -19,8 +19,8 @@ const PortfolioDetailPage: FC = () => {
     <div className='portfolio-detail-area'>
       <Header logoTheme='theme-light' />
       <div className='portfolio-detail-header' style={{ backgroundImage: "url('/images/banner-1.jpg')" }}>
-        <h1 className='detail-title'>PORTFOLIO PINTEREST</h1>
-        <div className='detail-subtitle'>let your business grow trough this stunning theme</div>
+        <h1 className='typography-h1'>PORTFOLIO PINTEREST</h1>
+        <div className='typography-body1'>let your business grow trough this stunning theme</div>
       </div>
       <div className='portfolio-gallery'>
         <div className='masonry-grid'>

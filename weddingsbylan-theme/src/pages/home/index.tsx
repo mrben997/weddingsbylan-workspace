@@ -384,7 +384,7 @@ const Home: React.FC = () => {
                   <p className='typography-body1 mt--1 mb--1'>
                     Browse through our extensive portfolio showcasing years of experience and countless beautiful moments we've had the privilege to capture.
                   </p>
-                  <div className='app-container medium portfolio-area'>
+                  <div className='app-container medium section-portfolio-area'>
                     {[{ url: '/images/gallery-0.jpg' }, { url: '/images/gallery-1.jpg' }, { url: '/images/gallery-2.jpg' }].map((x, i) => (
                       <div key={i.toString()} className='item'>
                         <img src={x.url} alt='album' />

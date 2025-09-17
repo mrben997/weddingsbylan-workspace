@@ -78,7 +78,7 @@ const PortfolioPage: FC = () => {
     if (activeTab === 'ALL') {
       return portfolioImages
     }
-    return portfolioImages.filter(image => image.category === activeTab)
+    return portfolioImages.filter((image) => image.category === activeTab)
   }, [activeTab])
 
   const handleTabChange = (tab: string) => {
@@ -88,18 +88,18 @@ const PortfolioPage: FC = () => {
   return (
     <div className='portfolio-area'>
       <Header logoTheme='theme-light' />
-      
-      <div className="portfolio-content">
-        <div className="portfolio-header">
-          <h1 className='typography-h3'>Our Portfolio</h1>
-          <DividerIcon/>
-          <p className='typography-body'>Explore our collection of beautiful wedding moments captured through our lens.</p>
+
+      <div className='portfolio-content'>
+        <div className='portfolio-header'>
+          <h1 className='typography-h1'>Our Portfolio</h1>
+          <DividerIcon />
+          <p className='typography-body1'>Explore our collection of beautiful wedding moments captured through our lens.</p>
         </div>
 
         {/* Main Portfolio Slider */}
-        <ImageSlider 
+        <ImageSlider
           images={portfolioImages}
-          className="portfolio-slider"
+          className='portfolio-slider'
           autoplay={true}
           navigation={true}
           pagination={true}
@@ -110,31 +110,26 @@ const PortfolioPage: FC = () => {
         />
 
         {/* Gallery Style Grid with Tabs */}
-        <div className="gallery-section">
-          <h2 className="section-title">Gallery Highlights</h2>
+        <div className='gallery-section'>
+          <h2 className='section-title typography-h2'>Gallery Highlights</h2>
           {/* Tab Filter */}
-          <TabFilter 
-            tabs={categories}
-            activeTab={activeTab}
-            onTabChange={handleTabChange}
-            className="portfolio-tabs"
-          />
+          <TabFilter tabs={categories} activeTab={activeTab} onTabChange={handleTabChange} className='portfolio-tabs' />
           {/* Filtered Image Grid */}
-          <div className="gallery-grid">
+          <div className='gallery-grid'>
             {filteredImages.length === 0 ? (
-              <div className="empty-gallery">
-                <div className="empty-message">No images found for this category.</div>
-                <div className="empty-description">Please select another tab to view more images.</div>
+              <div className='empty-gallery'>
+                <div className='empty-message typography-h6'>No images found for this category.</div>
+                <div className='empty-description typography-body1'>Please select another tab to view more images.</div>
               </div>
             ) : (
               filteredImages.map((image, idx) => (
-                <Link to="/portfolio-detail" className="gallery-item" key={idx}>
-                  <div className="gallery-img-container">
-                    <img src={image.src} alt={image.alt} loading="lazy" />
+                <Link to='/portfolio-detail' className='gallery-item' key={idx}>
+                  <div className='gallery-img-container'>
+                    <img src={image.src} alt={image.alt} loading='lazy' />
                   </div>
-                  <div className="gallery-info">
-                    <div className="gallery-title">{image.title}</div>
-                    <div className="gallery-desc">{image.description}</div>
+                  <div className='gallery-info'>
+                    <div className='gallery-title typography-subtitle1'>{image.title}</div>
+                    <div className='gallery-desc typography-body1'>{image.description}</div>
                   </div>
                 </Link>
               ))
