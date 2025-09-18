@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-namespace": "off",
+    // Suppress unused variable errors
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    // Suppress warnings for not using "let" or "const"
+    "no-var": "off",
+    // If you"re using React, disable React-specific warnings like missing display names
+    "react/display-name": "off",
+    // Disable warnings about img elements (for Next.js specific optimization warnings)
+    "@next/next/no-img-element": "off",
+    // You can turn off the specific TypeScript rule about using `{}` as a type
+    "@typescript-eslint/ban-types": "off",
+    "prefer-const": "off", // Disable prefer-const rule
+    "react/no-unescaped-entities": "off"
+  }
+}

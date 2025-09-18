@@ -1,0 +1,34 @@
+RewriteEngine On
+UnsetEnv _MOD_SPELING
+RewriteRule ^index\.html$ http://localhost:31300/ [P,L]
+RewriteRule ^googlefe8af88ad91b2143\.html$ http://localhost:31300/googlefe8af88ad91b2143\.html [P,L]
+
+RewriteRule ^upload/(.*)$ /public/upload/$1 [R=301,L]
+
+RewriteRule ^public/flipbook/(.*)$ http://localhost:31300/public/flipbook/$1 [P,L]
+
+
+RewriteRule ^(.*)\.html(.*)$ /$1$2 [R=301,L]
+# RewriteRule ^(.*)tin-tuc(.*)$ /$1blog$2 [R=301,L]
+RewriteRule ^(.*)san-pham(.*)$ /$1service$2 [R=301,L]
+# RewriteRule ^(.*)tuyen-dung(.*)$ http://localhost:31300/$1recruitment/$2 [P,L]
+
+RewriteCond %{REQUEST_URI} ^/tuyen-dung/(.*)$
+RewriteRule ^tuyen-dung/(.*)$ /recruitment/$1 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/tuyen-dung$
+#RewriteRule ^tuyen-dung$ /recruitment [R=301,L]
+
+RewriteRule ^gioi-thieu$ / [R=301,L]
+RewriteRule ^trang-chu$ / [R=301,L]
+
+# RewriteRule ^(.*)lien-he(.*)$ /$1contact$2 [R=301,L]
+RewriteRule ^(.*)$ http://localhost:31300/$1 [P,L]
+
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv API_URL http://localhost:41400/api/
+SetEnv PORT 31300
+SetEnv HOSTNAME 0.0.0.0
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END

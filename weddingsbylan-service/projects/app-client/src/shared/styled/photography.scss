@@ -1,0 +1,322 @@
+.photography-page {
+  // Hero Banner Section
+  .hero-banner {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Parallax background setup
+    &.parallax-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      
+      // Fallback for mobile devices that don't support fixed attachment
+      @media (max-width: 768px) {
+        background-attachment: scroll;
+      }
+    }
+
+    // Dark overlay for better text readability
+    .parallax-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      text-align: center;
+      color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+
+      .hero-title {
+        font-family: var(--font-family-heading);
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: var(--font-weight-light);
+        letter-spacing: 0.05em;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        line-height: var(--line-height-sm);
+        
+        // Smooth text appearance animation
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out 0.5s forwards;
+      }
+
+      .hero-description {
+        font-family: var(--font-family-base);
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        font-weight: var(--font-weight-light);
+        line-height: var(--line-height-md);
+        font-style: italic;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+        
+        // Smooth text appearance animation
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out 0.8s forwards;
+      }
+    }
+  }
+
+  // Services Section
+  .services-section {
+    padding: 100px 0;
+    background-color: var(--color-bg);
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-item {
+      text-align: center;
+      padding: 40px 20px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+        
+        .service-icon {
+          svg {
+            transform: scale(1.1);
+            stroke: var(--color-primary);
+          }
+        }
+      }
+
+      .service-icon {
+        margin-bottom: 30px;
+        
+        svg {
+          width: 60px;
+          height: 60px;
+          stroke: var(--color-text-secondary);
+          transition: all 0.3s ease;
+          stroke-width: 1.5;
+        }
+      }
+
+      .service-title {
+        font-family: var(--font-family-heading);
+        font-size: 1.25rem;
+        font-weight: var(--font-weight-medium);
+        color: var(--color-text);
+        margin-bottom: 20px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: var(--line-height-sm);
+      }
+
+      .service-description {
+        font-family: var(--font-family-base);
+        font-size: 0.95rem;
+        line-height: var(--line-height-md);
+        color: var(--color-text-secondary);
+        max-width: 280px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  // Enhanced parallax effect with JavaScript interaction
+  &.parallax-active {
+    .hero-banner {
+      transition: transform 0.1s ease-out;
+    }
+  }
+}
+
+// Keyframe animations
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .photography-page {
+    .services-section {
+      padding: 80px 0;
+      
+      .services-grid {
+        gap: 50px 30px;
+      }
+      
+      .service-item {
+        padding: 30px 15px;
+      }
+    }
+
+    .hero-banner {
+      .hero-content {
+        .hero-title {
+          font-size: clamp(2.5rem, 7vw, 4rem);
+          margin-bottom: 1.5rem;
+        }
+        
+        .hero-description {
+          font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .photography-page {
+    .services-section {
+      padding: 60px 0;
+      
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
+      }
+      
+      .service-item {
+        padding: 25px 10px;
+        
+        .service-icon {
+          margin-bottom: 20px;
+          
+          svg {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        
+        .service-title {
+          font-size: 1.1rem;
+          margin-bottom: 15px;
+        }
+        
+        .service-description {
+          font-size: 0.9rem;
+          max-width: 250px;
+        }
+      }
+    }
+
+    .hero-banner {
+      height: 100vh;
+      
+      .hero-content {
+        padding: 0 16px;
+        
+        .hero-title {
+          font-size: clamp(2rem, 6vw, 3rem);
+          margin-bottom: 1.2rem;
+          letter-spacing: 0.03em;
+        }
+        
+        .hero-description {
+          font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .photography-page {
+    .services-section {
+      padding: 50px 0;
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+      
+      .service-item {
+        padding: 20px 5px;
+        
+        .service-icon {
+          margin-bottom: 18px;
+          
+          svg {
+            width: 45px;
+            height: 45px;
+          }
+        }
+        
+        .service-title {
+          font-size: 1rem;
+          margin-bottom: 12px;
+        }
+        
+        .service-description {
+          font-size: 0.85rem;
+          max-width: 100%;
+        }
+      }
+    }
+
+    .hero-banner {
+      .parallax-overlay {
+        background: rgba(0, 0, 0, 0.5); // Darker overlay for better mobile readability
+      }
+      
+      .hero-content {
+        padding: 0 12px;
+        
+        .hero-title {
+          font-size: clamp(1.8rem, 5vw, 2.5rem);
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .photography-page {
+    .hero-banner {
+      height: auto;
+      min-height: 50vh;
+      background-attachment: scroll !important;
+      
+      .parallax-overlay {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      
+      .hero-content {
+        color: black;
+        
+        .hero-title {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}

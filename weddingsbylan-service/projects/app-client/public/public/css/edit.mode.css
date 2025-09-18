@@ -1,0 +1,22 @@
+[data-edit-key] {
+    border: 1px solid rgb(255, 145, 0);
+    position: relative;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+.edit-mode-button {
+    position: absolute;
+    /* Định vị nút */
+    top: 10px;
+    /* Cách từ đỉnh div */
+    right: 10px;
+    /* Cách từ bên phải div */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 9999;
+}

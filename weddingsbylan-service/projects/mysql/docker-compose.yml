@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1fwp745FQGjqlJD
+      MYSQL_DATABASE: weddingsbylan
+      MYSQL_USER: user
+      MYSQL_PASSWORD: dBA1LzjI4Uu83Gq
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mysql_network
+
+volumes:
+  mysql_data:
+
+networks:
+  mysql_network:
+    driver: bridge

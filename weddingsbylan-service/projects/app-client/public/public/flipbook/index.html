@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Debugging</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+
+<body>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            height: 90vh;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .fullscreen {
+            background-color: #333;
+        }
+    </style>
+
+    <div class="container" id="container">
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/html2canvas.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/pdf.min.js"></script>
+    <script src="dist/flip-book.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const padUrl = urlParams.get('pdf');  // Lấy giá trị của 'user'
+        $('#container').FlipBook({
+            pdf: padUrl,
+            template: {
+                html: 'templates/default-book-view.html',
+                links: [
+                    {
+                        rel: 'stylesheet',
+                        href: 'css/font-awesome.min.css'
+                    }
+                ],
+                sounds: {
+                    startFlip: 'audio/start-flip.mp3',
+                    endFlip: 'audio/end-flip.mp3'
+                },
+                styles: [
+                    'css/white-book-view.css'
+                ],
+                links: [{
+                    rel: 'stylesheet',
+                    href: 'css/font-awesome.min.css'
+                }],
+                script: 'js/default-book-view.js'
+            }
+        });
+    </script>
+</body>
+
+</html>

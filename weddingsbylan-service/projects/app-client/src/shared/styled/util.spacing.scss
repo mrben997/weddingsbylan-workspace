@@ -1,0 +1,45 @@
+
+// 📁 spacing.scss
+$spacing-base: 10px;
+$spacing-scale: (1, 2, 3, 4, 5);
+
+@mixin generate-spacing($type, $attr) {
+  @each $size in $spacing-scale {
+    $value: $size * $spacing-base;
+
+    // Vertical
+    .#{$type}t--#{$size} {
+      #{$attr}-top: $value;
+    }
+    .#{$type}b--#{$size} {
+      #{$attr}-bottom: $value;
+    }
+
+    // Horizontal
+    .#{$type}l--#{$size} {
+      #{$attr}-left: $value;
+    }
+    .#{$type}r--#{$size} {
+      #{$attr}-right: $value;
+    }
+
+    // X / Y
+    .#{$type}x--#{$size} {
+      #{$attr}-left: $value;
+      #{$attr}-right: $value;
+    }
+    .#{$type}y--#{$size} {
+      #{$attr}-top: $value;
+      #{$attr}-bottom: $value;
+    }
+
+    // All
+    .#{$type}--#{$size} {
+      #{$attr}: $value;
+    }
+  }
+}
+
+// Generate padding/margin
+@include generate-spacing(p, padding);
+@include generate-spacing(m, margin);

@@ -1,0 +1,124 @@
+// Font Families
+$font-family-base: var(--font-family-base);
+
+// Font Sizes
+$font-sizes: (
+  h1: 4rem,
+  h2: 2.25rem,
+  h3: 1.875rem,
+  h4: 1.5rem,
+  h5: 1.25rem,
+  h6: 1rem,
+  subtitle1: 1rem,
+  subtitle2: 0.875rem,
+  body1: 1rem,
+  body2: 0.875rem,
+  caption: 0.75rem,
+  overline: 0.75rem
+);
+
+// Font Weights
+$font-weights: (
+  h1: 600,
+  h2: 500,
+  h3: 400,
+  h4: 400,
+  h5: 400,
+  h6: 500,
+  subtitle1: 400,
+  subtitle2: 500,
+  body1: 400,
+  body2: 400,
+  caption: 400,
+  overline: 500
+);
+
+// Line Heights
+$line-heights: (
+  tight: 1.2,
+  default: 1.5,
+  loose: 1.75
+);
+
+// Letter Spacing
+$letter-spacings: (
+  tight: -0.015em,
+  normal: 0,
+  wide: 0.05em
+);
+
+// Typography mixin
+@mixin typography($name, $size, $weight, $lineHeight: default, $spacing: normal, $transform: none, $color: inherit) {
+  .typography-#{$name} {
+    font-family: $font-family-base;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: map.get($line-heights, $lineHeight);
+    letter-spacing: map.get($letter-spacings, $spacing);
+    text-transform: $transform;
+    color: $color;
+  }
+}
+
+// Generate all classes
+@include typography(h1, map.get($font-sizes, h1), map.get($font-weights, h1), tight, tight, none, var(--color-text));
+@include typography(h2, map.get($font-sizes, h2), map.get($font-weights, h2), tight, normal, none, var(--color-text));
+@include typography(h3, map.get($font-sizes, h3), map.get($font-weights, h3), tight, normal, none, var(--color-text));
+@include typography(h4, map.get($font-sizes, h4), map.get($font-weights, h4), default, normal, none, var(--color-text));
+@include typography(h5, map.get($font-sizes, h5), map.get($font-weights, h5), default, normal, none, var(--color-text));
+@include typography(h6, map.get($font-sizes, h6), map.get($font-weights, h6), default, normal, none, var(--color-text));
+@include typography(subtitle1, map.get($font-sizes, subtitle1), map.get($font-weights, subtitle1), default, normal, none, var(--color-text));
+@include typography(subtitle2, map.get($font-sizes, subtitle2), map.get($font-weights, subtitle2), default, normal, none, var(--color-text-secondary));
+@include typography(body1, map.get($font-sizes, body1), map.get($font-weights, body1), default, normal, none, var(--color-text));
+@include typography(body2, map.get($font-sizes, body2), map.get($font-weights, body2), default, normal, none, var(--color-text-secondary));
+@include typography(caption, map.get($font-sizes, caption), map.get($font-weights, caption), default, normal, none, var(--color-text-secondary));
+@include typography(overline, map.get($font-sizes, overline), map.get($font-weights, overline), default, wide, uppercase, var(--color-text-secondary));
+
+// Color utility classes
+.text-primary {
+  color: var(--color-primary) !important;
+}
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+.text-accent {
+  color: var(--color-accent) !important;
+}
+.text-main {
+  color: var(--color-text) !important;
+}
+.text-muted {
+  color: var(--color-text-secondary) !important;
+}
+.text-white {
+  color: #fff !important;
+}
+.text-black {
+  color: #000 !important;
+}
+
+.flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-btn {
+  font-size: 0.8rem;
+  padding: 16px 40px 15px;
+  min-width: 176px;
+  line-height: 1.7em;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, background-position 0.3s ease, opacity 0.2s ease-out;
+  &.app-btn-primary {
+    border: 1px solid var(--color-main, #000);
+    color: var(--color-main, #000);
+    background-color: transparent;
+    &:hover {
+      background-color: var(--color-main, #000) !important;
+      color: #fff;
+    }
+  }
+}

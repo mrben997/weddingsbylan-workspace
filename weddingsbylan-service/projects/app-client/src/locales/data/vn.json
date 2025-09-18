@@ -1,0 +1,63 @@
+{
+    "Locale": "vn",
+    "Home": "Trang chủ",
+    "Service": "Dịch vụ",
+    "Portfolio": "Hồ sơ năng lực",
+    "Recruitment": "Tuyển dụng",
+    "RecruitmentDetail": "Chi tiết tuyển dụng",
+    "Blog": "Tin tức",
+    "ServiceDetail": "Chi tiết dịch vụ",
+    "BlogDetails": "Chi tiết tin tức",
+    "Contact": "Liên hệ",
+    "ContactInfo": "Thông tin liên hệ",
+    "GiveMeYourInfo": "Hãy cho chúng tôi biết vấn đề của bạn bạn",
+    "RecentPosts": "Bài viết gần đây",
+    "Logo": "logonds-3.png",
+    "MenuDashboard": "Dashboard",
+    "MenuNews": "Tin tức",
+    "MenuSettings": "Cài đặt",
+    "MenuSecurity": "Bảo mật",
+    "MenuSevices": "Dịch vụ",
+    "MenuRecruitments": "Tuyển dụng",
+    "TableCreate": "Tạo mới",
+    "TableEdit": "Cập nhật",
+    "TableName": "Tiêu đề",
+    "TableDescription": "Mô tả",
+    "TableStatus": "Trạng thái",
+    "TableTags": "Từ khóa",
+    "TableActions": "Hàng động",
+    "TableContent": "Nội dung",
+    "FormChangePassword": "Đổi mật khẩu",
+    "FormOldPassword": "Mật khẩu củ",
+    "FormNewPassword": "Mật khẩu mới",
+    "FormComfirmPassword": "Nhập lại mật khẩu",
+    "JobCV": "BẠN CÓ QUAN TÂM LÀM VIỆC VỚI CHÚNG TÔI!",
+    "SendJobCV": "Gửi CV của bạn",
+    "SeeAllService": "Tất cả dịch vụ",
+    "AllService": "Tất cả dịch vụ",
+    "PortfolioCategories": {
+        "All": "Tất cả",
+        "Security": "Bảo vệ",
+        "CCV": "CCV",
+        "Universitycampus": "Khuôn viên đại học",
+        "Supermarket": "Siêu thị"
+    },
+    "TitleDefault": "CÔNG TY DỊCH VỤ BẢO VỆ ANH HÀO",
+    "SendMailNow": "Gữi ngay bây giờ",
+    "SubjectJobCV": "Gữi CV xin việc",
+    "SubjectMail": "Chủ đề",
+    "BodyMail": "Nội dung",
+    "Addresses": [
+        {
+            "Title": "Trụ sở chính",
+            "Description": "Tòa nhà : Số 1050/13 Quang Trung, Phường 8, Q.Gò Vấp, TP.Hồ Chí Minh\nMST : 0 3 1 1 9 0 2 7 3 0\nĐiện thoại : 0 2 8 3 5 8 9 3 2 3 6\nWebsite: baoveanhhao.vn"
+        },
+        {
+            "Title": "Chi nhánh Miền Bắc",
+            "Description": "Toà nhà: Số 38, ngõ 98 Thái Hà, Trung Liệt, Đống Đa, TP.Hà Nội\nMST: 0 3 1 1 9 0 2 7 3 0 - 0 0 3\nĐiện thoại: 0 9 0 3 8 1 2 0 0 6\nEmail: info@baoveanhhao.vn"
+        }
+    ],
+    "AboutUS": "Giới thiệu về chúng tôi",
+    "Intro": "Giới thiệu",
+    "OtherPost": "Bài viết khác"
+}

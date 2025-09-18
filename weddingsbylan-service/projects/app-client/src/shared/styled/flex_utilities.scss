@@ -1,0 +1,126 @@
+
+// 📁 flex-utilities.scss - Comprehensive Flexbox Utility System
+
+// Flex Direction & Display
+$flex-directions: (
+  'row': row,
+  'col': column,
+  'row-reverse': row-reverse,
+  'col-reverse': column-reverse
+);
+
+// Align Items
+$align-items: (
+  'start': flex-start,
+  'center': center,
+  'end': flex-end,
+  'stretch': stretch,
+  'baseline': baseline
+);
+
+// Justify Content
+$justify-content: (
+  'start': flex-start,
+  'center': center,
+  'end': flex-end,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly
+);
+
+// Flex Properties
+$flex-properties: (
+  'wrap': wrap,
+  'nowrap': nowrap,
+  'grow': 1,
+  'shrink': 1,
+  'none': none,
+  'auto': auto
+);
+
+// Generate flex direction classes
+@each $name, $value in $flex-directions {
+  .flex-#{$name} {
+    display: flex;
+    flex-direction: $value;
+  }
+}
+
+// Generate align-items classes
+@each $name, $value in $align-items {
+  .items-#{$name} {
+    align-items: $value;
+  }
+}
+
+// Generate justify-content classes
+@each $name, $value in $justify-content {
+  .justify-#{$name} {
+    justify-content: $value;
+  }
+}
+
+// Generate flex property classes
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-grow { flex-grow: 1; }
+.flex-shrink { flex-shrink: 1; }
+.flex-none { flex: none; }
+.flex-auto { flex: 1 1 auto; }
+
+// Generate numbered flex classes (1-12)
+@for $i from 1 through 12 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
+
+// Common flex combinations (shortcuts)
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-center-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-center-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.flex-col-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+// Text alignment utilities
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }

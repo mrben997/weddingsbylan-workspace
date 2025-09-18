@@ -1,0 +1,17 @@
+{
+  "name": "security-service",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "app": "npm --prefix projects/app-client run dev",
+    "server": "npm --prefix projects/server run dev",
+    "start": "concurrently \"npm run server:start\" \"npm run app:start\"",
+    "dev": "concurrently \"npm run server\" \"npm run app\"",
+    "app:start": "cd projects/app-client && node server.js",
+    "server:start": "npm --prefix projects/server run prod",
+    "prod": "concurrently \"npm run server:start\" \"npm run app:start\""
+  },
+  "dependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

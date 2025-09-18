@@ -1,0 +1,162 @@
+@use 'sass:map';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary color - màu chủ đạo, dùng cho các thành phần chính như nút, link nổi bật */
+  --color-primary: #4a3e5a;
+  --color-primary-rgb: 74, 62, 90;
+  /* Secondary color - màu phụ, thường dùng cho các điểm nhấn phụ hoặc hover */
+  --color-secondary: #b19b78;
+  /* Accent color - màu nhấn, dùng để làm nổi bật các chi tiết nhỏ */
+  --color-accent: #e0c097;
+  /* Background color - màu nền chính của trang */
+  --color-bg: #fff;
+  --color-bg-rgb: 255, 255, 255;
+  /* Secondary background color - màu nền phụ, dùng cho các vùng phân biệt hoặc section */
+  --color-bg-secondary: #f8f8f8;
+  --color-bg-secondary-rgb: 248, 248, 248;
+  /* Main text color - màu chữ chính */
+  --color-text: #222;
+  /* Secondary text color - màu chữ phụ, dùng cho mô tả, caption */
+  --color-text-secondary: #666;
+  /* Border color - màu viền, dùng cho border các thành phần */
+  --color-border: #e5e5e5;
+
+  /* Font families */
+  --font-family-base: 'Raleway', sans-serif;
+  --font-family-heading: 'Playfair Display', serif;
+
+  /* Font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height-sm: 1.2;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.75;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.015em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 2.25rem;
+    --font-size-h2: 1.75rem;
+    --font-size-h3: 1.5rem;
+  }
+}
+
+body {
+  color: var(--color-text, #000);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.svg-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: fill 0.2s ease-in-out;
+  &.small {
+    width: 16px;
+    height: 16px;
+  }
+  &.large {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px; // Giới hạn chiều rộng tối đa
+  margin: 0 auto; // Căn giữa container
+  padding: 0 20px; // Padding 2 bên
+
+  // Responsive breakpoints
+  @media (max-width: 1240px) {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
+  }
+
+  // Variants cho các kích thước khác nhau
+  &.small {
+    max-width: 768px;
+  }
+
+  &.medium {
+    max-width: 992px;
+  }
+
+  &.large {
+    max-width: 1440px;
+  }
+
+  &.full {
+    max-width: none;
+    padding: 0;
+  }
+
+  // Variant không padding
+  &.no-padding {
+    padding: 0;
+  }
+
+  // Variant padding lớn hơn
+  &.wide-padding {
+    padding: 0 40px;
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+}
+
+.section-divider {
+  display: inline-block;
+  margin: 0.85rem 0;
+  color: var(--color-text-secondary, #666);
+}
+
+@import './util.spacing.scss';
+@import './util.typography.scss';
+@import './flex_utilities.scss';

@@ -1,0 +1,63 @@
+{
+    "Locale": "en",
+    "Home": "Home",
+    "Service": "Services",
+    "Portfolio": "Company profile",
+    "Blog": "News",
+    "Recruitment": "Recruitment",
+    "RecruitmentDetail": "Recruitment detail",
+    "ServiceDetail": "Service detail",
+    "BlogDetails": "News detail",
+    "Contact": "Contact",
+    "ContactInfo": "Contact info",
+    "GiveMeYourInfo": "Tell us your problem",
+    "RecentPosts": "Recent Posts",
+    "Logo": "logonds-en-3.png",
+    "MenuDashboard": "Dashboard",
+    "MenuNews": "News",
+    "MenuSettings": "Settings",
+    "MenuSecurity": "Security",
+    "MenuSevices": "Services",
+    "MenuRecruitments": "Recruitment",
+    "TableCreate": "Create",
+    "TableEdit": "Edit",
+    "TableName": "Title",
+    "TableDescription": "Description",
+    "TableStatus": "Status",
+    "TableTags": "Tags",
+    "TableActions": "Actions",
+    "TableContent": "Content",
+    "FormChangePassword": "Change password",
+    "FormOldPassword": "Old password",
+    "FormNewPassword": "New password",
+    "FormComfirmPassword": "Comfirm password",
+    "JobCV": "ARE YOU INTERESTED IN WORKING WITH US!",
+    "SendJobCV": "Submit your CV",
+    "SeeAllService": "See All Services",
+    "AllService": "Services",
+    "PortfolioCategories": {
+        "All": "All",
+        "Security": "Security",
+        "CCV": "CCV",
+        "Universitycampus": "University campus",
+        "Supermarket": "Supermarket"
+    },
+    "TitleDefault": "ANH HAO SECURITY SERVICES COMPANY",
+    "SendMailNow": "Send now",
+    "SubjectJobCV": "Send job CV",
+    "SubjectMail": "Subject",
+    "BodyMail": "Content",
+    "Addresses": [
+        {
+            "Title": "Head office",
+            "Description": "Building: No. 1050/13 Quang Trung, Ward 8, Go Vap District, Ho Chi Minh City\nTax code: 0 3 1 1 9 0 2 7 3 0\nPhone: 0 2 8 3 5 8 9 3 2 3 6\nWebsite: baoveanhhao.vn"
+        },
+        {
+            "Title": "Northern Branch",
+            "Description": "Toà nhà: Số 38, ngõ 98 Thái Hà, Trung Liệt, Đống Đa, TP.Hà Nội\nMST: 0 3 1 1 9 0 2 7 3 0 - 0 0 3\nĐiện thoại: 0 9 0 3 8 1 2 0 0 6\nEmail: info@baoveanhhao.vn"
+        }
+    ],
+    "AboutUS": "About us",
+    "Intro": "Introduce",
+    "OtherPost": "Other post"
+}
