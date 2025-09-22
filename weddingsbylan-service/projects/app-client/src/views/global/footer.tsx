@@ -1,24 +1,26 @@
 import './footer.scss'
 import React, { FC } from 'react'
 import { ISearchParams } from '@/app/types'
-import { IFooterForm } from '@/admin-react-app/pages/settings/setting.form.types'
+import { IFooterForm, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { ImagePath } from '@/shared/config'
 
 interface IFooterProps extends ISearchParams {
-  data?: IFooterForm[] | null
-  locale?: string
+  footerData?: IFooterForm[] | null
+  settingData?: ISettingForm[] | null
 }
 
 const Footer: FC<IFooterProps> = async (props) => {
-  const data = props.data ? props.data[0] : undefined
+  const footerData = props.footerData ? props.footerData[0] : undefined
+  const settingData = props.settingData ? props.settingData[0] : undefined
+
   return (
-    <section className='section section-column footer-area theme-dark' style={{ backgroundImage: `url('${ImagePath}/${data?.BgUrl}')` }}>
+    <section className='section section-column footer-area theme-dark' style={{ backgroundImage: `url('${ImagePath}/${footerData?.BgUrl}')` }}>
       <div className='section-content' {...getEditModeKey('Footer')}>
         <div className='footer-content flex-center-center'>
           <div className='logo-area large theme-dark'>
             {/* <img src="/images/logo.png" alt="weddingsbylan-logo" /> */}
-            <div className='img-bg' style={{ backgroundImage: `url('${ImagePath}/${data?.LogoUrl}')` }}></div>
+            <div className='img-bg' style={{ backgroundImage: `url('${ImagePath}/${settingData?.LogoUrl}')` }}></div>
           </div>
           <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
             <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />

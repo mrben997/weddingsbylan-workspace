@@ -8,6 +8,25 @@ body {
   overflow: hidden;
 }
 
+.home-page-area {
+  .section-portfolio-area {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    .item {
+      max-width: 28%;
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
 .logo-area {
   width: 150px;
   height: 75px;
@@ -50,7 +69,13 @@ body {
     &.right {
       justify-content: flex-end;
     }
-
+    &.center {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
     .section-content-haft {
       width: 50%;
       padding: 40px;

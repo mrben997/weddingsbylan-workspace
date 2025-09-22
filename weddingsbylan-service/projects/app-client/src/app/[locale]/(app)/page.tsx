@@ -6,12 +6,13 @@ import '@/shared/styled/home.scss'
 import { Initial } from './initial'
 import { settingSService } from '@/services/setting.service'
 import { FC } from 'react'
-import HomeAbout from './_home/about'
-import HomeFooter from './_home/footer'
+import HomePhotography from './_home/photography'
 import { ImagePath } from '@/shared/config'
 import HomeService from './_home/service'
 import HomeBanner from './_home/banner'
 import { IPageProps } from '@/app/types'
+import Footer from '@/views/global/footer'
+import HomePortfolio from '@/views/home/portfolio'
 
 const Home: FC<IPageProps> = async (props) => {
   const p = await props.params
@@ -19,15 +20,28 @@ const Home: FC<IPageProps> = async (props) => {
   const pageData = await settingSService.getSettingdata(
     locale ?? 'vn',
     ['Global', 'Home'],
-    ['Setting', 'Banner', 'About', 'AboutImage', 'Service', 'ServiceImage', 'Footer']
+    [
+      'Setting',
+      'Banner',
+      'HomePhotography',
+      'HomePhotographyImage',
+      'HomeMakeupAndHair',
+      'HomeMakeupAndHairImage',
+      'HomePortfolio',
+      'HomePortfolioImage',
+      'HomePortfolioItems',
+      'Footer'
+    ]
   )
 
   const obj = {
-    aboutImage: pageData?.getData('AboutImage'),
-    serviceImage: pageData?.getData('ServiceImage')
+    photographyImg: pageData?.getData('HomePhotographyImage'),
+    makeupAndHairImg: pageData?.getData('HomeMakeupAndHairImage'),
+    portfolioImg: pageData?.getData('HomePortfolioImage')
   }
-  const aboutImage = obj.aboutImage ? obj.aboutImage[0] : undefined
-  const serviceImage = obj.serviceImage ? obj.serviceImage[0] : undefined
+  const photographyImg = obj.photographyImg ? obj.photographyImg[0] : undefined
+  const makeupAndHairImg = obj.makeupAndHairImg ? obj.makeupAndHairImg[0] : undefined
+  const portfolioImg = obj.portfolioImg ? obj.portfolioImg[0] : undefined
 
   return (
     <>
@@ -41,17 +55,21 @@ const Home: FC<IPageProps> = async (props) => {
               <HomeBanner data={pageData?.getData('Banner')} />
             </div>
             {/* about */}
-            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${aboutImage?.ImageUrl}`} data-parallax-minor='.section'>
-              <HomeAbout data={pageData?.getData('About')} />
+            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${photographyImg?.ImageUrl}`} data-parallax-minor='.section'>
+              <HomePhotography data={pageData?.getData('HomePhotography')} />
             </div>
             {/* service */}
-            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${serviceImage?.ImageUrl}`} data-parallax-minor='.section'>
-              <HomeService data={pageData?.getData('Service')} />
+            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${makeupAndHairImg?.ImageUrl}`} data-parallax-minor='.section'>
+              <HomeService data={pageData?.getData('HomeMakeupAndHair')} />
+            </div>
+            {/* portfolio */}
+            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${portfolioImg?.ImageUrl}`} data-parallax-minor='.section'>
+              <HomePortfolio portfolioItems={pageData?.getData('HomePortfolioItems')} portfolioData={pageData?.getData('HomePortfolio')} />
             </div>
             {/* footer */}
             {/* <div className="swiper-slide" data-parallax-bg="/images/footer-0.png" data-parallax-minor=".section"> */}
             <div className='swiper-slide' data-logo-class='theme-dark'>
-              <HomeFooter data={pageData?.getData('Footer')} />
+              <Footer footerData={pageData?.getData('Footer')} settingData={pageData?.getData('Setting')} />
             </div>
           </div>
           {/* vertical swiper pagination */}

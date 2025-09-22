@@ -21,13 +21,17 @@ export interface ISettingItemConfig<T extends IFormModel = IFormModel> {
 export { FormTypes }
 export type TInnerType<T> = T extends ISettingItemConfig<infer U> ? U : never
 export interface ISettingStruct {
-  // Home
+  // Global
   Setting: ISettingItemConfig<FormTypes.ISettingForm>
+  // Home
   Banner: ISettingItemConfig<FormTypes.IBannerForm>
-  About: ISettingItemConfig<FormTypes.IAboutForm>
-  AboutImage: ISettingItemConfig<FormTypes.IAboutForm>
-  Service: ISettingItemConfig<FormTypes.IServiceForm>
-  ServiceImage: ISettingItemConfig<FormTypes.IServiceForm>
+  HomePhotography: ISettingItemConfig<FormTypes.IHomePhotographyForm>
+  HomePhotographyImage: ISettingItemConfig<FormTypes.IHomePhotographyForm>
+  HomeMakeupAndHair: ISettingItemConfig<FormTypes.IHomeMakeupAndHairForm>
+  HomeMakeupAndHairImage: ISettingItemConfig<FormTypes.IHomeMakeupAndHairForm>
+  HomePortfolio: ISettingItemConfig<FormTypes.IHomePortfolioForm>
+  HomePortfolioItems: ISettingItemConfig<FormTypes.IHomePortfolioForm>
+  HomePortfolioImage: ISettingItemConfig<FormTypes.IHomePortfolioForm>
   Footer: ISettingItemConfig<FormTypes.IFooterForm>
   // Makeup & Hair
   MahAbout: ISettingItemConfig<FormTypes.IMahAboutForm>

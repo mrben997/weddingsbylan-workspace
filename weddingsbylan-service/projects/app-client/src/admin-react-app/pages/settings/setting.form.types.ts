@@ -23,11 +23,25 @@ export interface IBannerForm extends IFormModel {
   Href: string
 }
 
-export interface IAboutForm extends IFormModel {
+export interface IHomePhotographyForm extends IFormModel {
   Title: string
   Content: string
   ImageUrl: string
   Href: string
+}
+
+export interface IHomeMakeupAndHairForm extends IFormModel {
+  Title: string
+  Content: string
+  ImageUrl: string
+  Href: string
+}
+
+export interface IHomePortfolioForm extends IFormModel {
+  Title: string
+  Description: string
+  Href: string
+  ImageUrl: string
 }
 
 export interface IServiceForm extends IFormModel {
@@ -39,7 +53,6 @@ export interface IServiceForm extends IFormModel {
 
 export interface IFooterForm extends IFormModel {
   BgUrl: string
-  LogoUrl: string
 }
 //#endregion Home Page
 

@@ -68,9 +68,9 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  About: {
-    title: 'About',
-    DefineKey: { Area: 'Home', FormKey: 'About' },
+  HomePhotography: {
+    title: 'Home Photography',
+    DefineKey: { Area: 'Home', FormKey: 'HomePhotography' },
     isSingle: true,
     renderForm: (data) => {
       return [
@@ -81,9 +81,9 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  AboutImage: {
-    title: 'About Image',
-    DefineKey: { Area: 'Home', FormKey: 'AboutImage' },
+  HomePhotographyImage: {
+    title: 'Home Photography Image',
+    DefineKey: { Area: 'Home', FormKey: 'HomePhotographyImage' },
     isSingle: true,
     renderForm: (data) => {
       return [
@@ -103,9 +103,9 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  Service: {
-    title: 'Service',
-    DefineKey: { Area: 'Home', FormKey: 'Service' },
+  HomeMakeupAndHair: {
+    title: 'Home Makeup & Hair',
+    DefineKey: { Area: 'Home', FormKey: 'HomeMakeupAndHair' },
     isSingle: true,
     renderForm: (data) => {
       return [
@@ -115,15 +115,69 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  ServiceImage: {
-    title: 'Service Image',
-    DefineKey: { Area: 'Home', FormKey: 'ServiceImage' },
+  HomeMakeupAndHairImage: {
+    title: 'Home Makeup & Hair Image',
+    DefineKey: { Area: 'Home', FormKey: 'HomeMakeupAndHairImage' },
     isSingle: true,
     renderForm: (data) => {
       return [
         {
           key: 'ImageUrl',
           label: 'Background Image',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 1920, height: 650 }
+          })
+        }
+      ]
+    }
+  },
+  HomePortfolio: {
+    title: 'Home Portfolio',
+    DefineKey: { Area: 'Home', FormKey: 'HomePortfolio' },
+    isSingle: true,
+    renderForm: (data) => {
+      return [
+        { key: 'Title', label: 'Title' },
+        { key: 'Description', label: 'Description', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) },
+        { key: 'Href', label: 'Href' }
+      ]
+    }
+  },
+  HomePortfolioItems: {
+    title: 'Home Portfolio Items',
+    DefineKey: { Area: 'Home', FormKey: 'HomePortfolioItems' },
+    renderForm: (data) => [
+      { key: 'Href', label: 'Href' },
+      {
+        key: 'ImageUrl',
+        label: 'ImageUrl',
+        inputElement: createUploadImage({
+          upload: async (file) => {
+            await Sleep(1000)
+            const data = await serviceUpload.uploadSettingImage(file)
+            return await Promise.resolve(data.filename)
+          },
+          renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+          size: { width: 1920, height: 650 }
+        })
+      }
+    ]
+  },
+  HomePortfolioImage: {
+    title: 'Home Portfolio Image',
+    DefineKey: { Area: 'Home', FormKey: 'HomePortfolioImage' },
+    isSingle: true,
+    renderForm: (data) => {
+      return [
+        {
+          key: 'ImageUrl',
+          label: 'ImageUrl',
           inputElement: createUploadImage({
             upload: async (file) => {
               await Sleep(1000)
@@ -144,7 +198,7 @@ export const SettingStruct: ISettingStruct = {
     renderForm: (data) => {
       return [
         {
-          key: 'LogoUrl',
+          key: 'BgUrl',
           label: 'Logo Image',
           inputElement: createUploadImage({
             upload: async (file) => {
@@ -207,6 +261,6 @@ export const SettingStruct: ISettingStruct = {
         }
       ]
     }
-  },
+  }
   //#endregion Makeup & Hair Page
 }

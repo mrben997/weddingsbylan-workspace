@@ -15,10 +15,10 @@ interface IHomeServiceProps {
 const HomeService: FC<IHomeServiceProps> = (props) => {
   const data = props.data ? props.data[0] : undefined
   return (
-    <section className='section section-bg' {...getEditModeKey('ServiceImage')}>
+    <section className='section section-bg' {...getEditModeKey('HomeMakeupAndHairImage')}>
       <div className='section-content left'>
         <div className='section-content-haft'>
-          <div className='flex-column' {...getEditModeKey('Service')}>
+          <div className='flex-column' {...getEditModeKey('HomeMakeupAndHair')}>
             <h5 className='typography-h1'>{data?.Title || defaultValue.Title}</h5>
             <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
               <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />
