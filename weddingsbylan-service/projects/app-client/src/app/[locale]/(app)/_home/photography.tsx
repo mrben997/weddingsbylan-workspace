@@ -26,7 +26,7 @@ const HomePhotography: FC<IHomePhotographyProps> = (props) => {
               <polygon points='100,5 105,10 100,15 95,10' fill='currentColor' />
               <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
             </svg>
-            <p className='typography-body1 mt--1'>{data?.Content || 'Content'}</p>
+            <p className='typography-body1 text-italic mt--1'>{data?.Content || 'Content'}</p>
             <button className='app-btn app-btn-primary mt--2'>Read more</button>
           </div>
         </div>

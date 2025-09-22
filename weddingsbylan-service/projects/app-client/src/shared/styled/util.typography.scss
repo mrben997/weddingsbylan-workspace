@@ -1,6 +1,3 @@
-// Font Families
-$font-family-base: var(--font-family-base);
-
 // Font Sizes
 $font-sizes: (
   h1: 4rem,
@@ -19,8 +16,8 @@ $font-sizes: (
 
 // Font Weights
 $font-weights: (
-  h1: 600,
-  h2: 500,
+  h1: 500,
+  h2: 400,
   h3: 400,
   h4: 400,
   h5: 400,
@@ -48,9 +45,9 @@ $letter-spacings: (
 );
 
 // Typography mixin
-@mixin typography($name, $size, $weight, $lineHeight: default, $spacing: normal, $transform: none, $color: inherit) {
+@mixin typography($name, $size, $weight, $lineHeight: default, $spacing: normal, $transform: none, $color: inherit, $fontFamily: var(--font-primary)) {
   .typography-#{$name} {
-    font-family: $font-family-base;
+    font-family: $fontFamily;
     font-size: $size;
     font-weight: $weight;
     line-height: map.get($line-heights, $lineHeight);
@@ -61,12 +58,12 @@ $letter-spacings: (
 }
 
 // Generate all classes
-@include typography(h1, map.get($font-sizes, h1), map.get($font-weights, h1), tight, tight, none, var(--color-text));
-@include typography(h2, map.get($font-sizes, h2), map.get($font-weights, h2), tight, normal, none, var(--color-text));
-@include typography(h3, map.get($font-sizes, h3), map.get($font-weights, h3), tight, normal, none, var(--color-text));
-@include typography(h4, map.get($font-sizes, h4), map.get($font-weights, h4), default, normal, none, var(--color-text));
-@include typography(h5, map.get($font-sizes, h5), map.get($font-weights, h5), default, normal, none, var(--color-text));
-@include typography(h6, map.get($font-sizes, h6), map.get($font-weights, h6), default, normal, none, var(--color-text));
+@include typography(h1, map.get($font-sizes, h1), map.get($font-weights, h1), tight, tight, none, var(--color-text), var(--font-secondary));
+@include typography(h2, map.get($font-sizes, h2), map.get($font-weights, h2), tight, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h3, map.get($font-sizes, h3), map.get($font-weights, h3), tight, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h4, map.get($font-sizes, h4), map.get($font-weights, h4), default, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h5, map.get($font-sizes, h5), map.get($font-weights, h5), default, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h6, map.get($font-sizes, h6), map.get($font-weights, h6), default, normal, none, var(--color-text), var(--font-secondary));
 @include typography(subtitle1, map.get($font-sizes, subtitle1), map.get($font-weights, subtitle1), default, normal, none, var(--color-text));
 @include typography(subtitle2, map.get($font-sizes, subtitle2), map.get($font-weights, subtitle2), default, normal, none, var(--color-text-secondary));
 @include typography(body1, map.get($font-sizes, body1), map.get($font-weights, body1), default, normal, none, var(--color-text));
@@ -95,6 +92,9 @@ $letter-spacings: (
 }
 .text-black {
   color: #000 !important;
+}
+.text-italic {
+  font-style: italic !important;
 }
 
 .flex-center-center {

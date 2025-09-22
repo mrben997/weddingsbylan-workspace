@@ -27,10 +27,6 @@
   /* Border color - màu viền, dùng cho border các thành phần */
   --color-border: #e5e5e5;
 
-  /* Font families */
-  --font-family-base: 'Raleway', sans-serif;
-  --font-family-heading: 'Playfair Display', serif;
-
   /* Font sizes */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -66,7 +62,7 @@
 
 body {
   color: var(--color-text, #000);
-  font-family: var(--font-family-base);
+  font-family: var(--font-primary);
   font-size: var(--font-size-md);
   line-height: var(--line-height-md);
 }

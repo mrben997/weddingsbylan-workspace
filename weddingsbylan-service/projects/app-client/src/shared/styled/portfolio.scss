@@ -1,0 +1,121 @@
+/* Portfolio styles: responsive grid, tab filter and hover overlay */
+.portfolio-view-area {
+	padding: 48px 24px;
+	max-width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.portfolio-view-area .typography-h2 {
+	margin-bottom: 8px;
+}
+
+.portfolio-view-area .tab-filter {
+	margin: 28px 0;
+}
+
+.tab-list {
+	display: inline-flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.tab-item {
+	background: transparent;
+	border: none;
+	padding: 10px 8px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	color: #666;
+	cursor: pointer;
+	position: relative;
+}
+
+.tab-item.active {
+	color: #0a2433;
+}
+
+.tab-item.active::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: #0a2433;
+	bottom: -8px;
+	margin: 0 auto;
+	width: 60%;
+}
+
+.gallery-view-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+	margin-top: 24px;
+}
+
+
+.portfolio-view-item {
+	position: relative;
+	overflow: hidden;
+	border-radius: 6px;
+	background: #f7f7f7;
+}
+
+.portfolio-view-item img {
+	width: 100%;
+	height: 360px;
+	object-fit: cover;
+	display: block;
+	transition: transform 300ms ease;
+}
+
+.portfolio-view-item:hover img {
+	transform: scale(1.03);
+}
+
+
+/* No per-item animation for now: items render directly based on filter */
+
+.portfolio-view-info {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+	color: #fff;
+	padding: 18px;
+	transform: translateY(100%);
+	transition: transform 240ms ease;
+}
+
+.portfolio-view-item:hover .portfolio-view-info {
+	transform: translateY(0);
+}
+
+.portfolio-view-info .typography-h6 {
+	margin: 0 0 6px 0;
+	font-size: 16px;
+}
+
+.portfolio-view-info .typography-body2 {
+	margin: 0;
+	font-size: 13px;
+	opacity: 0.95;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.gallery-view-grid { grid-template-columns: repeat(2, 1fr); }
+	.portfolio-view-item img { height: 320px; }
+}
+
+@media (max-width: 640px) {
+	.gallery-view-grid { grid-template-columns: 1fr; gap: 18px; }
+	.portfolio-view-item img { height: 240px; }
+	.portfolio-view-area { padding: 24px 16px; }
+	.tab-list { gap: 12px; }
+}
+
