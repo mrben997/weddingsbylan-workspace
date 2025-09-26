@@ -1,14 +1,14 @@
-.slider-wrapper {
+.slider {
   position: relative;
   width: 100%;
   height: 100vh;
 
-  .slider {
+  &__container {
     width: 100%;
     height: 100%;
   }
 
-  .slide {
+  &__slide {
     width: 100%;
     height: 100%;
     position: relative;
@@ -28,27 +28,27 @@
       background: rgba(0, 0, 0, 0.35);
       z-index: 1;
     }
+  }
 
-    .content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      cursor: default;
+  &__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    cursor: default;
 
-      .title,
-      .section-divider,
-      .subtitle,
-      .desc,
-      .btn {
-        opacity: 0;
-        transform: translateY(40px);
-      }
+    .slider__title,
+    .slider__divider,
+    .slider__subtitle,
+    .slider__desc,
+    .slider__btn {
+      opacity: 0;
+      transform: translateY(40px);
     }
   }
 
   /* Custom arrows */
-  .custom-nav {
+  &__nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -62,56 +62,56 @@
     cursor: pointer;
     z-index: 10;
 
-    .arrow {
+    &-arrow {
       font-size: 26px;
     }
 
-    .count {
+    &-count {
       font-size: 20px;
       position: relative;
 
-      .top {
+      &-top {
         position: absolute;
         top: -8px;
         left: -10px;
       }
 
-      .divider {
+      &-divider {
         display: inline-block;
         transform: rotate(20deg) scaleY(1.5);
       }
 
-      .bottom {
+      &-bottom {
         position: absolute;
         bottom: -4px;
         left: 6px;
       }
     }
 
-    &.left {
+    &--left {
       left: 15px;
     }
 
-    &.right {
+    &--right {
       right: 15px;
     }
   }
 
   /* animate text */
-  .swiper-slide-active .content {
-    .title {
+  .swiper-slide-active .slider__content {
+    .slider__title {
       animation: fadeUp 0.8s ease forwards 0.2s;
     }
-    .section-divider {
+    .slider__divider {
       animation: fadeUp 0.8s ease forwards 0.5s;
     }
-    .subtitle {
+    .slider__subtitle {
       animation: fadeUp 0.8s ease forwards 0.8s;
     }
-    .desc {
+    .slider__desc {
       animation: fadeUp 0.8s ease forwards 1.1s;
     }
-    .btn {
+    .slider__btn {
       animation: fadeUp 0.8s ease forwards 1.4s;
     }
   }
@@ -130,19 +130,19 @@
 }
 
 /* Typography */
-.title {
+.slider__title {
   font-size: 3.5rem;
   margin-bottom: 25px;
   font-weight: 600;
   line-height: 1.2;
   color: #fff;
 
-  &.no-margin {
+  &--no-margin {
     margin-bottom: 0;
   }
 }
 
-.subtitle {
+.slider__subtitle {
   display: block;
   font-size: 0.95rem;
   margin-bottom: 15px;
@@ -152,33 +152,32 @@
   color: #f8f8f8;
 }
 
-.desc {
+.slider__desc {
   display: block;
   font-size: 0.9rem;
   margin: 20px auto;
   letter-spacing: 1px;
   max-width: 900px;
   line-height: 1.6;
-  text-transform: none;
   font-weight: 300;
   color: #f8f8f8;
 }
 
-.btn {
+.slider__btn {
   display: inline-block;
   padding: 12px 36px;
   margin-top: 40px;
-  border: 1px solid #fff !important; // viền mảnh thanh lịch
+  border: 1px solid #fff;
   background: transparent;
-  color: #fff !important; // chữ trắng rõ
+  color: #fff;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.3) !important; /* nền xám nhạt */
-    color: #fff; /* chữ trắng */
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff;
     border-color: transparent;
     text-decoration: none;
     user-select: none;
@@ -187,12 +186,7 @@
 
 /* Mobile */
 @media (max-width: 440px) {
-  .custom-nav {
+  .slider__nav {
     display: none;
-
-    .arrow,
-    .count {
-      display: none;
-    }
   }
 }
