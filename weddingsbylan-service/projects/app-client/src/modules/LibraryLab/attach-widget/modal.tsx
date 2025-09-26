@@ -17,6 +17,7 @@ interface IAttachModalProps {
   /** @default true */
   isAutoClose?: boolean
   onClose?: () => void
+  imageGetter?: (item: IAttachItem) => string | undefined
 }
 
 interface IAttachModalState {
@@ -113,7 +114,7 @@ class AttachModal extends Component<IAttachModalProps, IAttachModalState> {
 
               if (x.status === 'deleted') itemClasses.push(attachModalClasses.itemDelete)
               else if (x.status === 'new') itemClasses.push(attachModalClasses.itemNew)
-
+              const thumbnail = this.props.imageGetter ? this.props.imageGetter(x) : x.thumbnail
               return (
                 <Grid key={x.id + i.toString()} item xs={6} sm={4} md={3} lg={2}>
                   <div className={itemClasses.join(' ')}>
@@ -122,17 +123,13 @@ class AttachModal extends Component<IAttachModalProps, IAttachModalState> {
                         {x.name}
                       </Typography>
                       <Tooltip title={x.status === 'deleted' ? 'Restore' : 'Delete'} arrow>
-                        <IconButton
-                          size='small'
-                          color={x.status === 'deleted' ? 'primary' : 'secondary'}
-                          onClick={() => this.handleTriggerDeleteItemClick(x)}
-                        >
+                        <IconButton size='small' color={x.status === 'deleted' ? 'primary' : 'secondary'} onClick={() => this.handleTriggerDeleteItemClick(x)}>
                           {x.status === 'deleted' ? <ReplayIcon fontSize='small' /> : <RemoveIcon fontSize='small' />}
                         </IconButton>
                       </Tooltip>
                     </div>
                     <div className={attachModalClasses.itemContent}>
-                      <img src={x.thumbnail || x.url} alt={x.name} />
+                      <img src={thumbnail || x.url} alt={x.name} />
                     </div>
                   </div>
                 </Grid>

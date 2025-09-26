@@ -15,6 +15,7 @@ export interface IOnChangeParams {
 
 export interface ICellAttachWidgetParams {
   onChange?: (params: IOnChangeParams) => Promise<void>
+  imageGetter?: (item: IAttachItem) => string | undefined
 }
 
 export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderCellFunction {
@@ -27,6 +28,7 @@ export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderC
     return (
       <AttachWidget
         value={val}
+        imageGetter={params.imageGetter}
         onChange={async (i, o) => {
           if (!params.onChange) return
           return params.onChange({ value, row, items: i, options: o })

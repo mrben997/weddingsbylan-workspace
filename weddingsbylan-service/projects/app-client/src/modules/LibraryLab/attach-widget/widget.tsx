@@ -12,6 +12,7 @@ export interface IAttachWidgetProps {
   value: IAttachItem[]
   onChange?: AttachChangeFunction
   maxDisplayFiles?: number
+  imageGetter?: (item: IAttachItem) => string | undefined
 }
 
 export interface IAttachWidgetState {
@@ -54,11 +55,14 @@ export class AttachWidget extends Component<IAttachWidgetProps, IAttachWidgetSta
                 No files, drag and drop here
               </Typography>
             )}
-            {list.map((item, index) => (
-              <IconButton key={index} component='a' href={item.url} target='_blank' className={attachWidgetClasses.listItem}>
-                <img src={item.thumbnail || item.url} alt={item.name} />
-              </IconButton>
-            ))}
+            {list.map((item, index) => {
+              const thumbnail = this.props.imageGetter ? this.props.imageGetter(item) : item.thumbnail
+              return (
+                <IconButton key={index} component='a' href={item.url} target='_blank' className={attachWidgetClasses.listItem}>
+                  <img src={thumbnail || item.url} alt={item.name} />
+                </IconButton>
+              )
+            })}
           </div>
           {this.renderMoreButton()}
         </div>
@@ -82,7 +86,9 @@ export class AttachWidget extends Component<IAttachWidgetProps, IAttachWidgetSta
       const handleClick = () => {
         context.ShowModal({
           backdropActivated: true,
-          ContentModal: () => <AttachModal value={value} onChange={onChange} onClose={context.CloseModal} isAutoClose={false} />
+          ContentModal: () => (
+            <AttachModal value={value} onChange={onChange} onClose={context.CloseModal} isAutoClose={false} imageGetter={this.props.imageGetter} />
+          )
         })
       }
       return (
