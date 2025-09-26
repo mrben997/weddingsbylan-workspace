@@ -1,7 +1,10 @@
 import React from 'react'
+
 import Header from '../../shared/components/Layout/Header'
 import Footer from '../../shared/components/Layout/Footer'
 import './index.scss'
+import Slider from './Slider'
+import Service from './Service'
 
 const Photography: React.FC = () => {
   return (
@@ -10,9 +13,10 @@ const Photography: React.FC = () => {
 
       <main className='photography-page'>
         <section className='banner-area'>
-          <div className='banner-bg' style={{ backgroundImage: 'url(images/banner-0.jpg)' }}></div>
+          {/* <div className='banner-bg' style={{ backgroundImage: 'url(images/banner-0.jpg)' }}></div>
           <h2 className='typography-h1 mb--3'>Photography</h2>
-          <p className='typography-subtitle1'>Welcome to the photography page. Here you can find our latest works and projects.</p>
+          <p className='typography-subtitle1'>Welcome to the photography page. Here you can find our latest works and projects.</p> */}
+          <Slider />
         </section>
 
         {/* About */}
@@ -37,7 +41,7 @@ const Photography: React.FC = () => {
             <h2 className='typography-h2'>SERVICES</h2>
             <span className='typography-subtitle1'>CHOOSE YOURS</span>
           </div>
-          <div className='services-list'>
+          {/* <div className='services-list'>
             <div className='service-card'>
               <h3 className='typography-h5 title mb--2'>Engagements, couples photoshoots</h3>
               <p className='service-price sub-title mb--1'>(STARTS AT $425)</p>
@@ -71,7 +75,9 @@ const Photography: React.FC = () => {
                 online gallery with print release.
               </p>
             </div>
-          </div>
+          </div> */}
+
+          <Service />
         </section>
       </main>
 

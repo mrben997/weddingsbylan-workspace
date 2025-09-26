@@ -13,35 +13,190 @@
     }
   }
 
-  .services-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 1200px;
-    gap: 12px;
+  // .services-list {
+  //   display: flex;
+  //   justify-content: center;
+  //   flex-wrap: wrap;
+  //   width: 100%;
+  //   max-width: 1200px;
+  //   gap: 12px;
+  // }
+
+  // .service-card {
+  //   background: var(--color-bg);
+  //   border: 1px solid var(--color-border);
+  //   border-radius: 8px;
+  //   box-shadow: 0 2px 16px rgba(var(--color-primary-rgb), 0.04);
+  //   flex: 1 1 320px;
+  //   max-width: 340px;
+  //   min-width: 280px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: flex-start;
+  //   transition: box-shadow 0.2s, border-color 0.2s;
+  //   padding: 24px;
+  //   .title {
+  //     font-weight: 500;
+  //     min-height: 2em;
+  //   }
+  // }
+  // .service-card:hover {
+  //   box-shadow: 0 4px 32px rgba(var(--color-secondary), 0.12);
+  //   border-color: var(--color-secondary);
+  // }
+}
+
+.service {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+
+  &__card-container {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+    min-width: 250px;
+    padding: 0 15px;
   }
 
-  .service-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    box-shadow: 0 2px 16px rgba(var(--color-primary-rgb), 0.04);
-    flex: 1 1 320px;
-    max-width: 340px;
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: box-shadow 0.2s, border-color 0.2s;
-    padding: 24px;
-    .title {
+  &__card {
+    background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-1.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 58px 20px 38px;
+    width: 100%;
+    min-width: 250px;
+    position: relative;
+    overflow: hidden;
+
+    ul {
+      list-style: none;
+    }
+
+    &-title {
+      margin-bottom: 30px;
+
+      h3 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #545454;
+        font-weight: 400;
+      }
+    }
+
+    &-price {
+      .service__price-value {
+        font-size: 32px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        color: #4a3e5a;
+      }
+
+      .service__price-per {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 20px;
+      }
+    }
+
+    &-features {
+      margin-top: 45px;
+      font-size: 15px;
       font-weight: 500;
-      min-height: 2em;
+      color: grey;
+      line-height: 30px;
+
+      div {
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &-button {
+      margin-top: 50px;
+    }
+
+    /* Modifiers */
+    &--expert {
+      background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-2.jpg');
+      color: #fff;
+
+      h3,
+      .service__price-value,
+      .service__price-per,
+      .service__card-features,
+      .service__btn {
+        color: #fff;
+        border-color: #fff;
+      }
+
+      .service__btn:hover {
+        background: #fff;
+        color: #333;
+      }
+    }
+
+    &--supreme {
+      background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-3.png');
     }
   }
-  .service-card:hover {
-    box-shadow: 0 4px 32px rgba(var(--color-secondary), 0.12);
-    border-color: var(--color-secondary);
+
+  /* Button */
+  &__btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #555;
+    background-color: transparent;
+    font-size: 14px;
+    transition: all 0.3s;
+
+    &:hover {
+      background: #4a3e5a;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  /* Ribbon */
+  &__ribbon {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: #d8d4db;
+    color: #4a3e5a;
+    padding: 14px 5px 19px 5px;
+    font-size: 13px;
+    font-weight: 500;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    border-radius: 0 0 20px 20px;
+  }
+
+  /* Mobile */
+  @media (max-width: 576px) {
+    &__card-container {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    &__card {
+      padding: 40px 15px;
+
+      h3 {
+        font-size: 24px;
+      }
+
+      .service__price-value {
+        font-size: 24px;
+      }
+    }
   }
 }
