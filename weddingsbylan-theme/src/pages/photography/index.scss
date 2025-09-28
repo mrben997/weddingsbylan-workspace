@@ -4,6 +4,10 @@
 @use '../../shared/styles/theme-dark.scss';
 
 .photography-page {
+  display: flex;
+  gap: 70px;
+  flex-direction: column;
+
   .banner-area {
     position: relative;
     overflow: hidden;

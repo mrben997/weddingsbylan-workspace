@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Header from '../../shared/components/Layout/Header'
 import Footer from '../../shared/components/Layout/Footer'
 import './index.scss'
 import Slider from './Slider'
 import Service from './Service'
+import Notes from './Notes'
 
 const Photography: React.FC = () => {
+  const [expanded, setExpanded] = useState(false)
+
   return (
     <div className='photography-wrapper'>
       <Header />
@@ -24,13 +27,18 @@ const Photography: React.FC = () => {
           <div className='about-image' style={{ backgroundImage: 'url(images/about-1.jpg)' }}></div>
           <div className='about-content'>
             <h2>About Lan Le</h2>
-            <p>
+            <p className={expanded ? 'expanded' : 'collapsed'}>
               Lan Le is a talented and passionate photographer who is dedicated to capturing the special moments of couples, families, and weddings. With an eye
               for detail and a creative flair, she is able to capture stunning and unique images that truly reflect the essence of her subjects. Her approach to
               photography is simple yet effective: she seeks to capture the natural beauty and authenticity of her couples, without any artificial posing or
-              staging.
+              staging. Lan Le is a talented and passionate photographer who is dedicated to capturing the special moments of couples, families, and weddings.
+              With an eye for detail and a creative flair, she is able to capture stunning and unique images that truly reflect the essence of her subjects. Her
+              approach to photography is simple yet effective: she seeks to capture the natural beauty and authenticity of her couples, without any artificial
+              posing or staging.
             </p>
-            <span className='read-more'>Read more</span>
+            <span className='read-more' onClick={() => setExpanded(!expanded)}>
+              {expanded ? 'Read less' : 'Read more'}
+            </span>
           </div>
         </section>
 
@@ -78,6 +86,10 @@ const Photography: React.FC = () => {
           </div> */}
 
           <Service />
+        </section>
+
+        <section className='note'>
+          <Notes />
         </section>
       </main>
 

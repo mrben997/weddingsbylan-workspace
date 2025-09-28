@@ -1,6 +1,6 @@
 .services-section {
   width: 100%;
-  background: var(--color-bg);
+  background: url('https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/h1-parallax-1.jpg?id=7106');
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +56,7 @@
   &__card-container {
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
-    min-width: 250px;
+    min-width: 350px;
     padding: 0 15px;
   }
 
@@ -72,6 +72,7 @@
     overflow: hidden;
 
     ul {
+      font-family: var(--font-secondary);
       list-style: none;
     }
 
@@ -95,7 +96,7 @@
       }
 
       .service__price-per {
-        font-size: 14px;
+        font-size: 15px;
         color: #777;
         margin-bottom: 20px;
       }
@@ -155,7 +156,7 @@
     text-decoration: none;
     color: #555;
     background-color: transparent;
-    font-size: 14px;
+    font-size: 12px;
     transition: all 0.3s;
 
     &:hover {
