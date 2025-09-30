@@ -26,8 +26,8 @@ const Photography: React.FC = () => {
         <section className='about-section'>
           <div className='about-image' style={{ backgroundImage: 'url(images/about-1.jpg)' }}></div>
           <div className='about-content'>
-            <h2>About Lan Le</h2>
-            <p className={expanded ? 'expanded' : 'collapsed'}>
+            <h2 className='typography-h2'>About Lan Le</h2>
+            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>
               Lan Le is a talented and passionate photographer who is dedicated to capturing the special moments of couples, families, and weddings. With an eye
               for detail and a creative flair, she is able to capture stunning and unique images that truly reflect the essence of her subjects. Her approach to
               photography is simple yet effective: she seeks to capture the natural beauty and authenticity of her couples, without any artificial posing or

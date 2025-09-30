@@ -11,12 +11,7 @@ interface Plan {
 }
 
 const plans: Plan[] = [
-  {
-    title: 'BUSINESS',
-    price: '$39',
-    per: 'per month',
-    features: ['10 projects', '100 users']
-  },
+  { title: 'BUSINESS', price: '$39', per: 'per month', features: ['10 projects', '100 users'] },
   {
     title: 'EXPERT',
     price: '$59',
@@ -39,24 +34,24 @@ const Service = () => {
   return (
     <div className='service'>
       {plans.map((plan, index) => (
-        <div key={index} className='service__card-container'>
-          <div className={`service__card ${plan.variant ? `service__card--${plan.variant}` : ''}`}>
-            {plan.ribbon && <span className={`service__ribbon service__ribbon--${plan.ribbon.type}`}>{plan.ribbon.text}</span>}
+        <div key={index} className='card-wrapper'>
+          <div className={`card ${plan.variant ?? ''}`}>
+            {plan.ribbon && <span className={`ribbon ${plan.ribbon.type}`}>{plan.ribbon.text}</span>}
             <ul>
-              <li className='service__card-title'>
+              <li className='title'>
                 <h3>{plan.title}</h3>
               </li>
-              <li className='service__card-price'>
-                <div className='service__price-value'>{plan.price}</div>
-                <div className='service__price-per'>{plan.per}</div>
+              <li className='price'>
+                <div className='value'>{plan.price}</div>
+                <div className='per'>{plan.per}</div>
               </li>
-              <li className='service__card-features'>
+              <li className='features'>
                 {plan.features.map((feature, i) => (
                   <div key={i}>{feature}</div>
                 ))}
               </li>
-              <li className='service__card-button'>
-                <a href='#' className='service__btn'>
+              <li className='button'>
+                <a href='#' className='btn'>
                   READ MORE
                 </a>
               </li>

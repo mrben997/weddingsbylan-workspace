@@ -53,14 +53,14 @@
   flex-wrap: wrap;
   margin-top: 20px;
 
-  &__card-container {
+  .card-wrapper {
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
     min-width: 350px;
     padding: 0 15px;
   }
 
-  &__card {
+  .card {
     background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-1.png');
     background-size: cover;
     background-position: center;
@@ -76,7 +76,7 @@
       list-style: none;
     }
 
-    &-title {
+    .title {
       margin-bottom: 30px;
 
       h3 {
@@ -87,22 +87,22 @@
       }
     }
 
-    &-price {
-      .service__price-value {
+    .price {
+      .value {
         font-size: 32px;
         font-weight: 400;
         margin-bottom: 5px;
         color: #4a3e5a;
       }
 
-      .service__price-per {
+      .per {
         font-size: 15px;
         color: #777;
         margin-bottom: 20px;
       }
     }
 
-    &-features {
+    .features {
       margin-top: 45px;
       font-size: 15px;
       font-weight: 500;
@@ -118,37 +118,37 @@
       }
     }
 
-    &-button {
+    .button {
       margin-top: 50px;
     }
 
     /* Modifiers */
-    &--expert {
+    &.expert {
       background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-2.jpg');
       color: #fff;
 
       h3,
-      .service__price-value,
-      .service__price-per,
-      .service__card-features,
-      .service__btn {
+      .value,
+      .per,
+      .features,
+      .btn {
         color: #fff;
         border-color: #fff;
       }
 
-      .service__btn:hover {
+      .btn:hover {
         background: #fff;
         color: #333;
       }
     }
 
-    &--supreme {
+    &.supreme {
       background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-3.png');
     }
   }
 
   /* Button */
-  &__btn {
+  .btn {
     display: inline-block;
     padding: 10px 20px;
     border: 1px solid #555;
@@ -167,7 +167,7 @@
   }
 
   /* Ribbon */
-  &__ribbon {
+  .ribbon {
     position: absolute;
     top: 0;
     right: 10px;
@@ -183,19 +183,19 @@
 
   /* Mobile */
   @media (max-width: 440px) {
-    &__card-container {
+    .card-wrapper {
       flex: 1 1 100%;
       max-width: 100%;
     }
 
-    &__card {
+    .card {
       padding: 40px 15px;
 
       h3 {
         font-size: 24px;
       }
 
-      .service__price-value {
+      .value {
         font-size: 24px;
       }
     }

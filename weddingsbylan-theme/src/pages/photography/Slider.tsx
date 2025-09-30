@@ -44,25 +44,27 @@ const Slider = () => {
         loop
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        className='slider__container'
+        className='container'
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className='slider__slide' style={{ backgroundImage: `url(${slide.img})` }}>
-              <div className='slider__content'>
-                <h2 className={`slider__title ${index === 0 || index === 2 ? 'slider__title--no-margin' : ''}`}>{slide.title}</h2>
-
+            <div className='slide' style={{ backgroundImage: `url(${slide.img})` }}>
+              <div className='content'>
+                {/* TODO font-size: 79px color: var(--color-bg) font-weight: 300 */}
+                <h2 className={`typography-h1 title ${index === 0 || index === 2 ? 'title--no-margin' : ''}`}>{slide.title}</h2>
                 {(index === 0 || index === 2) && (
-                  <svg className='slider__divider' width='100' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
+                  <svg className='divider' width='100' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
                     <line x1='0' y1='10' x2='85' y2='10' stroke='#fff' strokeWidth='1' />
                     <polygon points='100,5 105,10 100,15 95,10' fill='#fff' />
                     <line x1='115' y1='10' x2='200' y2='10' stroke='#fff' strokeWidth='1' />
                   </svg>
                 )}
-
-                <span className='slider__subtitle'>{slide.subtitle}</span>
-                {index === 1 && <span className='slider__desc'>{slide.desc}</span>}
-                <a href='#' className='slider__btn'>
+                {/* TODO color: font-size: 25px var(--color-bg))*/}
+                <span className='typography-subtitle subtitle'>{slide.subtitle}</span>
+                {/* TODO font-size: 18px color: var(--color-bg)*/}
+                {index === 1 && <span className='typography-h5 desc'>{slide.desc}</span>}
+                {/* TODO color: var(--color-bg) text-transform: uppercase*/}
+                <a href='#' className='typography-subtitle2 btn'>
                   {slide.button}
                 </a>
               </div>
@@ -72,25 +74,26 @@ const Slider = () => {
       </Swiper>
 
       {/* Custom arrows */}
-      <div className='slider__nav slider__nav--left' onClick={() => swiperRef.current?.slidePrev()}>
-        <span className='slider__nav-arrow'>
+      <div className='nav left' onClick={() => swiperRef.current?.slidePrev()}>
+        <span className='arrow'>
           <FaArrowLeftLong />
         </span>
-        <span className='slider__nav-count'>
-          <span className='slider__nav-count-top'>{((activeIndex - 1 + slides.length) % slides.length) + 1}</span>
-          <span className='slider__nav-count-divider'>/</span>
-          <span className='slider__nav-count-bottom'>{slides.length}</span>
+        {/* TODO color: var(--color-bg)*/}
+        <span className='typography-h6 count'>
+          <span className='count-top'>{((activeIndex - 1 + slides.length) % slides.length) + 1}</span>
+          <span className='count-divider'>/</span>
+          <span className='count-bottom'>{slides.length}</span>
         </span>
       </div>
 
-      <div className='slider__nav slider__nav--right' onClick={() => swiperRef.current?.slideNext()}>
-        <span className='slider__nav-arrow'>
+      <div className='nav right' onClick={() => swiperRef.current?.slideNext()}>
+        <span className='arrow'>
           <FaArrowRightLong />
         </span>
-        <span className='slider__nav-count'>
-          <span className='slider__nav-count-top'>{((activeIndex + 1) % slides.length) + 1}</span>
-          <span className='slider__nav-count-divider'>/</span>
-          <span className='slider__nav-count-bottom'>{slides.length}</span>
+        <span className='typography-h6 count'>
+          <span className='count-top'>{((activeIndex + 1) % slides.length) + 1}</span>
+          <span className='count-divider'>/</span>
+          <span className='count-bottom'>{slides.length}</span>
         </span>
       </div>
     </div>
