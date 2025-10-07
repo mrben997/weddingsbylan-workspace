@@ -1,4 +1,3 @@
-
 import { SxProps, Theme } from '@mui/material'
 
 export const HttpRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/
@@ -136,9 +135,9 @@ export const MergeObjects = <T extends Record<string, any>>(...objects: DeepPart
     if (!obj || typeof obj === 'string') return prev
     Object.keys(obj).forEach((key) => {
       if (IsObject((prev as any)[key]) && IsObject((obj as any)[key])) {
-        ; (prev as any)[key] = MergeObjects((prev as any)[key], (obj as any)[key])
+        ;(prev as any)[key] = MergeObjects((prev as any)[key], (obj as any)[key])
       } else {
-        ; (prev as any)[key] = (obj as any)[key]
+        ;(prev as any)[key] = (obj as any)[key]
       }
     })
     return prev
@@ -364,6 +363,16 @@ export const TryParseInt = function (value: any, defaultValue?: number): number 
     if (!value) return defaultValue
     return parseInt(value)
   } catch (error) {
+    return defaultValue
+  }
+}
+
+export const tryParseObject = function <T>(value: any, defaultValue: T): T {
+  try {
+    if (!value) return defaultValue
+    return JSON.parse(value)
+  } catch (error) {
+    console.log(error)
     return defaultValue
   }
 }

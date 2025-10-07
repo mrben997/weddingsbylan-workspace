@@ -38,7 +38,7 @@ const CreateCheckboxSingle = function <TModel>(params?: IParams) {
       const checked = this.props.value ?? this.state.checked
       return (
         <CustomFormGroup {...mapProps.formGroupProps}>
-          {!this.props.disabled && <input name={this.props.name?.toString()} hidden value={checked ? "true" : "false"} />}
+          {!this.props.disabled && <input name={this.props.name?.toString()} hidden value={checked ? 'true' : 'false'} onChange={() => {}} />}
           <FormControlLabel
             {...slots.formControlLabelProps}
             label={this.renderLabel()}
