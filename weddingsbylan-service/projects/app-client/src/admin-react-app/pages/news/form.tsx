@@ -17,7 +17,7 @@ import { INews } from '@/admin-react-app/model'
 import { ConvertTitleToAscii, getLocale } from '@/admin-react-app/ultilities/helper'
 import { getTranslation } from '@/locales/helper'
 import { CreateFormGridLayout, CreateFormUI, FormModalWrapper, FormValidator, IFormBase, ISlots, SingleRuleValidate } from '@/modules/Library/Forms'
-import { CreateCheckboxSingle, CreateInputTextMultiline } from '@/modules/Library/Forms/Inputs'
+import { CreateCheckboxSingle, CreateInputTextMultiline, CreateSelectSimple, ISelectSimpleOption } from '@/modules/Library/Forms/Inputs'
 import CreateTextCkEditor from '@/modules/Library/Forms/Inputs/CreateTextCkEditor'
 import { Box, SxProps, Theme } from '@mui/material'
 import { ComponentType, FC, useState } from 'react'
@@ -46,6 +46,9 @@ var formValidate = new FormValidator<Partial<INews>>({
 
 const language = getTranslation(getLocale())
 
+const tabs = ['Weddings', 'Engagements', 'Portraits', 'Events']
+const getTabs = tabs.map<ISelectSimpleOption>((x) => ({ name: x, value: x }))
+
 const FormInstance = CreateFormGridLayout({
   validate: formValidate,
   configs: [
@@ -65,8 +68,9 @@ const FormInstance = CreateFormGridLayout({
     // },
     {
       key: 'Tags',
-      label: language.TableTags,
-      inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) as ComponentType
+      label: 'Tab name',
+      // inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) as ComponentType
+      inputElement: CreateSelectSimple<INews>({ options: getTabs })
     },
     {
       key: 'ImageUrl',

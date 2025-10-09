@@ -83,7 +83,7 @@ export const getTableInstance = (params: ICellAttachWidgetParams) => {
           )
         }
       },
-      Tags: { minWidth: 150, headerName: language.TableTags },
+      Tags: { minWidth: 150, headerName: 'Tab name' },
       Description: { type: 'string', width: 360, renderCell: createCellAttachWidget(params) }
     }
   })
