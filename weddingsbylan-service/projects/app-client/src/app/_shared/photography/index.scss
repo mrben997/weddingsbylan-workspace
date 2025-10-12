@@ -1,7 +1,7 @@
-@use '../../shared/styles/global.scss';
+@use '../styles/global.scss';
 @use './about.scss';
 @use './service.scss';
-@use '../../shared/styles/theme-dark.scss';
+@use '../styles/theme-dark.scss';
 
 .photography-page {
   display: flex;

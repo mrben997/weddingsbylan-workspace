@@ -1,7 +1,5 @@
+'use client'
 import React, { useState } from 'react'
-
-import Header from '../../shared/components/Layout/Header'
-import Footer from '../../shared/components/Layout/Footer'
 import './index.scss'
 import Slider from './Slider'
 import Service, { IPlan } from './Service'
@@ -15,14 +13,12 @@ interface IPhotographyProps {
   service?: IPlan[]
 }
 
-const Photography: React.FC<IPhotographyProps> = (props) => {
-  const { configs = photographyConfigs, notes = [], service = [] } = props
+const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
+  const { configs = photographyConfigs, notes, service } = props
   const [expanded, setExpanded] = useState(false)
 
   return (
     <div className='photography-wrapper'>
-      <Header />
-
       <main className='photography-page'>
         <section className='banner-area'>
           {/* <div className='banner-bg' style={{ backgroundImage: 'url(images/banner-0.jpg)' }}></div>
@@ -93,9 +89,8 @@ const Photography: React.FC<IPhotographyProps> = (props) => {
           <Notes data={notes} />
         </section>
       </main>
-      <Footer />
     </div>
   )
 }
 
-export default Photography
+export default PhotographyViewBase

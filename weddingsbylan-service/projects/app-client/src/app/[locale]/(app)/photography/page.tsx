@@ -5,9 +5,20 @@ import { IPageProps } from '@/app/types'
 import { ImagePath } from '@/shared/config'
 import { settingSService } from '@/services/setting.service'
 import { getEditModeKey } from '@/shared/components/edit.mode'
-import Footer from '@/shared/layout/footer'
-import Header from '@/shared/layout/header'
 import PhotographyPage from '@/views/photography'
+import PhotographyViewBase from '@/app/_shared/photography'
+import { GetImageUrl } from '@/shared/helper'
+import { INote } from '@/app/_shared/photography/Notes'
+import { IPlan } from '@/app/_shared/photography/Service'
+import { serviceService } from '@/services/Service.servce'
+
+const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; service?: IPlan[] }> => {
+  const data = await serviceService.Filter({ where: { Locale: 'vn' } }, signal)
+  console.log('data', data)
+
+  const obj = {}
+  return obj
+}
 
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
@@ -17,9 +28,18 @@ const Page: FC<IPageProps> = async (props) => {
   const dataSetting = pageData?.getSingleData('Setting')
   const dataMahAbout = pageData?.getSingleData('MahAbout')
   const dataMahAboutImage = pageData?.getSingleData('MahAboutImage')
-  
+  const dataFetch = await getServices()
+
   return (
-    <PhotographyPage/>
+    <PhotographyViewBase
+      configs={{
+        title: dataMahAbout?.Title ?? '',
+        description: dataMahAbout?.Content ?? '',
+        image: GetImageUrl('Settings', dataMahAboutImage?.ImageUrl) ?? '',
+        alt: 'Makeup & Hair',
+        url: '/makeup-and-hair'
+      }}
+    />
   )
 }
 
