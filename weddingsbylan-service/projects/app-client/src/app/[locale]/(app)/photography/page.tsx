@@ -11,12 +11,22 @@ import { GetImageUrl } from '@/shared/helper'
 import { INote } from '@/app/_shared/photography/Notes'
 import { IPlan } from '@/app/_shared/photography/Service'
 import { serviceService } from '@/services/Service.servce'
+import { IServiceDTO, IServiceSetting } from '@/admin-react-app/pages/services/types'
+import { tryParseObject } from '@/modules/Library/Helpers'
 
-const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; service?: IPlan[] }> => {
+const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; services?: IPlan[] }> => {
   const data = await serviceService.Filter({ where: { Locale: 'vn' } }, signal)
   console.log('data', data)
-
-  const obj = {}
+  const items: IServiceDTO[] = (data ?? []).map((x) => {
+    const setting = tryParseObject<IServiceSetting>(x.Content, { version: '0.0.1', data: {} })
+    return { ...x, Area: setting.data?.area, Type: setting.data?.type }
+  })
+  const notes = items.filter((x) => x.Type === 'note' && x.Area === 'photography')
+  const services = items.filter((x) => x.Type === 'package' && x.Area === 'photography')
+  const obj = {
+    notes: notes.map<INote>((x) => ({ id: x.Id, title: x.Name ?? '', text: x.Description ?? '' })),
+    services: services.map<IPlan>((x) => ({ title: x.Name ?? '', price: '$39', per: 'per month', features: [x.Description ?? ''] }))
+  }
   return obj
 }
 
@@ -32,6 +42,8 @@ const Page: FC<IPageProps> = async (props) => {
 
   return (
     <PhotographyViewBase
+      notes={dataFetch.notes}
+      services={dataFetch.services}
       configs={{
         title: dataMahAbout?.Title ?? '',
         description: dataMahAbout?.Content ?? '',

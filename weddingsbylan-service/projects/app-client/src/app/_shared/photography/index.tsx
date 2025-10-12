@@ -10,11 +10,11 @@ import { photographyConfigs } from './configs'
 interface IPhotographyProps {
   configs?: IPhotographyConfigs
   notes?: INote[]
-  service?: IPlan[]
+  services?: IPlan[]
 }
 
 const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
-  const { configs = photographyConfigs, notes, service } = props
+  const { configs = photographyConfigs, notes, services } = props
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -82,12 +82,13 @@ const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
             </div>
           </div> */}
 
-          <Service data={service} />
+          <Service data={services} />
         </section>
-
-        <section className='note'>
-          <Notes data={notes} />
-        </section>
+        {notes && notes?.length > 0 && (
+          <section className='note'>
+            <Notes data={notes} />
+          </section>
+        )}
       </main>
     </div>
   )
