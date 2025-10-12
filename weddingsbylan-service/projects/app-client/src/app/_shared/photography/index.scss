@@ -1,0 +1,42 @@
+@use '../styles/global.scss';
+@use './about.scss';
+@use './service.scss';
+@use '../styles/theme-dark.scss';
+
+.photography-page {
+  display: flex;
+  gap: 70px;
+  flex-direction: column;
+
+  .banner-area {
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 1;
+
+    .banner-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+
+    h2,
+    p {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+  }
+}

@@ -5,8 +5,6 @@ import { IPageProps } from '@/app/types'
 import { ImagePath } from '@/shared/config'
 import { settingSService } from '@/services/setting.service'
 import { getEditModeKey } from '@/shared/components/edit.mode'
-import Footer from '@/shared/layout/footer'
-import Header from '@/shared/layout/header'
 
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
@@ -19,7 +17,6 @@ const Page: FC<IPageProps> = async (props) => {
 
   return (
     <>
-      <Header data={pageData?.getData('Setting')} />
       <div className='makeup-and-hair-area'>
         <div className='hero-section flex-row items-center app-container'>
           <div className='image-container flex-1' {...getEditModeKey('MahAboutImage')}>
@@ -136,7 +133,6 @@ const Page: FC<IPageProps> = async (props) => {
           </div>
         </div>
       </div>
-      <Footer data={pageData?.getData('Footer')} />
     </>
   )
 }

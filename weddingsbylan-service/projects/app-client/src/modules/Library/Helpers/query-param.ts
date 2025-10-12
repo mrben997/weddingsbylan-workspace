@@ -83,5 +83,5 @@ class QueryParamBase {
   }
 }
 export const QueryParam = new QueryParamBase()
-  ; (window as any).QueryParam = QueryParam
+// ; (window as any).QueryParam = QueryParam
 export default QueryParam

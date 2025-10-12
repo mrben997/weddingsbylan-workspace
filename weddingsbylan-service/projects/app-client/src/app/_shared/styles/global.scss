@@ -1,0 +1,334 @@
+@use 'sass:map';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary color - màu chủ đạo, dùng cho các thành phần chính như nút, link nổi bật */
+  --color-primary: #4a3e5a;
+  --color-primary-rgb: 74, 62, 90;
+  /* Secondary color - màu phụ, thường dùng cho các điểm nhấn phụ hoặc hover */
+  --color-secondary: #b19b78;
+  /* Accent color - màu nhấn, dùng để làm nổi bật các chi tiết nhỏ */
+  --color-accent: #e0c097;
+  /* Background color - màu nền chính của trang */
+  --color-bg: #fff;
+  --color-bg-rgb: 255, 255, 255;
+  /* Secondary background color - màu nền phụ, dùng cho các vùng phân biệt hoặc section */
+  --color-bg-secondary: #f8f8f8;
+  --color-bg-secondary-rgb: 248, 248, 248;
+  /* Main text color - màu chữ chính */
+  --color-text: #222;
+  /* Secondary text color - màu chữ phụ, dùng cho mô tả, caption */
+  --color-text-secondary: #666;
+  /* Border color - màu viền, dùng cho border các thành phần */
+  --color-border: #e5e5e5;
+
+  /* Font families */
+  --font-primary: 'Playfair Display', serif;
+  --font-secondary: 'Raleway', sans-serif;
+
+  /* Font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height-sm: 1.2;
+  --line-height-md: 1.5;
+  --line-height-lg: 1.75;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.015em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 2.25rem;
+    --font-size-h2: 1.75rem;
+    --font-size-h3: 1.5rem;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  color: var(--color-text, #000);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.svg-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: fill 0.2s ease-in-out;
+  &.small {
+    width: 16px;
+    height: 16px;
+  }
+  &.large {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px; // Giới hạn chiều rộng tối đa
+  margin: 0 auto; // Căn giữa container
+  padding: 0 20px; // Padding 2 bên
+
+  // Responsive breakpoints
+  @media (max-width: 1240px) {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
+  }
+
+  // Variants cho các kích thước khác nhau
+  &.small {
+    max-width: 768px;
+  }
+
+  &.medium {
+    max-width: 992px;
+  }
+
+  &.large {
+    max-width: 1440px;
+  }
+
+  &.full {
+    max-width: none;
+    padding: 0;
+  }
+
+  // Variant không padding
+  &.no-padding {
+    padding: 0;
+  }
+
+  // Variant padding lớn hơn
+  &.wide-padding {
+    padding: 0 40px;
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+}
+
+.section-divider {
+  display: inline-block;
+  margin: 0.85rem 0;
+  color: var(--color-text-secondary, #666);
+}
+
+// 📁 spacing.scss
+$spacing-base: 10px;
+$spacing-scale: (1, 2, 3, 4, 5);
+
+@mixin generate-spacing($type, $attr) {
+  @each $size in $spacing-scale {
+    $value: $size * $spacing-base;
+
+    // Vertical
+    .#{$type}t--#{$size} {
+      #{$attr}-top: $value;
+    }
+    .#{$type}b--#{$size} {
+      #{$attr}-bottom: $value;
+    }
+
+    // Horizontal
+    .#{$type}l--#{$size} {
+      #{$attr}-left: $value;
+    }
+    .#{$type}r--#{$size} {
+      #{$attr}-right: $value;
+    }
+
+    // X / Y
+    .#{$type}x--#{$size} {
+      #{$attr}-left: $value;
+      #{$attr}-right: $value;
+    }
+    .#{$type}y--#{$size} {
+      #{$attr}-top: $value;
+      #{$attr}-bottom: $value;
+    }
+
+    // All
+    .#{$type}--#{$size} {
+      #{$attr}: $value;
+    }
+  }
+}
+
+// Generate padding/margin
+@include generate-spacing(p, padding);
+@include generate-spacing(m, margin);
+
+// Font Families
+$font-family-base: var(--font-primary);
+
+// Font Sizes
+$font-sizes: (
+  h1: 4rem,
+  h2: 2.25rem,
+  h3: 1.875rem,
+  h4: 1.5rem,
+  h5: 1.25rem,
+  h6: 1rem,
+  subtitle1: 1rem,
+  subtitle2: 0.875rem,
+  body1: 1rem,
+  body2: 0.875rem,
+  caption: 0.75rem,
+  overline: 0.75rem
+);
+
+// Font Weights
+$font-weights: (
+  h1: 500,
+  h2: 500,
+  h3: 400,
+  h4: 400,
+  h5: 400,
+  h6: 500,
+  subtitle1: 400,
+  subtitle2: 500,
+  body1: 400,
+  body2: 400,
+  caption: 400,
+  overline: 500
+);
+
+// Line Heights
+$line-heights: (
+  tight: 1.2,
+  default: 1.5,
+  loose: 1.75
+);
+
+// Letter Spacing
+$letter-spacings: (
+  tight: -0.015em,
+  normal: 0,
+  wide: 0.05em
+);
+
+// Typography mixin
+@mixin typography($name, $size, $weight, $lineHeight: default, $spacing: normal, $transform: none, $color: inherit, $font: $font-family-base) {
+  .typography-#{$name} {
+    font-family: $font;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: map.get($line-heights, $lineHeight);
+    letter-spacing: map.get($letter-spacings, $spacing);
+    text-transform: $transform;
+    color: $color;
+  }
+}
+
+// Generate all classes
+@include typography(h1, map.get($font-sizes, h1), map.get($font-weights, h1), tight, tight, none, var(--color-text), var(--font-secondary));
+@include typography(h2, map.get($font-sizes, h2), map.get($font-weights, h2), tight, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h3, map.get($font-sizes, h3), map.get($font-weights, h3), tight, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h4, map.get($font-sizes, h4), map.get($font-weights, h4), default, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h5, map.get($font-sizes, h5), map.get($font-weights, h5), default, normal, none, var(--color-text), var(--font-secondary));
+@include typography(h6, map.get($font-sizes, h6), map.get($font-weights, h6), default, normal, none, var(--color-text), var(--font-secondary));
+@include typography(subtitle1, map.get($font-sizes, subtitle1), map.get($font-weights, subtitle1), default, normal, none, var(--color-text));
+@include typography(subtitle2, map.get($font-sizes, subtitle2), map.get($font-weights, subtitle2), default, normal, none, var(--color-text-secondary));
+@include typography(body1, map.get($font-sizes, body1), map.get($font-weights, body1), default, normal, none, var(--color-text));
+@include typography(body2, map.get($font-sizes, body2), map.get($font-weights, body2), default, normal, none, var(--color-text-secondary));
+@include typography(caption, map.get($font-sizes, caption), map.get($font-weights, caption), default, normal, none, var(--color-text-secondary));
+@include typography(overline, map.get($font-sizes, overline), map.get($font-weights, overline), default, wide, uppercase, var(--color-text-secondary));
+
+// Color utility classes
+.text-primary {
+  color: var(--color-primary) !important;
+}
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+.text-accent {
+  color: var(--color-accent) !important;
+}
+.text-main {
+  color: var(--color-text) !important;
+}
+.text-muted {
+  color: var(--color-text-secondary) !important;
+}
+.text-white {
+  color: #fff !important;
+}
+.text-black {
+  color: #000 !important;
+}
+
+.flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-btn {
+  font-size: 0.8rem;
+  padding: 16px 40px 15px;
+  min-width: 176px;
+  line-height: 1.7em;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, background-position 0.3s ease, opacity 0.2s ease-out;
+  &.app-btn-primary {
+    border: 1px solid var(--color-main, #000);
+    color: var(--color-main, #000);
+    background-color: transparent;
+    &:hover {
+      background-color: var(--color-main, #000) !important;
+      color: #fff;
+    }
+  }
+}
