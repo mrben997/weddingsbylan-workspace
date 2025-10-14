@@ -9,28 +9,28 @@ import { getEditModeKey } from '@/shared/components/edit.mode'
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
   const locale = p.locale ?? 'vn'
-  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global', 'MakeupAndHair'], ['Setting', 'MahAbout', 'MahAboutImage', 'Footer'])
+  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global', 'MakeupAndHair'], ['Setting', 'About', 'AboutImage', 'Footer'])
 
   const dataSetting = pageData?.getSingleData('Setting')
-  const dataMahAbout = pageData?.getSingleData('MahAbout')
-  const dataMahAboutImage = pageData?.getSingleData('MahAboutImage')
+  const dataAbout = pageData?.getSingleData('About')
+  const dataAboutImage = pageData?.getSingleData('AboutImage')
 
   return (
     <>
       <div className='makeup-and-hair-area'>
         <div className='hero-section flex-row items-center app-container'>
-          <div className='image-container flex-1' {...getEditModeKey('MahAboutImage')}>
-            <img src={`${ImagePath}/${dataMahAboutImage?.ImageUrl}`} alt='Professional makeup artist Lan Le with makeup brushes' className='hero-image' />
+          <div className='image-container flex-1' {...getEditModeKey('AboutImage')}>
+            <img src={`${ImagePath}/${dataAboutImage?.ImageUrl}`} alt='Professional makeup artist Lan Le with makeup brushes' className='hero-image' />
           </div>
-          <div className='content-container flex-1 p--4' {...getEditModeKey('MahAbout')}>
+          <div className='content-container flex-1 p--4' {...getEditModeKey('About')}>
             <div className='logo-area theme-dark'>
               {/* <img src="images/logo.png" alt="weddingsbylan-logo" /> */}
               <div className='img-bg' style={{ backgroundImage: `url('${ImagePath}/${dataSetting?.LogoUrl}')` }}></div>
             </div>
             <div className='about-section'>
-              <h2 className='typography-h2 text-main mb--3'>{dataMahAbout?.Title || 'About title'}</h2>
-              <p className='typography-body1 text-muted'>{dataMahAbout?.SubTitle || 'About subtitle'}</p>
-              <p className='typography-body1 text-muted'>{dataMahAbout?.Content || 'About content'}</p>
+              <h2 className='typography-h2 text-main mb--3'>{dataAbout?.Title || 'About title'}</h2>
+              <p className='typography-body1 text-muted'>{dataAbout?.SubTitle || 'About subtitle'}</p>
+              <p className='typography-body1 text-muted'>{dataAbout?.Content || 'About content'}</p>
             </div>
           </div>
         </div>

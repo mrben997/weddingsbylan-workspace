@@ -1,22 +1,20 @@
 'use server'
-import '@/shared/styled/photography.scss'
 import React, { FC } from 'react'
 import { IPageProps } from '@/app/types'
 import { ImagePath } from '@/shared/config'
 import { settingSService } from '@/services/setting.service'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import PhotographyPage from '@/views/photography'
-import PhotographyViewBase from '@/app/_shared/photography'
+import PhotographyViewBase from '@/views/photography'
 import { GetImageUrl } from '@/shared/helper'
-import { INote } from '@/app/_shared/photography/Notes'
-import { IPlan } from '@/app/_shared/photography/Service'
+import { INote } from '@/views/photography/Notes'
+import { IPlan } from '@/views/photography/Service'
 import { serviceService } from '@/services/Service.servce'
 import { IServiceDTO, IServiceSetting } from '@/admin-react-app/pages/services/types'
 import { tryParseObject } from '@/modules/Library/Helpers'
 
 const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; services?: IPlan[] }> => {
   const data = await serviceService.Filter({ where: { Locale: 'vn' } }, signal)
-  console.log('data', data)
   const items: IServiceDTO[] = (data ?? []).map((x) => {
     const setting = tryParseObject<IServiceSetting>(x.Content, { version: '0.0.1', data: {} })
     return { ...x, Area: setting.data?.area, Type: setting.data?.type }
@@ -33,21 +31,25 @@ const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; ser
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
   const locale = p.locale ?? 'vn'
-  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global', 'MakeupAndHair'], ['Setting', 'MahAbout', 'MahAboutImage', 'Footer'])
+  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global'], ['Setting', 'About', 'AboutImage', 'Footer'])
 
   const dataSetting = pageData?.getSingleData('Setting')
-  const dataMahAbout = pageData?.getSingleData('MahAbout')
-  const dataMahAboutImage = pageData?.getSingleData('MahAboutImage')
+  const dataAbout = pageData?.getSingleData('About')
+  const dataAboutImage = pageData?.getSingleData('AboutImage')
   const dataFetch = await getServices()
 
   return (
     <PhotographyViewBase
+      data={{
+        setting: dataSetting,
+        aboutImage: dataAboutImage
+      }}
       notes={dataFetch.notes}
       services={dataFetch.services}
       configs={{
-        title: dataMahAbout?.Title ?? '',
-        description: dataMahAbout?.Content ?? '',
-        image: GetImageUrl('Settings', dataMahAboutImage?.ImageUrl) ?? '',
+        title: dataAbout?.Title ?? '',
+        description: dataAbout?.Content ?? '',
+        image: GetImageUrl('Settings', dataAboutImage?.ImageUrl) ?? '',
         alt: 'Makeup & Hair',
         url: '/makeup-and-hair'
       }}

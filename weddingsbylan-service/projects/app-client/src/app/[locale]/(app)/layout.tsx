@@ -13,7 +13,7 @@ import FooterScripts from '@/views/global/footer-script'
 
 import { Raleway, Playfair_Display } from 'next/font/google'
 import { ISearchParams } from '@/app/types'
-import AppHeader from '@/views/global/header'
+import AppHeaderSSR from '@/views/global/header.ssr'
 // import AppFooter from '@/views/global/footer'
 
 export interface IParamLocale {
@@ -65,12 +65,12 @@ const raleway = Raleway({
   variable: '--font-secondary'
 })
 
-export default async function RootLayout(
-  props: Readonly<{
-    children: React.ReactNode
-    params: { locale: string }
-  }>
-) {
+interface IRootLayoutProps {
+  children: React.ReactNode
+  params: { locale: string }
+}
+
+export default async function RootLayout(props: Readonly<IRootLayoutProps>) {
   const { children } = props
   const cookieStore = cookies()
   const p = await props.params
@@ -106,7 +106,7 @@ export default async function RootLayout(
 
       <body className={`${playfair.variable} ${raleway.variable}`}>
         <div className='page-wrapper'>
-          <AppHeader data={dataHomePage?.getData('Setting')} />
+          <AppHeaderSSR data={dataHomePage?.getData('Setting')} />
           {props.children}
           {/* <AppFooter footerData={dataHomePage?.getData('Footer')} settingData={dataHomePage?.getData('Setting')} /> */}
           <FooterScripts />

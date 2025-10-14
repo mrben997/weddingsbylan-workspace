@@ -1,115 +1,106 @@
-import '@/shared/styled/photography.scss'
-import React, { FC } from 'react'
-import { IPageProps } from '@/app/types'
-import { ImagePath } from '@/shared/config'
-import { settingSService } from '@/services/setting.service'
+'use client'
+import React, { useState } from 'react'
+import './index.scss'
+import Slider from './Slider'
+import Service, { IPlan } from './Service'
+import Notes, { INote } from './Notes'
+import { IPhotographyConfigs } from './types'
+import { photographyConfigs } from './configs'
 import { getEditModeKey } from '@/shared/components/edit.mode'
-import Footer from '@/shared/layout/footer'
-import Header from '@/shared/layout/header'
+import { ImagePath } from '@/shared/config'
+import { IAboutForm, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
 
-interface IPhotographyPageProps {}
+interface IPhotographyProps {
+  configs?: IPhotographyConfigs
+  notes?: INote[]
+  services?: IPlan[]
+  data: {
+    setting: ISettingForm | undefined
+    aboutImage: IAboutForm | undefined
+  }
+}
 
-const PhotographyPage: FC<IPhotographyPageProps> = (props) => {
+const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
+  const { configs = photographyConfigs, notes, services, data } = props
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <div className='photography-page'>
-      {/* Hero Banner Section */}
-      <section className='hero-banner section-bg parallax-section' data-bg='/images/photography-hero.jpg'>
-        <div className='parallax-overlay'></div>
-        <div className='section-content'>
-          <div className='app-container'>
-            <div className='hero-content'>
-              <h1 className='hero-title'>OUR SERVICES</h1>
-              <p className='hero-description'>
-                Lorem ipsum dolor sit amet, nec in mollis tractatos, eos vidit etiam expetendis at. His aliquip definitiones eu, ea iriure salutatus nam
-              </p>
-            </div>
+    <div className='photography-wrapper'>
+      <main className='photography-page'>
+        <section className='banner-area'>
+          {/* <div className='banner-bg' style={{ backgroundImage: 'url(images/banner-0.jpg)' }}></div>
+          <h2 className='typography-h1 mb--3'>Photography</h2>
+          <p className='typography-subtitle1'>Welcome to the photography page. Here you can find our latest works and projects.</p> */}
+          <Slider />
+        </section>
+
+        {/* About */}
+        <section className='about-section'>
+          <div className='about-image' style={{ backgroundImage: `url('${ImagePath}/${data.aboutImage?.ImageUrl}')` }} {...getEditModeKey('AboutImage')}></div>
+          <div className='about-content' {...getEditModeKey('About')}>
+            <h2 className='typography-h2'>{configs.title}</h2>
+            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{configs.description}</p>
+            <span className='read-more' onClick={() => setExpanded(!expanded)}>
+              {expanded ? 'Read less' : 'Read more'}
+            </span>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services Grid Section */}
-      <section className='services-section'>
-        <div className='app-container'>
-          <div className='services-grid'>
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <path d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' />
-                </svg>
-              </div>
-              <h3 className='service-title'>FULLY ENGAGED</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
+        {/* Services */}
+        <section className='services-section mb--5'>
+          <div className='services-title mb--3'>
+            <div {...getEditModeKey('Setting')}>
+              <img src={`${ImagePath}/${data.setting?.LogoUrl}`} alt='Lan logo' className='services-logo' />
             </div>
-
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <circle cx='12' cy='12' r='10' />
-                  <path d='M12 6v6l4 2' />
-                </svg>
-              </div>
-              <h3 className='service-title'>CONNECTING WORLDS</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
-            </div>
-
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <path d='M20 6L9 17l-5-5' />
-                </svg>
-              </div>
-              <h3 className='service-title'>RESPONSIVE LAYOUTS</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
-            </div>
-
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <path d='M12 19l9-7-9-7-9 7 9 7z' />
-                  <path d='M5 12l7-7 7 7' />
-                </svg>
-              </div>
-              <h3 className='service-title'>YOUR KICKSTART</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
-            </div>
-
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <path d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' />
-                  <polyline points='9,22 9,12 15,12 15,22' />
-                </svg>
-              </div>
-              <h3 className='service-title'>SUPORT WORLDWIDE</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
-            </div>
-
-            <div className='service-item'>
-              <div className='service-icon'>
-                <svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5'>
-                  <path d='M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z' />
-                </svg>
-              </div>
-              <h3 className='service-title'>FAVOURITE THEME</h3>
-              <p className='service-description'>
-                Lorem ipsum dolor sit amet, te vero erat has, ad partem vivendo sensibus qui. At vim labore evertitur, ne vis invenire antiopam suscipiantur.
-              </p>
-            </div>
+            <h2 className='typography-h2'>SERVICES</h2>
+            <span className='typography-subtitle1'>CHOOSE YOURS</span>
           </div>
-        </div>
-      </section>
+          {/* <div className='services-list'>
+            <div className='service-card'>
+              <h3 className='typography-h5 title mb--2'>Engagements, couples photoshoots</h3>
+              <p className='service-price sub-title mb--1'>(STARTS AT $425)</p>
+              <p className='typography-body1 text'>
+                Creating memories together, the images will reflect your love for each other. 90 minutes session 1 location, 2 outfits 150 images. High
+                resolution online gallery
+              </p>
+              <p className='typography-body1 text'>Non local shoots will add a travel fee outside of Gloucester County</p>
+            </div>
+            <div className='service-card'>
+              <h3 className='typography-h5 title mb--2'>Weddings PACKAGE 1</h3>
+              <p className='service-price sub-title mb--1'>(STARTS AT $2900)</p>
+              <p className='typography-body1 text'>
+                Let me capture your genuine laughs, emotions and tears of happiness into your timeless photos. 1 photographer, 8 hours. All images in high
+                resolution online gallery 2 hour engagement engagement session.
+              </p>
+            </div>
+            <div className='service-card'>
+              <h3 className='typography-h5 title mb--2'>Weddings PACKAGE 2</h3>
+              <p className='service-price sub-title mb--1'>(STARTS AT $3500)</p>
+              <p className='typography-body1 text'>
+                Your perfect day deserves perfect memories. 1 photographer, 10 hours coverage. All images in high resolution online gallery. 2 hour engagement
+                session included. Premium editing and faster delivery.
+              </p>
+            </div>
+            <div className='service-card'>
+              <h3 className='typography-h5 title mb--2'>Portrait Sessions</h3>
+              <p className='service-price sub-title mb--1'>(STARTS AT $325)</p>
+              <p className='typography-body1 text'>
+                Individual, family or group portraits that capture personality and connections. 60 minutes session, 1 location, 100+ images. High resolution
+                online gallery with print release.
+              </p>
+            </div>
+          </div> */}
+
+          <Service data={services} />
+        </section>
+        {notes && notes?.length > 0 && (
+          <section className='note'>
+            <Notes data={notes} />
+          </section>
+        )}
+      </main>
     </div>
   )
 }
 
-export default PhotographyPage
+export default PhotographyViewBase

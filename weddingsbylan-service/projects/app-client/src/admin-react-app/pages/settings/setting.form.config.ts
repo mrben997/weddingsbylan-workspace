@@ -229,9 +229,9 @@ export const SettingStruct: ISettingStruct = {
   //#endregion Home Page
 
   //#region Makeup & Hair Page
-  MahAbout: {
+  About: {
     title: 'Makeup & Hair About',
-    DefineKey: { Area: 'MakeupAndHair', FormKey: 'MahAbout' },
+    DefineKey: { Area: 'Global', FormKey: 'About' },
     isSingle: true,
     renderForm: (data) => {
       return [
@@ -240,9 +240,9 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  MahAboutImage: {
+  AboutImage: {
     title: 'Makeup & Hair About Image',
-    DefineKey: { Area: 'MakeupAndHair', FormKey: 'MahAboutImage' },
+    DefineKey: { Area: 'Global', FormKey: 'AboutImage' },
     isSingle: true,
     renderForm: (data) => {
       return [
