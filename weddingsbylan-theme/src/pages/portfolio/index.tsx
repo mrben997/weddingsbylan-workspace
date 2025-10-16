@@ -1,4 +1,10 @@
-import React, { FC, useState, useMemo } from 'react'
+import React, { FC, useState, useEffect, useRef } from 'react'
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import Shuffle from 'shufflejs'
+import { GrSearch } from 'react-icons/gr'
+
 import Header from '../../shared/components/Layout/Header'
 import Footer from '../../shared/components/Layout/Footer'
 import DividerIcon from '../../shared/components/divider-icon'
@@ -8,7 +14,26 @@ import { Link } from 'react-router-dom'
 import './index.scss'
 
 const PortfolioPage: FC = () => {
-  const [activeTab, setActiveTab] = useState('ALL')
+  const [active, setActive] = useState('ALL')
+  const [allLoaded, setAllLoaded] = useState(false)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const shuffle = useRef<Shuffle | null>(null)
+  const swiperRef = useRef<any>(null)
+
+  const images = [
+    {
+      title: 'Minimalistic Models',
+      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-4.jpg'
+    },
+    {
+      title: 'Week In Paris',
+      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-3.jpg'
+    },
+    {
+      title: 'Scrapbook',
+      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-2.jpg'
+    }
+  ]
 
   // Portfolio categories
   const categories = ['ALL', 'ARTISTIC', 'MODERN', 'PHOTOGRAPHY', 'PRINT']
@@ -74,16 +99,75 @@ const PortfolioPage: FC = () => {
   ]
 
   // Filter images based on active tab
-  const filteredImages = useMemo(() => {
-    if (activeTab === 'ALL') {
-      return portfolioImages
-    }
-    return portfolioImages.filter((image) => image.category === activeTab)
-  }, [activeTab])
+  useEffect(() => {
+    if (!gridRef.current) return
+    const grid = gridRef.current
 
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab)
+    shuffle.current = new Shuffle(grid, {
+      itemSelector: '.item',
+      speed: 550
+    })
+
+    const imgs = Array.from(grid.querySelectorAll('img'))
+    let loaded = 0
+    const total = imgs.length
+
+    const markLoaded = (img?: HTMLImageElement) => {
+      if (img) img.classList.add('is-loaded')
+      loaded++
+      if (loaded === total) {
+        requestAnimationFrame(() => {
+          shuffle.current?.update()
+          shuffle.current?.layout()
+          setAllLoaded(true)
+        })
+      }
+    }
+
+    imgs.forEach((imgEl) => {
+      const img = imgEl as HTMLImageElement
+      if (img.complete && img.naturalWidth !== 0) markLoaded(img)
+      else {
+        img.addEventListener('load', () => markLoaded(img))
+        img.addEventListener('error', () => markLoaded(img))
+      }
+    })
+
+    return () => {
+      shuffle.current?.destroy()
+      shuffle.current = null
+    }
+  }, [])
+
+  const handleFilter = (cat: string) => {
+    setActive(cat)
+    if (!shuffle.current) return
+
+    if (cat === 'ALL') shuffle.current.filter()
+    else shuffle.current.filter(cat)
+
+    requestAnimationFrame(() => {
+      shuffle.current?.update()
+      shuffle.current?.layout()
+    })
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (shuffle.current) {
+        requestAnimationFrame(() => {
+          shuffle.current?.update()
+          shuffle.current?.layout()
+        })
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
+    }
+  }, [])
 
   return (
     <div className='portfolio-area'>
@@ -97,7 +181,7 @@ const PortfolioPage: FC = () => {
         </div>
 
         {/* Main Portfolio Slider */}
-        <ImageSlider
+        {/* <ImageSlider
           images={portfolioImages}
           className='portfolio-slider'
           autoplay={true}
@@ -107,33 +191,65 @@ const PortfolioPage: FC = () => {
           slidesPerView={1}
           spaceBetween={30}
           centeredSlides={false}
-        />
+        /> */}
+
+        {/* Slider */}
+        <div className='slider'>
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            effect='fade'
+            fadeEffect={{ crossFade: true }}
+            speed={1000}
+            loop
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            className='container'
+          >
+            {images.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className='slide'>
+                  <a href={item.src} title={item.title}>
+                    <img src={item.src} alt={item.title} />
+                  </a>
+                </div>
+              </SwiperSlide>
+            ))}
+            <button className='button prev' onClick={() => swiperRef.current?.slidePrev()}>
+              <FaAngleLeft size={28} />
+            </button>
+            <button className='button next' onClick={() => swiperRef.current?.slideNext()}>
+              <FaAngleRight size={28} />
+            </button>
+          </Swiper>
+        </div>
 
         {/* Gallery Style Grid with Tabs */}
         <div className='gallery-section'>
           <h2 className='section-title typography-h2'>Gallery Highlights</h2>
           {/* Tab Filter */}
-          <TabFilter tabs={categories} activeTab={activeTab} onTabChange={handleTabChange} className='portfolio-tabs' />
           {/* Filtered Image Grid */}
-          <div className='gallery-grid'>
-            {filteredImages.length === 0 ? (
-              <div className='empty-gallery'>
-                <div className='empty-message typography-h6'>No images found for this category.</div>
-                <div className='empty-description typography-body1'>Please select another tab to view more images.</div>
-              </div>
-            ) : (
-              filteredImages.map((image, idx) => (
-                <Link to='/portfolio-detail' className='gallery-item' key={idx}>
-                  <div className='gallery-img-container'>
-                    <img src={image.src} alt={image.alt} loading='lazy' />
-                  </div>
-                  <div className='gallery-info'>
-                    <div className='gallery-title typography-subtitle1'>{image.title}</div>
-                    <div className='gallery-desc typography-body1'>{image.description}</div>
-                  </div>
-                </Link>
-              ))
-            )}
+          <div className='gallery'>
+            <TabFilter tabs={categories} activeTab={active} onTabChange={handleFilter} />
+
+            <div className={`grid ${allLoaded ? 'is-ready' : ''}`} ref={gridRef}>
+              {portfolioImages.map((img, i) => (
+                <div key={i} className='item' data-groups={JSON.stringify([img.category])}>
+                  <Link to='/portfolio-detail' className='thumb'>
+                    <img src={img.src} alt={img.alt} loading='lazy' />
+                    <div className='gallery-overlay'>
+                      <span className='gallery-icon'>
+                        <GrSearch />
+                      </span>
+                    </div>
+                  </Link>
+                  <h4 className='title'>
+                    <Link to='/portfolio-detail' className='title-link'>
+                      {img.title}
+                    </Link>
+                  </h4>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
