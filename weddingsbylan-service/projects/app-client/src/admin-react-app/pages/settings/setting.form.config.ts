@@ -193,7 +193,7 @@ export const SettingStruct: ISettingStruct = {
   },
   Footer: {
     title: 'Footer',
-    DefineKey: { Area: 'Home', FormKey: 'Footer' },
+    DefineKey: { Area: 'Global', FormKey: 'Footer' },
     isSingle: true,
     renderForm: (data) => {
       return [
@@ -226,9 +226,6 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  //#endregion Home Page
-
-  //#region Makeup & Hair Page
   About: {
     title: 'Makeup & Hair About',
     DefineKey: { Area: 'Global', FormKey: 'About' },
