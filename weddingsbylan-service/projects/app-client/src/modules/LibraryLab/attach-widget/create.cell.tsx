@@ -19,7 +19,7 @@ export interface ICellAttachWidgetParams {
 }
 
 export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderCellFunction {
-  const cellAttachWidget: RenderCellFunction = ({ value, row }) => {
+  const CellAttachWidget: RenderCellFunction = ({ value, row }) => {
     const val = useMemo<IAttachItem[]>(() => {
       const parsed = tryParseArray<IAttachItem>(value, [])
       return parsed
@@ -36,6 +36,6 @@ export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderC
       />
     )
   }
-  return cellAttachWidget
+  return CellAttachWidget
 }
 export default createCellAttachWidget

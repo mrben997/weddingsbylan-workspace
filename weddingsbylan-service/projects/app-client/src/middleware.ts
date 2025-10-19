@@ -43,13 +43,14 @@ export async function middleware(request: NextRequest) {
 
     let response: NextResponse<unknown>
     // Check if path doesn't start with /vn or /en
-    if (!pathname.startsWith('/vn') && !pathname.startsWith('/en')) {
-        // Add /vn prefix to the path
-        request.nextUrl.pathname = `/vn${pathname}`;
-        response = NextResponse.redirect(request.nextUrl);
-    } else {
-        response = NextResponse.next();
-    }
+    // if (!pathname.startsWith('/vn') && !pathname.startsWith('/en')) {
+    //     // Add /vn prefix to the path
+    //     request.nextUrl.pathname = `/vn${pathname}`;
+    //     response = NextResponse.redirect(request.nextUrl);
+    // } else {
+    //     response = NextResponse.next();
+    // }
+    response = NextResponse.next();
 
     return response
 }

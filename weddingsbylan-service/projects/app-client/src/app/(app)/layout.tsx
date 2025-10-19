@@ -86,9 +86,9 @@ export default async function RootLayout(props: Readonly<IRootLayoutProps>) {
         {/*Meta Geo*/}
         {/* <base href="/edit/" /> */}
         {/* TODO chỉnh sửa nội dung ở đây */}
-        {/* <meta name='DC.title' content='CÔNG TY DỊCH VỤ  BẢO VỆ ANH HÀO' />
+        {/* <meta name='DC.title' content='Lan Wedding Makeup & Photo Studio' />
         <meta name='geo.region' content='VN-SG' />
-        <meta name='geo.placename' content='CÔNG TY DỊCH VỤ  BẢO VỆ ANH HÀO' />
+        <meta name='geo.placename' content='Lan Wedding Makeup & Photo Studio' />
         <meta name='geo.position' content='10.841908209639392:106.64609749259034' />
         <meta name='ICBM' content='10.841908209639392,106.64609749259034' />
         <meta name='DC.identifier' content='http://baoveanhhao.vn/' /> */}

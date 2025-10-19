@@ -4,22 +4,8 @@ import { newsService } from '@/services/news.servce'
 import { IAttachItem } from '@/modules/LibraryLab/attach-widget/types'
 import { INews } from '@/admin-react-app/model'
 import PortfolioDetail, { IItemDetail } from './portfolio-detail'
-import { GetImageUrl } from '@/shared/helper'
+import { convertDetails, GetImageUrl } from '@/shared/helper'
 
-export const TryParseArray = function <T>(value: any, defaultValue: T[] = []): T[] {
-  try {
-    if (!value) return []
-    const parseValue = JSON.parse(value)
-    return Array.isArray(parseValue) ? parseValue : []
-  } catch (error) {
-    return defaultValue
-  }
-}
-
-const convertDetails = (value: string = '') => {
-  const obj = TryParseArray<IAttachItem>(value, [])
-  return obj
-}
 
 interface PageProps {
   params: { id: string; locale?: string }

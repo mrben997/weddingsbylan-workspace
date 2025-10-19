@@ -1,5 +1,6 @@
 import { ILanguage, TLanguage } from "@/locales/types"
 import headerMenues from '../asstes/headerMenues'
+import { IAttachItem } from "@/modules/LibraryLab/attach-widget";
 export const changeLaunguage = (locale: TLanguage) => {
     let pathname = location.pathname;
     let search = location.search;
@@ -80,4 +81,20 @@ export const getPageUrl = (ImageType: ImageType, locale: TLanguage | string) => 
 export const getMenuPath = (locale: TLanguage, key: keyof ILanguage) => {
     const data = headerMenues.find(x => x.Key === key);
     return data?.Hrefs?.[locale] ?? undefined;
+}
+
+
+export const TryParseArray = function <T>(value: any, defaultValue: T[] = []): T[] {
+    try {
+        if (!value) return []
+        const parseValue = JSON.parse(value)
+        return Array.isArray(parseValue) ? parseValue : []
+    } catch (error) {
+        return defaultValue
+    }
+}
+
+export const convertDetails = (value: string = '') => {
+    const obj = TryParseArray<IAttachItem>(value, [])
+    return obj
 }
