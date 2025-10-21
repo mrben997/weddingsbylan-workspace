@@ -23,7 +23,7 @@ const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; ser
   const services = items.filter((x) => x.Type === 'package' && x.Area === 'photography')
   const obj = {
     notes: notes.map<INote>((x) => ({ id: x.Id, title: x.Name ?? '', text: x.Description ?? '' })),
-    services: services.map<IPlan>((x) => ({ title: x.Name ?? '', price: '$39', per: 'per month', features: [x.Description ?? ''] }))
+    services: services.map<IPlan>((x) => ({ title: x.Name ?? '', price: '$39', per: 'per month', features: x.Description ?? '' }))
   }
   return obj
 }
