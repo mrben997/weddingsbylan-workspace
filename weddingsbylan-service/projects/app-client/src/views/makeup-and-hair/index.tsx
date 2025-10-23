@@ -6,8 +6,18 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6'
 import './index.scss'
+import { IAboutForm, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
+import { ImagePath } from '@/shared/config'
 
-const slides = [
+export interface ISlide {
+  img: string
+  title: string
+  subtitle: string
+  desc?: string
+  button: string
+}
+
+const slides: ISlide[] = [
   {
     img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/h1-slide-1-background.jpg',
     title: 'STYLE & GRACE',
@@ -29,13 +39,25 @@ const slides = [
   }
 ]
 
-const plans = [
-  { title: 'BUSINESS', price: '$39', per: 'per month', features: ['10 projects', '100 users'] },
+export interface IPlan {
+  title: string
+  price: string
+  per: string
+  features: string
+  ribbon?: {
+    text: string
+    type: 'popular' | 'new'
+  }
+  variant?: 'expert' | 'supreme'
+}
+
+const defaultServices: IPlan[] = [
+  { title: 'BUSINESS', price: '$39', per: 'per month', features: '10 projects, 100 users' },
   {
     title: 'EXPERT',
     price: '$59',
     per: 'per month',
-    features: ['20 projects', '200 users'],
+    features: '20 projects, 200 users',
     ribbon: { text: 'POPULAR', type: 'popular' },
     variant: 'expert'
   },
@@ -43,20 +65,45 @@ const plans = [
     title: 'SUPREME',
     price: '$79',
     per: 'per month',
-    features: ['15 projects', '150 users'],
+    features: '15 projects, 150 users',
     ribbon: { text: 'NEW', type: 'new' },
     variant: 'supreme'
   }
 ]
 
-const notes = [
+export interface INote {
+  id: number
+  title: string
+  text: string
+}
+
+const defaultNotes: INote[] = [
   { id: 1, title: 'Introduction', text: 'Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum.' },
   { id: 2, title: 'Preparation', text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.' },
   { id: 3, title: 'Execution', text: 'Praesent laoreet sapien sit amet massa ornare, in pretium ex elementum.' },
   { id: 4, title: 'Summary', text: 'Curabitur nec arcu nec nulla scelerisque condimentum.' }
 ]
 
-const MakeupAndHairView: React.FC = () => {
+export interface IMakeupAndHairConfigs {
+  title: string
+  description: string
+  image: string
+  alt: string
+  url: string
+}
+
+interface IMakeupAndHairProps {
+  configs: IMakeupAndHairConfigs
+  notes?: INote[]
+  services?: IPlan[]
+  data: {
+    setting?: ISettingForm
+    aboutImage?: IAboutForm
+  }
+}
+
+const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
+  const { configs, notes = defaultNotes, services = defaultServices, data } = props
   const swiperRef = useRef<any>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
@@ -157,16 +204,10 @@ const MakeupAndHairView: React.FC = () => {
 
         {/* About */}
         <section className='about-section'>
-          <div className='about-image' style={{ backgroundImage: 'url(images/about-1.jpg)' }}></div>
+          <div className='about-image' style={{ backgroundImage: `url('${configs.image}')` }}></div>
           <div className='about-content'>
-            <h2 className='typography-h2'>About Lan Le</h2>
-            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>
-              Lan graduated from Empire Beauty School with distinguished recognition in 2000. Due to her natural curiosity and passion for all that is beauty,
-              she began her professional career learning from in-house artists at salons, spas, and beauty clinics all throughout Philadelphia. With over 20
-              years of experience, Lan now boasts a vast skill set in both professional hair and makeup. Lan values the needs of her clients and her priority is
-              to always make them the happiest on their special day. She makes sure that her work is done in an efficient and timely manner, reducing any
-              unnecessary stress for her beautiful brides on their memorable day!
-            </p>
+            <h2 className='typography-h2'>{configs.title}</h2>
+            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{configs.description}</p>
             <span className='read-more' onClick={() => setExpanded(!expanded)}>
               {expanded ? 'Read less' : 'Read more'}
             </span>
@@ -182,7 +223,7 @@ const MakeupAndHairView: React.FC = () => {
           </div>
 
           <div className='service'>
-            {plans.map((plan, index) => (
+            {services.map((plan, index) => (
               <div key={index} className='card-wrapper'>
                 <div className={`card ${plan.variant ?? ''}`}>
                   {plan.ribbon && <span className={`ribbon ${plan.ribbon.type}`}>{plan.ribbon.text}</span>}
@@ -195,9 +236,7 @@ const MakeupAndHairView: React.FC = () => {
                       <div className='per'>{plan.per}</div>
                     </li>
                     <li className='features'>
-                      {plan.features.map((feature, i) => (
-                        <div key={i}>{feature}</div>
-                      ))}
+                      <div dangerouslySetInnerHTML={{ __html: plan.features }} />
                     </li>
                     <li className='button'>
                       <a href='#' className='btn'>
@@ -226,9 +265,10 @@ const MakeupAndHairView: React.FC = () => {
               >
                 <div className='card'>
                   <h3 className='typography-h5'>{note.title}</h3>
-                  <p>
+                  {/* <p>
                     <em className='typography-h6'>{note.text}</em>
-                  </p>
+                  </p> */}
+                  <div className='typography-h6' dangerouslySetInnerHTML={{ __html: note.text }}></div>
                 </div>
 
                 <div className='divider'>
