@@ -89,10 +89,10 @@ const MakeupAndHairPage: React.FC = () => {
   }, [])
 
   return (
-    <div className='photography-wrapper'>
+    <div className='makeupandhair-wrapper'>
       <Header />
 
-      <main className='photography-page'>
+      <main className='makeupandhair-page'>
         <section className='banner-area'>
           <div className='slider'>
             <Swiper

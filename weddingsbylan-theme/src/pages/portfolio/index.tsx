@@ -180,19 +180,6 @@ const PortfolioPage: FC = () => {
           <p className='typography-body1'>Explore our collection of beautiful wedding moments captured through our lens.</p>
         </div>
 
-        {/* Main Portfolio Slider */}
-        {/* <ImageSlider
-          images={portfolioImages}
-          className='portfolio-slider'
-          autoplay={true}
-          navigation={true}
-          pagination={true}
-          loop={true}
-          slidesPerView={1}
-          spaceBetween={30}
-          centeredSlides={false}
-        /> */}
-
         {/* Slider */}
         <div className='slider'>
           <Swiper
@@ -226,8 +213,6 @@ const PortfolioPage: FC = () => {
         {/* Gallery Style Grid with Tabs */}
         <div className='gallery-section'>
           <h2 className='section-title typography-h2'>Gallery Highlights</h2>
-          {/* Tab Filter */}
-          {/* Filtered Image Grid */}
           <div className='gallery'>
             <TabFilter tabs={categories} activeTab={active} onTabChange={handleFilter} />
 

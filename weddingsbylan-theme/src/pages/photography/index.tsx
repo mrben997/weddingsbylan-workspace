@@ -86,11 +86,11 @@ const Photography: React.FC<IPhotographyProps> = (props) => {
             </div>
           </div> */}
 
-          <Service data={service} />
+          <Service />
         </section>
 
         <section className='note'>
-          <Notes data={notes} />
+          <Notes />
         </section>
       </main>
       <Footer />
