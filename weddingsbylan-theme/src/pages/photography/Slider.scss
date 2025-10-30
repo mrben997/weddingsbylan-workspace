@@ -177,3 +177,9 @@
     display: none !important;
   }
 }
+
+@media screen and (orientation: landscape) and (max-height: 440px) {
+  .nav {
+    display: none !important;
+  }
+}
