@@ -1,172 +1,161 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+import React, { FC, useState, useEffect, useRef, useCallback } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
 import Shuffle from 'shufflejs'
 import { GrSearch } from 'react-icons/gr'
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6'
 
+import 'swiper/css'
+import 'swiper/css/effect-fade'
 import Header from '../../shared/components/Layout/Header'
 import Footer from '../../shared/components/Layout/Footer'
 import DividerIcon from '../../shared/components/divider-icon'
-import ImageSlider from '../../shared/components/ImageSlider'
 import TabFilter from '../../shared/components/TabFilter'
 import { Link } from 'react-router-dom'
 import './index.scss'
 
+const slides = [
+  {
+    title: 'THE RIGHT ONE FOR YOU',
+    subtitle: 'Find your perfect dress in our large collection',
+    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/home-shop-sidebar-backround.jpg'
+  },
+  {
+    title: 'NEVER STOP DREAMING.',
+    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/bridal-shop-slide-2-background.jpg'
+  },
+  {
+    title: 'FOR YOUR PERFECT DAY',
+    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/home-shop-sidebar-slide-2-backround.jpg'
+  }
+]
+
+const categories = ['ALL', 'ARTISTIC', 'MODERN', 'PHOTOGRAPHY', 'PRINT']
+
+const portfolioImages = [
+  {
+    src: '/images/portfolio-0.jpg',
+    alt: 'Portfolio Image 1',
+    title: 'Wedding Photography',
+    description: 'Capturing beautiful moments on your special day',
+    category: 'PHOTOGRAPHY'
+  },
+  {
+    src: '/images/portfolio-1.jpg',
+    alt: 'Portfolio Image 2',
+    title: 'Couple Portrait',
+    description: 'Romantic and elegant couple photography',
+    category: 'ARTISTIC'
+  },
+  {
+    src: '/images/slide-0.jpg',
+    alt: 'Portfolio Image 3',
+    title: 'Wedding Ceremony',
+    description: 'Professional ceremony photography',
+    category: 'PHOTOGRAPHY'
+  },
+  {
+    src: '/images/slide-1.jpg',
+    alt: 'Portfolio Image 4',
+    title: 'Reception Moments',
+    description: 'Joy and celebration captured perfectly',
+    category: 'MODERN'
+  },
+  {
+    src: '/images/slide-2.jpg',
+    alt: 'Portfolio Image 5',
+    title: 'Detail Shots',
+    description: 'Beautiful wedding details and decorations',
+    category: 'ARTISTIC'
+  },
+  {
+    src: '/images/gallery-0.jpg',
+    alt: 'Portfolio Image 6',
+    title: 'Bridal Portrait',
+    description: 'Elegant bridal photography sessions',
+    category: 'PHOTOGRAPHY'
+  },
+  {
+    src: '/images/gallery-1.jpg',
+    alt: 'Portfolio Image 7',
+    title: 'Wedding Party',
+    description: 'Fun and creative group photography',
+    category: 'MODERN'
+  },
+  {
+    src: '/images/gallery-2.jpg',
+    alt: 'Portfolio Image 8',
+    title: 'Venue Shots',
+    description: 'Stunning venue and location photography',
+    category: 'PRINT'
+  }
+]
+
 const PortfolioPage: FC = () => {
-  const [active, setActive] = useState('ALL')
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeCategory, setActiveCategory] = useState('ALL')
   const [allLoaded, setAllLoaded] = useState(false)
+
   const gridRef = useRef<HTMLDivElement>(null)
-  const shuffle = useRef<Shuffle | null>(null)
-  const swiperRef = useRef<any>(null)
+  const shuffleInstance = useRef<Shuffle | null>(null)
+  const swiperInstance = useRef<any>(null)
 
-  const images = [
-    {
-      title: 'Minimalistic Models',
-      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-4.jpg'
-    },
-    {
-      title: 'Week In Paris',
-      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-3.jpg'
-    },
-    {
-      title: 'Scrapbook',
-      src: 'https://fleur.qodeinteractive.com/wp-content/uploads/2016/05/port1-gallery-2.jpg'
-    }
-  ]
-
-  // Portfolio categories
-  const categories = ['ALL', 'ARTISTIC', 'MODERN', 'PHOTOGRAPHY', 'PRINT']
-
-  // Portfolio images data with categories
-  const portfolioImages = [
-    {
-      src: '/images/portfolio-0.jpg',
-      alt: 'Portfolio Image 1',
-      title: 'Wedding Photography',
-      description: 'Capturing beautiful moments on your special day',
-      category: 'PHOTOGRAPHY'
-    },
-    {
-      src: '/images/portfolio-1.jpg',
-      alt: 'Portfolio Image 2',
-      title: 'Couple Portrait',
-      description: 'Romantic and elegant couple photography',
-      category: 'ARTISTIC'
-    },
-    {
-      src: '/images/slide-0.jpg',
-      alt: 'Portfolio Image 3',
-      title: 'Wedding Ceremony',
-      description: 'Professional ceremony photography',
-      category: 'PHOTOGRAPHY'
-    },
-    {
-      src: '/images/slide-1.jpg',
-      alt: 'Portfolio Image 4',
-      title: 'Reception Moments',
-      description: 'Joy and celebration captured perfectly',
-      category: 'MODERN'
-    },
-    {
-      src: '/images/slide-2.jpg',
-      alt: 'Portfolio Image 5',
-      title: 'Detail Shots',
-      description: 'Beautiful wedding details and decorations',
-      category: 'ARTISTIC'
-    },
-    {
-      src: '/images/gallery-0.jpg',
-      alt: 'Portfolio Image 6',
-      title: 'Bridal Portrait',
-      description: 'Elegant bridal photography sessions',
-      category: 'PHOTOGRAPHY'
-    },
-    {
-      src: '/images/gallery-1.jpg',
-      alt: 'Portfolio Image 7',
-      title: 'Wedding Party',
-      description: 'Fun and creative group photography',
-      category: 'MODERN'
-    },
-    {
-      src: '/images/gallery-2.jpg',
-      alt: 'Portfolio Image 8',
-      title: 'Venue Shots',
-      description: 'Stunning venue and location photography',
-      category: 'PRINT'
-    }
-  ]
-
-  // Filter images based on active tab
   useEffect(() => {
     if (!gridRef.current) return
+
     const grid = gridRef.current
+    const shuffle = new Shuffle(grid, { itemSelector: '.item', speed: 550 })
+    shuffleInstance.current = shuffle
 
-    shuffle.current = new Shuffle(grid, {
-      itemSelector: '.item',
-      speed: 550
-    })
+    const images = Array.from(grid.querySelectorAll('img'))
+    let loadedCount = 0
 
-    const imgs = Array.from(grid.querySelectorAll('img'))
-    let loaded = 0
-    const total = imgs.length
-
-    const markLoaded = (img?: HTMLImageElement) => {
+    const handleLoaded = (img?: HTMLImageElement) => {
       if (img) img.classList.add('is-loaded')
-      loaded++
-      if (loaded === total) {
+      loadedCount++
+      if (loadedCount === images.length) {
         requestAnimationFrame(() => {
-          shuffle.current?.update()
-          shuffle.current?.layout()
+          shuffle.update()
+          shuffle.layout()
           setAllLoaded(true)
         })
       }
     }
 
-    imgs.forEach((imgEl) => {
+    images.forEach((imgEl) => {
       const img = imgEl as HTMLImageElement
-      if (img.complete && img.naturalWidth !== 0) markLoaded(img)
+      if (img.complete && img.naturalWidth > 0) handleLoaded(img)
       else {
-        img.addEventListener('load', () => markLoaded(img))
-        img.addEventListener('error', () => markLoaded(img))
+        const onLoad = () => handleLoaded(img)
+        const onError = () => handleLoaded(img)
+        img.addEventListener('load', onLoad)
+        img.addEventListener('error', onError)
       }
     })
 
+    const updateLayout = () => {
+      requestAnimationFrame(() => {
+        shuffle.update()
+        shuffle.layout()
+      })
+    }
+
+    window.addEventListener('resize', updateLayout)
+    window.addEventListener('orientationchange', updateLayout)
+
     return () => {
-      shuffle.current?.destroy()
-      shuffle.current = null
+      window.removeEventListener('resize', updateLayout)
+      window.removeEventListener('orientationchange', updateLayout)
+      shuffle.destroy()
+      shuffleInstance.current = null
     }
   }, [])
 
-  const handleFilter = (cat: string) => {
-    setActive(cat)
-    if (!shuffle.current) return
-
-    if (cat === 'ALL') shuffle.current.filter()
-    else shuffle.current.filter(cat)
-
-    requestAnimationFrame(() => {
-      shuffle.current?.update()
-      shuffle.current?.layout()
-    })
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (shuffle.current) {
-        requestAnimationFrame(() => {
-          shuffle.current?.update()
-          shuffle.current?.layout()
-        })
-      }
-    }
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('orientationchange', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('orientationchange', handleResize)
-    }
+  const handleFilter = useCallback((category: string) => {
+    setActiveCategory(category)
+    const shuffle = shuffleInstance.current
+    if (!shuffle) return
+    shuffle.filter(category === 'ALL' ? () => true : category)
   }, [])
 
   return (
@@ -184,37 +173,59 @@ const PortfolioPage: FC = () => {
         <div className='slider'>
           <Swiper
             modules={[Autoplay, EffectFade]}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
             effect='fade'
-            fadeEffect={{ crossFade: true }}
-            speed={1000}
+            fadeEffect={{ crossFade: false }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            speed={800}
             loop
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            onSwiper={(swiper) => (swiperInstance.current = swiper)}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             className='container'
           >
-            {images.map((item, index) => (
+            {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className='slide'>
-                  <a href={item.src} title={item.title}>
-                    <img src={item.src} alt={item.title} />
-                  </a>
+                <div className={`slide ${index === 0 ? 'slide--left' : ''}`} style={{ backgroundImage: `url(${slide.img})` }}>
+                  <div className='content'>
+                    {/* TODO font-size: 40px color: var(--color-bg) */}
+                    <h2 className='typography-h2 title'>{slide.title}</h2>
+                    {/* TODO color: font-size: 25px var(--color-bg))*/}
+                    <span className='subtitle'>{slide.subtitle}</span>
+                    {/* TODO font-size: 18px color: var(--color-bg)*/}
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
-            <button className='button prev' onClick={() => swiperRef.current?.slidePrev()}>
-              <FaAngleLeft size={28} />
-            </button>
-            <button className='button next' onClick={() => swiperRef.current?.slideNext()}>
-              <FaAngleRight size={28} />
-            </button>
           </Swiper>
+
+          {/* Custom arrows */}
+          <div className={`nav left ${activeIndex === 0 ? 'special' : ''}`} onClick={() => swiperInstance.current?.slidePrev()}>
+            <span className='arrow'>
+              <FaArrowLeftLong />
+            </span>
+            {/* TODO color: var(--color-bg)*/}
+            <span className={`typography-h6 count ${activeIndex === 0 ? 'special' : ''}`}>
+              <span className='count-top'>{((activeIndex - 1 + slides.length) % slides.length) + 1}</span>
+              <span className='count-divider'>/</span>
+              <span className='count-bottom'>{slides.length}</span>
+            </span>
+          </div>
+
+          <div className={`nav right ${activeIndex === 0 ? 'special' : ''}`} onClick={() => swiperInstance.current?.slideNext()}>
+            <span className='arrow'>
+              <FaArrowRightLong />
+            </span>
+            <span className='typography-h6 count'>
+              <span className='count-top'>{((activeIndex + 1) % slides.length) + 1}</span>
+              <span className='count-divider'>/</span>
+              <span className='count-bottom'>{slides.length}</span>
+            </span>
+          </div>
         </div>
 
-        {/* Gallery Style Grid with Tabs */}
         <div className='gallery-section'>
           <h2 className='section-title typography-h2'>Gallery Highlights</h2>
           <div className='gallery'>
-            <TabFilter tabs={categories} activeTab={active} onTabChange={handleFilter} />
+            <TabFilter tabs={categories} activeTab={activeCategory} onTabChange={handleFilter} />
 
             <div className={`grid ${allLoaded ? 'is-ready' : ''}`} ref={gridRef}>
               {portfolioImages.map((img, i) => (

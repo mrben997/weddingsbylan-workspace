@@ -74,17 +74,36 @@ const PortfolioDetailPage: FC = () => {
   return (
     <div className='portfolio-detail-area'>
       <Header logoTheme='theme-light' />
-      <div className='portfolio-detail-header' style={{ backgroundImage: "url('/images/banner-1.jpg')" }}>
-        {/* TODO font-size: 60px color: var(--color-primary) font-weight: 300 */}
-        <h1 className='typography-h1 detail-title'>PORTFOLIO PINTEREST</h1>
-        <svg className='detail-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
+      {/* <div className='portfolio-detail-header' style={{ backgroundImage: "url('/images/banner-1.jpg')" }}> */}
+      {/* TODO font-size: 60px color: var(--color-primary) font-weight: 300 */}
+      {/* <h1 className='typography-h1 detail-title'>PORTFOLIO PINTEREST</h1> */}
+      {/* <svg className='detail-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
           <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' stroke-width='1'></line>
           <polygon points='100,5 105,10 100,15 95,10' fill='currentColor'></polygon>
           <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' stroke-width='1'></line>
-        </svg>
-        {/* TODO font-size: h4 color: var(--color-primary) font-weight: 300 */}
-        <div className='typography-body1 detail-subtitle'>let your business grow trough this stunning theme</div>
-      </div>
+        </svg> */}
+      {/* TODO font-size: h4 color: var(--color-primary) font-weight: 300 */}
+      {/* <div className='typography-body1 detail-subtitle'>let your business grow trough this stunning theme</div> */}
+      {/* </div> */}
+
+      <section className='banner'>
+        <div
+          className=' banner-bg'
+          style={{ backgroundImage: `url('https://fleur.qodeinteractive.com/wp-content/uploads/2016/06/blog-standard-title-img-1.jpg')` }}
+        />
+        <div className=' banner-content'>
+          {/* TODO font-size: 60px color: var(--color-bg) font-weight: 300 */}
+          <h1 className='typography-h1 title'>PORTFOLIO PINTEREST</h1>
+          <svg className='detail-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
+            <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' stroke-width='1'></line>
+            <polygon points='100,5 105,10 100,15 95,10' fill='currentColor'></polygon>
+            <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' stroke-width='1'></line>
+          </svg>
+          {/* TODO font-size: 25px color: var(--color-bg) */}
+          <div className='typography-body1 subtitle'>Let your business grow trough this stunning theme</div>
+        </div>
+      </section>
+
       <div className='portfolio-gallery'>
         <div className='masonry-grid'>
           {detailImages.map((img, idx) => (
