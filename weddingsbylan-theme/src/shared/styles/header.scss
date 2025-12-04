@@ -149,3 +149,14 @@
     visibility: visible;
   }
 }
+
+@media (max-width: 440px) {
+  .img-bg {
+    position: absolute;
+    left: -40%;
+  }
+  .app-menu-btn {
+    position: absolute;
+    right: 4% !important;
+  }
+}

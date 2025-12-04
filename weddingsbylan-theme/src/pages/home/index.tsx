@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
+import { Link } from 'react-router-dom'
 import Header from '../../shared/components/Layout/Header'
 import Footer from '../../shared/components/Layout/Footer'
 import './index.scss'
@@ -34,6 +35,12 @@ const slides = [
     logoClass: 'theme-light',
     type: 'content',
     parallaxBg: 'images/portfolio-0.jpg',
+    parallaxMinor: '.section'
+  },
+  {
+    logoClass: 'theme-dark',
+    type: 'content',
+    parallaxBg: 'images/portfolio-1.jpg',
     parallaxMinor: '.section'
   },
   {
@@ -103,6 +110,11 @@ const Home: React.FC = () => {
       // Set main background image
       if (slideData?.parallaxBg) {
         parallaxBgRef.current.style.backgroundImage = `url(${slideData.parallaxBg})`
+
+        if (window.innerWidth <= 440) {
+          parallaxBgRef.current.style.backgroundSize = 'cover'
+          return
+        }
 
         // Hide background in minor element of active slide
         if (slideData.parallaxMinor) {
@@ -331,7 +343,7 @@ const Home: React.FC = () => {
 
           {/* About/Photography Section */}
           <SwiperSlide>
-            <section className='section section-bg'>
+            <section className='section section-bg left'>
               <div className='section-content right'>
                 <div className='section-content-haft'>
                   <h1 className='typography-h2'>Photography</h1>
@@ -352,7 +364,7 @@ const Home: React.FC = () => {
 
           {/* Service/Makeup Section */}
           <SwiperSlide>
-            <section className='section section-bg'>
+            <section className='section section-bg right'>
               <div className='section-content left'>
                 <div className='section-content-haft'>
                   <h1 className='typography-h2'>Makeup and Hair</h1>
@@ -392,6 +404,30 @@ const Home: React.FC = () => {
                     ))}
                   </div>
                   <button className='app-btn app-btn-primary mt--2'>Read more</button>
+                </div>
+              </div>
+            </section>
+          </SwiperSlide>
+
+          {/* Service/Contact Us Section */}
+          <SwiperSlide>
+            <section className='section section-bg'>
+              <div className='section-content right'>
+                <div className='section-content-haft'>
+                  <h1 className='typography-h2'>Contact Us</h1>
+                  <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
+                    <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />
+                    <polygon points='100,5 105,10 100,15 95,10' fill='currentColor' />
+                    <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
+                  </svg>
+                  <p className='typography-body1 mt--1'>
+                    Get your glam done by me. Event makeup and hair my specialty. Bringing the best of your natural beauty.
+                  </p>
+                  <button className='app-btn app-btn-primary mt--2'>
+                    <Link to='/contact-us' className='contact'>
+                      Contact
+                    </Link>
+                  </button>
                 </div>
               </div>
             </section>
