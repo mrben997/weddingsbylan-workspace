@@ -12,86 +12,23 @@ import Footer from '../../shared/components/Layout/Footer'
 import DividerIcon from '../../shared/components/divider-icon'
 import TabFilter from '../../shared/components/TabFilter'
 import { Link } from 'react-router-dom'
+import type { IPortfolioItem, IPortfolioSlide } from './configs'
+import { defaultCategories, defaultPortfolioItems, defaultPortfolioSlides } from './configs'
+
+// Styles
 import './index.scss'
 
-const slides = [
-  {
-    title: 'THE RIGHT ONE FOR YOU',
-    subtitle: 'Find your perfect dress in our large collection',
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/home-shop-sidebar-backround.jpg'
-  },
-  {
-    title: 'NEVER STOP DREAMING.',
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/bridal-shop-slide-2-background.jpg'
-  },
-  {
-    title: 'FOR YOUR PERFECT DAY',
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/home-shop-sidebar-slide-2-backround.jpg'
-  }
-]
+interface IPortfolioViewProps {
+  categories?: string[]
+  portfolioItems?: IPortfolioItem[]
+  portfolioSlides?: IPortfolioSlide[]
+}
 
-const categories = ['ALL', 'ARTISTIC', 'MODERN', 'PHOTOGRAPHY', 'PRINT']
+export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
+  const slides = props.portfolioSlides || defaultPortfolioSlides
+  const categories = props.categories || defaultCategories
+  const portfolioImages = props.portfolioItems || defaultPortfolioItems
 
-const portfolioImages = [
-  {
-    src: '/images/portfolio-0.jpg',
-    alt: 'Portfolio Image 1',
-    title: 'Wedding Photography',
-    description: 'Capturing beautiful moments on your special day',
-    category: 'PHOTOGRAPHY'
-  },
-  {
-    src: '/images/portfolio-1.jpg',
-    alt: 'Portfolio Image 2',
-    title: 'Couple Portrait',
-    description: 'Romantic and elegant couple photography',
-    category: 'ARTISTIC'
-  },
-  {
-    src: '/images/slide-0.jpg',
-    alt: 'Portfolio Image 3',
-    title: 'Wedding Ceremony',
-    description: 'Professional ceremony photography',
-    category: 'PHOTOGRAPHY'
-  },
-  {
-    src: '/images/slide-1.jpg',
-    alt: 'Portfolio Image 4',
-    title: 'Reception Moments',
-    description: 'Joy and celebration captured perfectly',
-    category: 'MODERN'
-  },
-  {
-    src: '/images/slide-2.jpg',
-    alt: 'Portfolio Image 5',
-    title: 'Detail Shots',
-    description: 'Beautiful wedding details and decorations',
-    category: 'ARTISTIC'
-  },
-  {
-    src: '/images/gallery-0.jpg',
-    alt: 'Portfolio Image 6',
-    title: 'Bridal Portrait',
-    description: 'Elegant bridal photography sessions',
-    category: 'PHOTOGRAPHY'
-  },
-  {
-    src: '/images/gallery-1.jpg',
-    alt: 'Portfolio Image 7',
-    title: 'Wedding Party',
-    description: 'Fun and creative group photography',
-    category: 'MODERN'
-  },
-  {
-    src: '/images/gallery-2.jpg',
-    alt: 'Portfolio Image 8',
-    title: 'Venue Shots',
-    description: 'Stunning venue and location photography',
-    category: 'PRINT'
-  }
-]
-
-const PortfolioPage: FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [activeCategory, setActiveCategory] = useState('ALL')
   const [allLoaded, setAllLoaded] = useState(false)
@@ -254,4 +191,4 @@ const PortfolioPage: FC = () => {
   )
 }
 
-export default PortfolioPage
+export default PortfolioView

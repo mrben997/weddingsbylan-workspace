@@ -1,6 +1,5 @@
+'use client'
 import React, { FC, useEffect } from 'react'
-import Header from '../../shared/components/Layout/Header'
-import Footer from '../../shared/components/Layout/Footer'
 import { defaultPortfolioItems, IPortfolioItem } from './configs'
 
 import './index.scss'
@@ -13,12 +12,11 @@ const PortfolioDetailView: FC<IPortfolioDetailViewProps> = (props) => {
   const items = props.items || defaultPortfolioItems
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    window?.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
 
   return (
     <div className='portfolio-detail-area'>
-      <Header logoTheme='theme-light' />
       {/* <div className='portfolio-detail-header' style={{ backgroundImage: "url('/images/banner-1.jpg')" }}> */}
       {/* TODO font-size: 60px color: var(--color-primary) font-weight: 300 */}
       {/* <h1 className='typography-h1 detail-title'>PORTFOLIO PINTEREST</h1> */}
@@ -64,7 +62,6 @@ const PortfolioDetailView: FC<IPortfolioDetailViewProps> = (props) => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

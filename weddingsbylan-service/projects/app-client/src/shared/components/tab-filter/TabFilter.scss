@@ -1,0 +1,103 @@
+.tab-filter {
+  width: 100%;
+  margin: 2rem 0;
+
+  .tab-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+
+    .tab-item {
+      background: transparent;
+      border: none;
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #4a3e5a;
+      cursor: pointer;
+      padding: 0.75rem 1.5rem;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      white-space: nowrap;
+      font-size: 13px;
+
+      // underline effect giống code mẫu WP
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) scaleX(0);
+        width: 60%;
+        height: 2px;
+        background: #4a3e5a;
+        transition: transform 0.3s ease;
+        transform-origin: center;
+      }
+
+      &:hover {
+        color: #4a3e5a;
+
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+      }
+
+      &.active {
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+      }
+    }
+  }
+}
+
+/* Animation cho content */
+.gallery-section {
+  .gallery-slider {
+    animation: fadeInUp 0.5s ease-out;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Empty state */
+.empty-gallery {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  .empty-message {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+
+  .empty-description {
+    color: #adb5bd;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 440px) {
+  .tab-list {
+    flex-direction: column;
+  }
+}

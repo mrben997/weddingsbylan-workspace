@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    let response: NextResponse<unknown>
+    let response: NextResponse<unknown> = NextResponse.next();
     // Check if path doesn't start with /vn or /en
     // if (!pathname.startsWith('/vn') && !pathname.startsWith('/en')) {
     //     // Add /vn prefix to the path
