@@ -24,7 +24,7 @@ import { convertToPascalCase, OrderRandom, PathStore } from '../helper';
 import { unlinkSync } from 'fs';
 import path from 'path';
 
-@authenticate('jwt')
+// @authenticate('jwt')
 export class NewsController {
   constructor(
     @repository(NewsRepository)

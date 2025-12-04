@@ -5,7 +5,7 @@ export const allowImageTypes = ['image/jpeg', 'image/png', 'image/svg+xml']
 
 export const allowPdfTypes = ['application/pdf']
 
-export const allowFileTypes = [...allowImageTypes]//, ...allowPdfTypes]
+export const allowFileTypes = [...allowImageTypes] //, ...allowPdfTypes]
 
 export const isValidFileType = (value?: string) => allowFileTypes.some((e) => e === value)
 

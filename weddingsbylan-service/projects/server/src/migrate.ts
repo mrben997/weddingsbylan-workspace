@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config({ });
 import {ServerApplication} from './application';
 
 export async function migrate(args: string[]) {

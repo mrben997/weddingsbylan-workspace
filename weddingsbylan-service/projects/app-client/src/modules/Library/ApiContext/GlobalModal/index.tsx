@@ -15,7 +15,7 @@ export interface OptionModal extends IBase {
 interface GlobalModalState extends IBase {
   ContentModal?: React.JSXElementConstructor<any>
 }
-interface GlobalModalProps { }
+interface GlobalModalProps {}
 
 export interface IGlobalModalContext {
   ShowModal: (option: OptionModal) => void
@@ -63,17 +63,18 @@ class GlobalModal extends Component<React.PropsWithChildren<GlobalModalProps>, G
     return (
       <GlobalModalContext.Provider value={this}>
         {this.props.children}
-        {(!!this.state.ContentModal) ?
+        {!!this.state.ContentModal ? (
           ReactDOM.createPortal(
-            <CustomModel
-              sx={this.state.sx}
-            ><Fade in timeout={300}>
-                <Wrapper sx={this.state.sxWrap}>
-                  {this.GenerateContent()}
-                </Wrapper>
+            <CustomModel sx={this.state.sx}>
+              <Fade in timeout={300}>
+                <Wrapper sx={this.state.sxWrap}>{this.GenerateContent()}</Wrapper>
               </Fade>
-            </CustomModel>
-            , document.body) : <></>}
+            </CustomModel>,
+            document.body
+          )
+        ) : (
+          <></>
+        )}
         {/* <Modal
           open={!!this.state.ContentModal}
           onClose={this.CloseModal}
@@ -92,10 +93,15 @@ class GlobalModal extends Component<React.PropsWithChildren<GlobalModalProps>, G
 
 export default GlobalModal
 
-const CustomModel = styled(Box)<{}>(({ sx }) => ({
+const CustomModel = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  top: 0, left: 0, right: 0, width: '100vw', height: '100vh', zIndex: 2000,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', ...(sx ?? {} as any)
+  top: 0,
+  left: 0,
+  right: 0,
+  width: '100vw',
+  height: '100vh',
+  zIndex: theme.zIndex.modal - 1,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)'
 }))
 
 const Wrapper = styled(Box)({

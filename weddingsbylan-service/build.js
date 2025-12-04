@@ -34,7 +34,7 @@ function copy(src, dest) {
 // Ensure the `build` folder exists
 const buildDir = path.resolve('build');
 if (fs.existsSync(buildDir)) {
-    fs.rmSync(buildDir, { recursive: true, force: true });
+    // fs.rmSync(buildDir, { recursive: true, force: true });
     console.log(`Removed existing folder: ${buildDir}`);
 }
 fs.mkdirSync(buildDir, { recursive: true });

@@ -15,10 +15,11 @@ export interface IOnChangeParams {
 
 export interface ICellAttachWidgetParams {
   onChange?: (params: IOnChangeParams) => Promise<void>
+  imageGetter?: (item: IAttachItem) => string | undefined
 }
 
 export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderCellFunction {
-  const cellAttachWidget: RenderCellFunction = ({ value, row }) => {
+  const CellAttachWidget: RenderCellFunction = ({ value, row }) => {
     const val = useMemo<IAttachItem[]>(() => {
       const parsed = tryParseArray<IAttachItem>(value, [])
       return parsed
@@ -27,6 +28,7 @@ export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderC
     return (
       <AttachWidget
         value={val}
+        imageGetter={params.imageGetter}
         onChange={async (i, o) => {
           if (!params.onChange) return
           return params.onChange({ value, row, items: i, options: o })
@@ -34,6 +36,6 @@ export function createCellAttachWidget(params: ICellAttachWidgetParams): RenderC
       />
     )
   }
-  return cellAttachWidget
+  return CellAttachWidget
 }
 export default createCellAttachWidget

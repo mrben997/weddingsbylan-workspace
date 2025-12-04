@@ -26,11 +26,10 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
     value?: string
   }
   class SelectSimple extends Component<IProps, IState> {
-    constructor(props: IProps) {
-      super(props)
-      this.state = { value: this.getDefaultValue()?.toString() }
-    }
     mapProps = (): SelectProps => {
+      console.log('select simple render')
+      console.log(this.getDefaultValue())
+
       const label = this.getLabel()
       const tfp: SelectProps = {
         id: this.props.name?.toString(),
@@ -38,17 +37,12 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
         name: this.props.name?.toString(),
         label: label,
         defaultValue: this.getDefaultValue(),
-        value: this.state.value,
         onChange: (event) => {
           const value: string = event.target.value + ''
-          this.setState({ value }, () => {
-            if (!!this.props.name) {
-              this.props.onBlur && this.props.onBlur(this.props.name)
-            }
-            const temp = this.getData().find((x) => x.value?.toString() === value)
-            if (!temp) return
-            this.props.onChange && this.props.onChange(temp)
-          })
+          const temp = this.getOptions().find((x) => x.value?.toString() === value)
+          if (temp && this.props.onChange) {
+            this.props.onChange(temp)
+          }
         },
         disabled: this.props.disabled,
         fullWidth: true
@@ -57,7 +51,7 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
       return MergeObjects({}, tfp, selectProps)
     }
     render() {
-      const data = this.getData()
+      const data = this.getOptions()
       const label = this.getLabel()
       const errorMessage = getErrorMessage(this.props.messageErrors, this.props.name)
       return (
@@ -83,11 +77,14 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
       if (!!this.props.label && typeof this.props.label === 'string') return this.props.label
       return this.props.name?.toString() ?? ''
     }
-    getDefaultValue = () => {
-      const { data, name } = this.props
-      return this.props.defaultValue?.toString() ?? (!!data && !!name ? data[name] : undefined) ?? this.getData()[0].value
+    getDefaultValue = (currentProps?: IProps) => {
+      const { data, name } = currentProps ?? this.props
+      console.log('get default value', data, name, this.props.defaultValue)
+
+      const dValue = this.props.defaultValue?.toString() ?? (name ? data?.[name]?.toString() : undefined)
+      return dValue ?? this.getOptions()[0].value
     }
-    getData = (): ISelectSimpleOption[] => {
+    getOptions = (): ISelectSimpleOption[] => {
       return this.props.options ?? options?.options ?? []
     }
   }

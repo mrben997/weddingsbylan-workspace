@@ -57,7 +57,7 @@ export interface IFooterForm extends IFormModel {
 //#endregion Home Page
 
 //#region Makeup & Hair Page
-export interface IMahAboutForm extends IFormModel {
+export interface IAboutForm extends IFormModel {
   Title: string
   SubTitle: string
   Content: string
