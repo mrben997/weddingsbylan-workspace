@@ -205,7 +205,8 @@ class Setting extends Component<ISettingProps, ISettingState> {
                     getContentKey={() => this.getQueryEditKey()}
                     ContentMap={this.renderConfigMap()}
                 >
-                    <IframeBlock ref={this.refFrame} src={`/${getLocale()}/edit-mode?`} width={"100%"} height={"100%"} />
+                    {/* <IframeBlock ref={this.refFrame} src={`/${getLocale()}/edit-mode?`} width={"100%"} height={"100%"} /> */}
+                    <IframeBlock ref={this.refFrame} src={`/edit-mode?`} width={"100%"} height={"100%"} />
                 </LayoutContainerSetting>
             </>
         )

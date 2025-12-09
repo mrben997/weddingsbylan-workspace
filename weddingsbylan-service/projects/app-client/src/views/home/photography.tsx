@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ImagePath } from '@/shared/config'
+// import { ImagePath } from '@/shared/config'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { IHomePhotographyForm } from '@/admin-react-app/pages/settings/setting.form.types'
 

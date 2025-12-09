@@ -18,8 +18,8 @@ const HomeBanner: FC<IHomeBannerProps> = (props) => {
               <div className='swiper-slide' key={index}>
                 <div className='carousel-item left' style={{ backgroundImage: `url('${ImagePath}/${item.ImageUrl}')` }}>
                   <div className='carousel-item-content'>
-                    <h1 className='typography-caption'>{item.SubTitle}</h1>
-                    <h2 className='typography-h1 mt--1'>{item.Title}</h2>
+                    <h1 className='typography-caption sub-title'>{item.SubTitle}</h1>
+                    <h2 className='typography-h1 mt--1 title'>{item.Title}</h2>
                     <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
                       <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />
                       <polygon points='100,5 105,10 100,15 95,10' fill='currentColor' />

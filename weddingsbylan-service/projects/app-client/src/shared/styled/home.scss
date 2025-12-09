@@ -67,6 +67,22 @@ body {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .section {
+    .section-content {
+      flex-direction: column !important;
+      .section-content-haft {
+        width: 100% !important;
+        height: 100% !important;
+        padding: 20px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
 .vertical-swiper-pagination {
   position: fixed;
   top: 50%;
@@ -174,6 +190,22 @@ body {
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .carousel-area {
+    .carousel-item-content {
+      width: 100% !important;
+      padding: 20px !important;
+      align-items: center !important;
+      text-align: center !important;
+      .title {
+        font-size: 2rem !important;
+      }
+      .sub-title {
+        font-size: 1rem !important;
+      }
+    }
+  }
+}
 
 // Horizontal carousel navigation and pagination
 .horizontal-carousel {
@@ -243,6 +275,29 @@ body {
     .swiper-pagination-current,
     .swiper-pagination-total {
       font-weight: 700;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .horizontal-carousel {
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 60px;
+      height: 60px;
+
+      &::after {
+        font-size: 16px;
+      }
+
+      .nav-number {
+        font-size: 10px;
+      }
+    }
+    .swiper-button-next {
+      right: 10px;
+    }
+    .swiper-button-prev {
+      left: 10px;
     }
   }
 }

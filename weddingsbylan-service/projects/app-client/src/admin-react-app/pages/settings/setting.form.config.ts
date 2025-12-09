@@ -1,6 +1,6 @@
 import createUploadImage from '@/modules/Library/Forms/Inputs/CretaeUploadImage'
 import { ISettingStruct } from './types'
-import { Sleep } from '@/modules/Library/Helpers'
+import { FetchDelay, Sleep } from '@/modules/Library/Helpers'
 import { serviceUpload } from '@/admin-react-app/services/service.upload'
 import CreateTextCkEditor from '@/modules/Library/Forms/Inputs/CreateTextCkEditor'
 import { CreateInputTextMultiline, CreateSelectSimple } from '@/modules/Library/Forms/Inputs'
@@ -41,6 +41,41 @@ export const SettingStruct: ISettingStruct = {
         })
       }
     ]
+  },
+  Footer: {
+    title: 'Footer',
+    DefineKey: { Area: 'Global', FormKey: 'Footer' },
+    isSingle: true,
+    renderForm: (data) => {
+      return [
+        {
+          key: 'BgUrl',
+          label: 'Logo Image',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 1920, height: 650 }
+          })
+        }
+        // {
+        //   key: 'BgUrl',
+        //   label: 'Background Image',
+        //   inputElement: CretaeUploadImage({
+        //     upload: async (file) => {
+        //       await Sleep(1000)
+        //       const data = await serviceUpload.uploadSettingImage(file)
+        //       return await Promise.resolve(data.filename)
+        //     },
+        //     renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+        //     size: { width: 1920, height: 650 }
+        //   })
+        // }
+      ]
+    }
   },
   //#region Home Page
   Banner: {
@@ -191,41 +226,8 @@ export const SettingStruct: ISettingStruct = {
       ]
     }
   },
-  Footer: {
-    title: 'Footer',
-    DefineKey: { Area: 'Global', FormKey: 'Footer' },
-    isSingle: true,
-    renderForm: (data) => {
-      return [
-        {
-          key: 'BgUrl',
-          label: 'Logo Image',
-          inputElement: createUploadImage({
-            upload: async (file) => {
-              await Sleep(1000)
-              const data = await serviceUpload.uploadSettingImage(file)
-              return await Promise.resolve(data.filename)
-            },
-            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
-            size: { width: 1920, height: 650 }
-          })
-        }
-        // {
-        //   key: 'BgUrl',
-        //   label: 'Background Image',
-        //   inputElement: CretaeUploadImage({
-        //     upload: async (file) => {
-        //       await Sleep(1000)
-        //       const data = await serviceUpload.uploadSettingImage(file)
-        //       return await Promise.resolve(data.filename)
-        //     },
-        //     renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
-        //     size: { width: 1920, height: 650 }
-        //   })
-        // }
-      ]
-    }
-  },
+  //#endregion
+  //#region Makeup & Hair Page
   About: {
     title: 'Makeup & Hair About',
     DefineKey: { Area: 'Global', FormKey: 'About' },
@@ -258,6 +260,39 @@ export const SettingStruct: ISettingStruct = {
         }
       ]
     }
+  },
+  //#endregion
+  //#region Portfolio
+  PortfolioSlide: {
+    title: 'Portfolio Slide',
+    DefineKey: { Area: 'Portfolio', FormKey: 'PortfolioSlide' },
+    renderForm: (data) => {
+      return [
+        { key: 'Title', label: 'Title' },
+        {
+          key: 'ImageUrl',
+          label: 'ImageUrl',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              const data = await FetchDelay(() => serviceUpload.uploadSettingImage(file), 1000)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 1920, height: 650 }
+          })
+        }
+      ]
+    }
+  },
+  PortfolioDetail: {
+    title: 'Portfolio Detail',
+    DefineKey: { Area: 'Portfolio', FormKey: 'PortfolioDetail' },
+    renderForm: (data) => {
+      return [
+        { key: 'Title', label: 'Title' },
+        { key: 'Description', label: 'Description', inputElement: CreateTextCkEditor({}) }
+      ]
+    }
   }
-  //#endregion Makeup & Hair Page
+  //#endregion
 }

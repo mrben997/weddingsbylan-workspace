@@ -13,6 +13,7 @@ import HomeBanner from '../../views/home/banner'
 import { IPageProps } from '@/app/types'
 import Footer from '@/views/global/footer'
 import HomePortfolio from '@/views/home/portfolio'
+import CustomSwiperSlide from '@/views/home/custom.swiper-slide'
 
 const Home: FC<IPageProps> = async (props) => {
   const p = await props.params
@@ -51,29 +52,26 @@ const Home: FC<IPageProps> = async (props) => {
           <div className='parallax-bg'></div>
           <div className='swiper-wrapper'>
             {/* page 1 */}
-            <div className='swiper-slide carousel-area' data-logo-class='theme-dark'>
+            <CustomSwiperSlide className='carousel-area' logoClass='theme-dark'>
               <HomeBanner data={pageData?.getData('Banner')} />
-            </div>
+            </CustomSwiperSlide>
             {/* about */}
-            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${photographyImg?.ImageUrl}`} data-parallax-minor='.section'>
+            <CustomSwiperSlide imageUrl={`${ImagePath}/${photographyImg?.ImageUrl}`}>
               <HomePhotography data={pageData?.getData('HomePhotography')} />
-            </div>
+            </CustomSwiperSlide>
             {/* service */}
-            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${makeupAndHairImg?.ImageUrl}`} data-parallax-minor='.section'>
+            <CustomSwiperSlide imageUrl={`${ImagePath}/${makeupAndHairImg?.ImageUrl}`}>
               <HomeService data={pageData?.getData('HomeMakeupAndHair')} />
-            </div>
+            </CustomSwiperSlide>
             {/* portfolio */}
-            <div className='swiper-slide' data-parallax-bg={`${ImagePath}/${portfolioImg?.ImageUrl}`} data-parallax-minor='.section'>
+            <CustomSwiperSlide imageUrl={`${ImagePath}/${portfolioImg?.ImageUrl}`}>
               <HomePortfolio portfolioItems={pageData?.getData('HomePortfolioItems')} portfolioData={pageData?.getData('HomePortfolio')} />
-            </div>
+            </CustomSwiperSlide>
             {/* footer */}
-            {/* <div className="swiper-slide" data-parallax-bg="/images/footer-0.png" data-parallax-minor=".section"> */}
-            <div className='swiper-slide' data-logo-class='theme-dark'>
+            <CustomSwiperSlide logoClass='theme-dark'>
               <Footer footerData={pageData?.getData('Footer')} settingData={pageData?.getData('Setting')} />
-            </div>
+            </CustomSwiperSlide>
           </div>
-          {/* vertical swiper pagination */}
-          {/* <div id="vertical-swiper-pagination" className="vertical-swiper-pagination"></div> */}
         </div>
       </section>
     </>

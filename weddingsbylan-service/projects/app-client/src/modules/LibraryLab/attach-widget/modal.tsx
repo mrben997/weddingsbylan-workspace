@@ -114,7 +114,10 @@ class AttachModal extends Component<IAttachModalProps, IAttachModalState> {
 
               if (x.status === 'deleted') itemClasses.push(attachModalClasses.itemDelete)
               else if (x.status === 'new') itemClasses.push(attachModalClasses.itemNew)
-              const thumbnail = this.props.imageGetter ? this.props.imageGetter(x) : x.thumbnail
+
+              let thumbnail = this.props.imageGetter ? this.props.imageGetter(x) : x.thumbnail
+              if (x.status === 'new') thumbnail = x.thumbnail // For new files, always use thumbnail
+
               return (
                 <Grid key={x.id + i.toString()} item xs={6} sm={4} md={3} lg={2}>
                   <div className={itemClasses.join(' ')}>

@@ -34,7 +34,7 @@ export class SettingSService extends CRUDService<ISetting, number> {
         where: {
           ...Area,
           ...Type,
-          Locale
+          // Locale
         }
       },
       signal
@@ -47,7 +47,7 @@ export class SettingSService extends CRUDService<ISetting, number> {
       {
         where: {
           Area,
-          Locale,
+          // Locale,
           FromKey
         }
       },

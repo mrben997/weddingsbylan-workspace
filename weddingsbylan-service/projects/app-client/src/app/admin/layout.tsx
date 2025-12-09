@@ -18,7 +18,8 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <head>
-                <base href={`/${locale}/admin/`} />
+                {/* <base href={`/${locale}/admin/`} /> */}
+                <base href={`/admin/`} />
                 <link rel="icon" href="/public/favicon.ico" />
             </head>
             <body>

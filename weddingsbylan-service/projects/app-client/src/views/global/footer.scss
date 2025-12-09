@@ -49,3 +49,14 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .footer-area {
+    padding: 20px;
+    .footer-navs {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+}

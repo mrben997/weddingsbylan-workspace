@@ -33,6 +33,9 @@ export class CRUDService<TModel, EntityId> {
                 filter
             }
         })
+        console.log('filter',  JSON.stringify(filter));
+        console.log('data', data);
+        
         return data
     }
 }

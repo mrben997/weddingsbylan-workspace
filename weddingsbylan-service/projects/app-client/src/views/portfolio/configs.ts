@@ -11,7 +11,7 @@ export const defaultPortfolioSlides: IPortfolioSlide[] = [
     img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/home-shop-sidebar-backround.jpg'
   },
   {
-    title: 'NEVER STOP DREAMING.',
+    title: 'NEVER STOP DREAMING',
     img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/bridal-shop-slide-2-background.jpg'
   },
   {
@@ -28,6 +28,7 @@ export interface IPortfolioItem {
   title: string
   description: string
   category: string
+  href?: string
 }
 
 export const defaultPortfolioItems: IPortfolioItem[] = [

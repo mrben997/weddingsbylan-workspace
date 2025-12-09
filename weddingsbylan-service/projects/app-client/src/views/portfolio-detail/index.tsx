@@ -3,6 +3,7 @@ import React, { FC, useEffect } from 'react'
 import { defaultPortfolioItems, IPortfolioItem } from './configs'
 
 import './index.scss'
+import { getEditModeKey } from '@/shared/components/edit.mode'
 
 interface IPortfolioDetailViewProps {
   items?: IPortfolioItem[]
@@ -21,9 +22,9 @@ const PortfolioDetailView: FC<IPortfolioDetailViewProps> = (props) => {
       {/* TODO font-size: 60px color: var(--color-primary) font-weight: 300 */}
       {/* <h1 className='typography-h1 detail-title'>PORTFOLIO PINTEREST</h1> */}
       {/* <svg className='detail-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
-          <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' stroke-width='1'></line>
+          <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1'></line>
           <polygon points='100,5 105,10 100,15 95,10' fill='currentColor'></polygon>
-          <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' stroke-width='1'></line>
+          <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1'></line>
         </svg> */}
       {/* TODO font-size: h4 color: var(--color-primary) font-weight: 300 */}
       {/* <div className='typography-body1 detail-subtitle'>let your business grow trough this stunning theme</div> */}
@@ -34,13 +35,13 @@ const PortfolioDetailView: FC<IPortfolioDetailViewProps> = (props) => {
           className=' banner-bg'
           style={{ backgroundImage: `url('https://fleur.qodeinteractive.com/wp-content/uploads/2016/06/blog-standard-title-img-1.jpg')` }}
         />
-        <div className=' banner-content'>
+        <div className='banner-content' {...getEditModeKey('PortfolioDetail')}>
           {/* TODO font-size: 60px color: var(--color-bg) font-weight: 300 */}
           <h1 className='typography-h1 title'>PORTFOLIO PINTEREST</h1>
           <svg className='detail-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
-            <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' stroke-width='1'></line>
+            <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1'></line>
             <polygon points='100,5 105,10 100,15 95,10' fill='currentColor'></polygon>
-            <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' stroke-width='1'></line>
+            <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1'></line>
           </svg>
           {/* TODO font-size: 25px color: var(--color-bg) */}
           <div className='typography-body1 subtitle'>Let your business grow trough this stunning theme</div>

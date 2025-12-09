@@ -1,51 +1,50 @@
+'use server'
 import React from 'react'
-import Footer from '@/views/global/footer'
-import { newsService } from '@/services/news.servce'
-import { IAttachItem } from '@/modules/LibraryLab/attach-widget/types'
 import { INews } from '@/admin-react-app/model'
-import PortfolioDetail, { IItemDetail } from './portfolio-detail'
+import { newsService } from '@/services/news.servce'
 import { convertDetails, GetImageUrl } from '@/shared/helper'
-
+import { IAttachItem } from '@/modules/LibraryLab/attach-widget/types'
+import type { IPortfolioItem } from '@/views/portfolio-detail/configs'
+import PortfolioDetailView from '@/views/portfolio-detail'
 
 interface PageProps {
   params: { id: string; locale?: string }
 }
 
+const mapNewsToPortfolioItems = (news: INews | null): IPortfolioItem[] => {
+  if (!news) return []
+
+  const attachments = convertDetails(news.Description || '') as IAttachItem[]
+
+  const items: IPortfolioItem[] = attachments
+    .map((att) => {
+      const url = GetImageUrl('News', att.url) || att.url || att.name || ''
+      return {
+        src: url,
+        alt: att.id || att.name || news.Name || 'portfolio image',
+        title: news.Name || att.name || '',
+        description: news.Content || news.Description || '',
+        category: news.Tags || ''
+      } as IPortfolioItem
+    })
+    .filter((it) => it.src && it.src.length > 0)
+
+  return items
+}
+
 const PortfolioDetailPage = async ({ params }: PageProps) => {
   const { id } = params
 
-  // Try to fetch the item by id from the news service
   let item: INews | null = null
   try {
-    // newsService.Get expects a url like `/${id}` to fetch a single item
-    // It will return the item's data or throw if not found
     item = await newsService.Get(`${id}`)
   } catch (e) {
-    // keep item null on error
     console.error('Failed to fetch portfolio item', e)
   }
 
-  const details = convertDetails(item?.Description).map<IItemDetail>((x) => ({ src: GetImageUrl('News', x.url) ?? '', alt: x.id }))
+  const items = mapNewsToPortfolioItems(item)
 
-  return <PortfolioDetail details={details.filter((x) => x.src !== '')} />
-
-  // return (
-  //   <div className='portfolio-detail-area'>
-  //     <div className='portfolio-detail-header' style={{ backgroundImage: "url('/images/banner-1.jpg')" }}>
-  //       <h1 className='typography-h1'>PORTFOLIO PINTEREST</h1>
-  //       <div className='typography-body1'>let your business grow trough this stunning theme</div>
-  //     </div>
-  //     <div className='portfolio-gallery'>
-  //       <div className='masonry-grid'>
-  //         {details.map((img, idx) => (
-  //           <div className='masonry-item' key={idx}>
-  //             <img src={img.url} alt={img.id} loading='lazy' />
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
+  return <PortfolioDetailView items={items} />
 }
 
 export default PortfolioDetailPage

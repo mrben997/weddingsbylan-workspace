@@ -33,10 +33,14 @@ export interface ISettingStruct {
   HomePortfolioItems: ISettingItemConfig<FormTypes.IHomePortfolioForm>
   HomePortfolioImage: ISettingItemConfig<FormTypes.IHomePortfolioForm>
   Footer: ISettingItemConfig<FormTypes.IFooterForm>
-  // common
-  About: ISettingItemConfig<FormTypes.IAboutForm>
   // Makeup & Hair
   AboutImage: ISettingItemConfig<FormTypes.IAboutForm>
+  // Photography
+  // Portfolio
+  PortfolioSlide: ISettingItemConfig<FormTypes.IPortfolioSlideForm>
+  PortfolioDetail: ISettingItemConfig<FormTypes.IPortfolioDetailForm>
+  // common
+  About: ISettingItemConfig<FormTypes.IAboutForm>
 }
 
 export type TColor = 'inherit' | 'action' | 'disabled' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'

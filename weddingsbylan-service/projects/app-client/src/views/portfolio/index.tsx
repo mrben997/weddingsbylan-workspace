@@ -14,9 +14,11 @@ import type { IPortfolioItem, IPortfolioSlide } from './configs'
 import { defaultCategories, defaultPortfolioItems, defaultPortfolioSlides } from './configs'
 
 // Styles
+import './slider.scss'
 import './index.scss'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { getEditModeKey } from '@/shared/components/edit.mode'
 
 interface IPortfolioViewProps {
   categories?: string[]
@@ -25,7 +27,8 @@ interface IPortfolioViewProps {
 }
 
 export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
-  const slides = props.portfolioSlides || defaultPortfolioSlides
+  const slides = props.portfolioSlides && props.portfolioSlides.length > 0 ? props.portfolioSlides : defaultPortfolioSlides
+
   const categories = props.categories || defaultCategories
   const portfolioImages = props.portfolioItems || defaultPortfolioItems
 
@@ -109,7 +112,7 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
         </div>
 
         {/* Slider */}
-        <div className='slider'>
+        <div className='slider' {...getEditModeKey('PortfolioSlide')}>
           <Swiper
             modules={[Autoplay, EffectFade]}
             effect='fade'
@@ -167,15 +170,11 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
             <TabFilter tabs={categories} activeTab={activeCategory} onTabChange={handleFilter} />
 
             <div className={`grid ${allLoaded ? 'is-ready' : ''}`} ref={gridRef}>
-              {portfolioImages.map((img, i) => {
-                // derive an id for the item; prefer Id/Id-like keys, otherwise fallback to index
-                const itemId = (img as any).Id || (img as any).id || (img as any).Key || (img as any).key || i
-                const href = `/${locale}/portfolio/${itemId}`
-
+              {portfolioImages.map((item, i) => {
                 return (
-                  <div key={i} className='item' data-groups={JSON.stringify([img.category])}>
-                    <Link href={href} className='thumb'>
-                      <img src={img.src} alt={img.alt} loading='lazy' />
+                  <div key={i} className='item' data-groups={JSON.stringify([item.category])}>
+                    <Link href={item.href || '#'} className='thumb'>
+                      <img src={item.src} alt={item.alt} loading='lazy' />
                       <div className='gallery-overlay'>
                         <span className='gallery-icon'>
                           <GrSearch />
@@ -183,8 +182,8 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
                       </div>
                     </Link>
                     <h4 className='title'>
-                      <Link href={href} className='title-link'>
-                        {img.title}
+                      <Link href={item.href || '#'} className='title-link'>
+                        {item.title}
                       </Link>
                     </h4>
                   </div>

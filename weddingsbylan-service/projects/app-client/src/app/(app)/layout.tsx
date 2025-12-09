@@ -74,9 +74,9 @@ export default async function RootLayout(props: Readonly<IRootLayoutProps>) {
   const { children } = props
   const cookieStore = cookies()
   const p = await props.params
-  const locale = p.locale ?? 'vn'
+  // const locale = p.locale ?? 'vn'
   const isEdit = cookieStore.has('edit-mode')
-  const dataHomePage = await settingSService.getSettingdata(locale, ['Global'], ['Setting', 'Footer'])
+  const dataHomePage = await settingSService.getSettingdata('vn', ['Global'], ['Setting', 'Footer'])
   // const language = getTranslation(locale)
   // console.log(dataHomePage?.getData('Setting'))
 

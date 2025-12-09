@@ -56,7 +56,8 @@ export class AttachWidget extends Component<IAttachWidgetProps, IAttachWidgetSta
               </Typography>
             )}
             {list.map((item, index) => {
-              const thumbnail = this.props.imageGetter ? this.props.imageGetter(item) : item.thumbnail
+              let thumbnail = this.props.imageGetter ? this.props.imageGetter(item) : item.thumbnail
+              if (item.status === 'new') thumbnail = item.thumbnail // For new files, always use thumbnail
               return (
                 <IconButton key={index} component='a' href={item.url} target='_blank' className={attachWidgetClasses.listItem}>
                   <img src={thumbnail || item.url} alt={item.name} />

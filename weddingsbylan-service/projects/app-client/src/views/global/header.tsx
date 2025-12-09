@@ -1,7 +1,7 @@
 'use client'
 import './header.scss'
 import { ISearchParams } from '@/app/types'
-import { ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
+import { INavFormData, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { ImagePath } from '@/shared/config'
@@ -13,6 +13,16 @@ export interface IAppHeaderProps extends ISearchParams {
 
 const AppHeader: FC<IAppHeaderProps> = (props) => {
   const data = props.data ? props.data[0] : undefined
+
+  const defaultNavProps: Partial<INavFormData> = {
+    Navs: [
+      { Title: 'Home', Url: '/' },
+      { Title: 'Photography', Url: '/photography' },
+      { Title: 'Makeup & Hair', Url: '/makeup-and-hair' },
+      { Title: 'Portfolio', Url: '/portfolio' },
+      { Title: 'Contacts Us', Url: '/contact-us' }
+    ]
+  }
 
   const [isActive, setIsActive] = useState(false)
   const menuAreaRef = useRef<HTMLDivElement | null>(null)

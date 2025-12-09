@@ -63,4 +63,18 @@ export interface IAboutForm extends IFormModel {
   Content: string
   ImageUrl: string
 }
-//#endregion Makeup & Hair Page
+//#endregion
+
+//#region Portfolio
+export interface IPortfolioSlideForm extends IFormModel {
+  Title: string
+  Description?: string
+  ImageUrl?: string
+}
+
+export interface IPortfolioDetailForm extends IFormModel {
+  Title: string
+  Description?: string
+  ImageUrl?: string
+}
+//#endregion
