@@ -7,6 +7,7 @@ import ContactUsPage from './pages/contact-us'
 import PortfolioView from './pages/portfolio'
 import MakeupAndHairPage from './pages/makeup-and-hair'
 import PortfolioDetailView from './pages/portfolio-detail'
+import OurTeamView from './pages/our-team'
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path='/portfolio' element={<PortfolioView />} />
         <Route path='/portfolio-detail' element={<PortfolioDetailView />} />
         <Route path='/contact-us' element={<ContactUsPage />} />
+        <Route path='/our-team' element={<OurTeamView />} />
       </Routes>
     </Layout>
   )

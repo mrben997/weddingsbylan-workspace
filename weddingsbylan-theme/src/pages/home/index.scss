@@ -39,6 +39,10 @@
             text-decoration: none;
           }
         }
+
+        &.white * {
+          color: #fff;
+        }
       }
 
       .section-content-center {

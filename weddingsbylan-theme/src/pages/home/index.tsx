@@ -38,9 +38,15 @@ const slides = [
     parallaxMinor: '.section'
   },
   {
-    logoClass: 'theme-dark',
+    logoClass: 'theme-light',
     type: 'content',
     parallaxBg: 'images/portfolio-1.jpg',
+    parallaxMinor: '.section'
+  },
+  {
+    logoClass: 'theme-dark',
+    type: 'content',
+    parallaxBg: 'images/banner-0.jpg',
     parallaxMinor: '.section'
   },
   {
@@ -427,6 +433,28 @@ const Home: React.FC = () => {
                     <Link to='/contact-us' className='contact'>
                       Contact
                     </Link>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </SwiperSlide>
+
+          {/* Service/Our Team Section */}
+          <SwiperSlide>
+            <section className='section section-bg'>
+              <div className='section-content left'>
+                <div className='section-content-haft white'>
+                  <h1 className='typography-h2'>Our Team</h1>
+                  <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
+                    <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />
+                    <polygon points='100,5 105,10 100,15 95,10' fill='currentColor' />
+                    <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
+                  </svg>
+                  <p className='typography-body1 mt--1'>
+                    Get your glam done by me. Event makeup and hair my specialty. Bringing the best of your natural beauty.
+                  </p>
+                  <button className='app-btn app-btn-primary mt--2 link'>
+                    <Link to='/our-team'>Go</Link>
                   </button>
                 </div>
               </div>
