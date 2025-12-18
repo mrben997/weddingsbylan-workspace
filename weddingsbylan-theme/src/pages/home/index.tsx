@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
 import type { Swiper as SwiperType } from 'swiper'
 import { Link } from 'react-router-dom'
@@ -63,6 +64,7 @@ const Home: React.FC = () => {
   const verticalSwiperRef = useRef<SwiperType | null>(null)
   const horizontalSwiperRef = useRef<SwiperType | null>(null)
   const parallaxBgRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   // Preload parallax backgrounds for non-active slides
   const preloadParallaxMinor = (swiper: SwiperType) => {
@@ -227,6 +229,13 @@ const Home: React.FC = () => {
   //   }
   // }, [])
 
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 440)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <div className='home-page'>
       <Header logoTheme={currentLogoTheme} />
@@ -286,7 +295,7 @@ const Home: React.FC = () => {
                     <div className='carousel-item left' style={{ backgroundImage: 'url(images/slide-0.jpg)' }}>
                       <div className='carousel-item-content'>
                         <h1 className='typography-caption'>Photography</h1>
-                        <h2 className='typography-h1 mt--1'>Capturing the moments that really matter</h2>
+                        <h2 className='typography-h1 mt--1 '>Capturing the moments that really matter</h2>
                         <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
                           <line x1='0' y1='10' x2='85' y2='10' stroke='currentColor' strokeWidth='1' />
                           <polygon points='100,5 105,10 100,15 95,10' fill='currentColor' />
@@ -402,13 +411,37 @@ const Home: React.FC = () => {
                   <p className='typography-body1 mt--1 mb--1'>
                     Browse through our extensive portfolio showcasing years of experience and countless beautiful moments we've had the privilege to capture.
                   </p>
-                  <div className='app-container medium section-portfolio-area'>
-                    {[{ url: '/images/gallery-0.jpg' }, { url: '/images/gallery-1.jpg' }, { url: '/images/gallery-2.jpg' }].map((x, i) => (
-                      <div key={i.toString()} className='item'>
-                        <img src={x.url} alt='album' />
-                      </div>
-                    ))}
-                  </div>
+                  {!isMobile && (
+                    <div className='app-container medium section-portfolio-area'>
+                      {[{ url: '/images/gallery-0.jpg' }, { url: '/images/gallery-1.jpg' }, { url: '/images/gallery-2.jpg' }].map((x, i) => (
+                        <div key={i.toString()} className='item'>
+                          <img src={x.url} alt='album' />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {/* MOBILE: SWIPER */}
+                  {isMobile && (
+                    <Swiper
+                      modules={[Autoplay]}
+                      slidesPerView={1}
+                      loop
+                      autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false
+                      }}
+                      className='app-container medium section-portfolio-area'
+                    >
+                      {[{ url: '/images/gallery-0.jpg' }, { url: '/images/gallery-1.jpg' }, { url: '/images/gallery-2.jpg' }].map((x, i) => (
+                        <SwiperSlide key={i}>
+                          <div className='item'>
+                            <img src={x.url} alt='album' />
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  )}
+
                   <button className='app-btn app-btn-primary mt--2'>Read more</button>
                 </div>
               </div>
@@ -429,11 +462,9 @@ const Home: React.FC = () => {
                   <p className='typography-body1 mt--1'>
                     Get your glam done by me. Event makeup and hair my specialty. Bringing the best of your natural beauty.
                   </p>
-                  <button className='app-btn app-btn-primary mt--2'>
-                    <Link to='/contact-us' className='contact'>
-                      Contact
-                    </Link>
-                  </button>
+                  <Link to='/contact-us' className='app-btn app-btn-primary btn-link mt--2'>
+                    Contact
+                  </Link>
                 </div>
               </div>
             </section>
@@ -453,9 +484,9 @@ const Home: React.FC = () => {
                   <p className='typography-body1 mt--1'>
                     Get your glam done by me. Event makeup and hair my specialty. Bringing the best of your natural beauty.
                   </p>
-                  <button className='app-btn app-btn-primary mt--2 link'>
-                    <Link to='/our-team'>Go</Link>
-                  </button>
+                  <Link to='/our-team' className='app-btn app-btn-primary btn-link mt--2 link'>
+                    Go
+                  </Link>
                 </div>
               </div>
             </section>

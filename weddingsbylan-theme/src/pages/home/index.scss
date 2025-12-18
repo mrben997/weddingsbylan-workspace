@@ -32,12 +32,11 @@
         width: 50%;
         padding: 40px;
 
-        .contact {
-          color: var(--color-main, #000);
-          &:hover {
-            color: #fff;
-            text-decoration: none;
-          }
+        .btn-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
         }
 
         &.white * {
@@ -158,6 +157,13 @@
       height: 100%;
       color: var(--color-text, #fff);
       z-index: 2;
+
+      @media screen and (orientation: landscape) and (max-height: 440px) {
+        margin: 0 auto;
+        h2 {
+          font-size: 50px;
+        }
+      }
     }
     .carousel-item {
       &.left .carousel-item-content {
@@ -285,6 +291,7 @@
     flex-wrap: wrap;
     .item {
       max-width: 28%;
+      opacity: 1;
       img {
         width: 100%;
         height: auto;
@@ -309,7 +316,6 @@
   .section {
     height: auto;
     min-height: 100vh;
-    padding: 20px 0;
     &.left {
       background-position: 16% center !important;
     }
@@ -328,7 +334,18 @@
       }
 
       .section-content-center {
+        position: absolute;
+        top: 100px;
         padding: 0 20px;
+
+        .section-portfolio-area {
+          width: 100%;
+          height: 40vh;
+          margin: 20px 0;
+          .item {
+            max-width: 100%;
+          }
+        }
       }
     }
   }
@@ -378,5 +395,12 @@
   .horizontal-carousel .swiper-button-prev {
     width: 60px;
     height: 60px;
+  }
+
+  .section-portfolio-area {
+    height: 40vh;
+    .item {
+      height: 100%;
+    }
   }
 }
