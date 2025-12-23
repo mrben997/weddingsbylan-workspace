@@ -67,7 +67,6 @@ const CreateFormBase = function <TModel>(param?: IParam<TModel>) {
       const model = ConvertFormDataToJson<TModel>(formData)
       this.setState({ modelState: model })
       const messageErrors = this.validate.run(model) as PartialError<TModel>
-      console.log({ messageErrors });
 
       if (messageErrors) {
         this.setState({ messageErrors: messageErrors })

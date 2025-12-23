@@ -78,7 +78,6 @@ export default async function RootLayout(props: Readonly<IRootLayoutProps>) {
   const isEdit = cookieStore.has('edit-mode')
   const dataHomePage = await settingSService.getSettingdata('vn', ['Global'], ['Setting', 'Footer'])
   // const language = getTranslation(locale)
-  // console.log(dataHomePage?.getData('Setting'))
 
   return (
     <html>

@@ -46,10 +46,10 @@ const Service: React.FC<IServiceProps> = ({ data = plans }) => {
                 <li className='title'>
                   <h3>{plan.title}</h3>
                 </li>
-                <li className='price'>
+                {/* <li className='price'>
                   <div className='value'>{plan.price}</div>
                   <div className='per'>{plan.per}</div>
-                </li>
+                </li> */}
                 <li className='features'>
                   <div dangerouslySetInnerHTML={{ __html: plan.features }}></div>
                 </li>

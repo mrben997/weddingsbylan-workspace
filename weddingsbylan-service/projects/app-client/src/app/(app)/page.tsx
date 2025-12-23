@@ -23,6 +23,7 @@ const Home: FC<IPageProps> = async (props) => {
     ['Global', 'Home'],
     [
       'Setting',
+      'SocialLinks',
       'Banner',
       'HomePhotography',
       'HomePhotographyImage',
@@ -69,7 +70,7 @@ const Home: FC<IPageProps> = async (props) => {
             </CustomSwiperSlide>
             {/* footer */}
             <CustomSwiperSlide logoClass='theme-dark'>
-              <Footer footerData={pageData?.getData('Footer')} settingData={pageData?.getData('Setting')} />
+              <Footer footerData={pageData?.getData('Footer')} settingData={pageData?.getData('Setting')} socialLinksData={pageData?.getData('SocialLinks')} />
             </CustomSwiperSlide>
           </div>
         </div>

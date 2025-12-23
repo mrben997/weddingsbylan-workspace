@@ -279,10 +279,6 @@ class UploadService {
       progress((pro.byteSent * 100) / pro.total)
     })
 
-    // uploadService.addListener(EventChannel.OnEnd, (status, pro) => {
-    //   console.log(100, pro)
-    // })
-
     try {
       const res = await uploadService.newUpload({ fileType: fileType }, options?.signal)
       return res ? (res as IUploadResult) : undefined
@@ -291,7 +287,6 @@ class UploadService {
       try {
         const messageData = JSON.parse(err.message)
         const temp = Object.values(messageData)[0]
-        console.log(temp)
       } catch {
         throw err
       }

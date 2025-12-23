@@ -1,5 +1,12 @@
 import { IFormModel } from './types'
 
+export interface ISocialLinksForm extends IFormModel {
+  FacebookUrl?: string
+  InstagramUrl?: string
+  PinterestUrl?: string
+  TikTokUrl?: string
+  YoutubeUrl?: string
+}
 export interface ISettingForm extends IFormModel {
   LogoUrl: string
   LogoDarkUrl: string

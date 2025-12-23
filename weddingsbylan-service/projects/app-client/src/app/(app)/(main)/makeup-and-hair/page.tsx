@@ -26,25 +26,24 @@ const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; ser
 
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
-  const pageData = await settingSService.getSettingdata('vn', ['Global'], ['Setting', 'About', 'AboutImage', 'Footer'])
+  const pageData = await settingSService.getSettingdata('vn', ['Global', 'MakeupAndHair'], ['Setting', 'MakeupAndHairAbout', 'Footer'])
 
   const dataSetting = pageData?.getSingleData('Setting')
-  const dataAbout = pageData?.getSingleData('About')
-  const dataAboutImage = pageData?.getSingleData('AboutImage')
+  const dataMakeupAndHairAbout = pageData?.getSingleData('MakeupAndHairAbout')
   const dataFetch = await getServices()
 
   return (
     <MakeupAndHairView
       data={{
         setting: dataSetting,
-        aboutImage: dataAboutImage
+        makeupAndHairAbout: dataMakeupAndHairAbout
       }}
       notes={dataFetch.notes}
       services={dataFetch.services}
       configs={{
-        title: dataAbout?.Title ?? '',
-        description: dataAbout?.Content ?? '',
-        image: GetImageUrl('Settings', dataAboutImage?.ImageUrl) ?? '',
+        title: dataMakeupAndHairAbout?.Title ?? '',
+        description: dataMakeupAndHairAbout?.Content ?? '',
+        image: GetImageUrl('Settings', dataMakeupAndHairAbout?.ImageUrl) ?? '',
         alt: 'Makeup & Hair',
         url: '/makeup-and-hair'
       }}

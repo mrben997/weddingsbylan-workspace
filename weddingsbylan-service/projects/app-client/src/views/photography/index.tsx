@@ -16,7 +16,7 @@ interface IPhotographyProps {
   services?: IPlan[]
   data: {
     setting: ISettingForm | undefined
-    aboutImage: IAboutForm | undefined
+    photographyAbout: IAboutForm | undefined
   }
 }
 
@@ -35,11 +35,11 @@ const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
         </section>
 
         {/* About */}
-        <section className='about-section'>
-          <div className='about-image' style={{ backgroundImage: `url('${ImagePath}/${data.aboutImage?.ImageUrl}')` }} {...getEditModeKey('AboutImage')}></div>
-          <div className='about-content' {...getEditModeKey('About')}>
-            <h2 className='typography-h2'>{configs.title}</h2>
-            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{configs.description}</p>
+        <section className='about-section' {...getEditModeKey('PhotographyAbout')}>
+          <div className='about-image' style={{ backgroundImage: `url('${ImagePath}/${data.photographyAbout?.ImageUrl}')` }}></div>
+          <div className='about-content'>
+            <h2 className='typography-h2'>{data.photographyAbout?.Title || configs.title}</h2>
+            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{data.photographyAbout?.Content || configs.description}</p>
             <span className='read-more' onClick={() => setExpanded(!expanded)}>
               {expanded ? 'Read less' : 'Read more'}
             </span>

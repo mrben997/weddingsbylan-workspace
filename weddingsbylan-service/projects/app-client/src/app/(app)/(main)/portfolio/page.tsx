@@ -18,8 +18,6 @@ const PortfolioPage: FC<IPageProps> = async (props) => {
   const dataSetting = pageData?.getSingleData('Setting')
   const dataPortfolioSlide = pageData?.getData('PortfolioSlide')
   const data = await newsService.Filter({})
-  console.log('Porfolio data', data)
-  // console.log('PortfolioPage slide:', dataPortfolioSlide)
 
   return <PortfolioView portfolioItems={mapData(data ?? [])} portfolioSlides={mapSlideData(dataPortfolioSlide || [])} />
 }

@@ -1,9 +1,6 @@
 import { getGridBooleanOperators, getGridDateOperators, getGridNumericOperators, getGridStringOperators, GridColDef } from "@mui/x-data-grid"
 import { EOperator } from '../ModelFilter'
-// console.log("String", getGridStringOperators().map(x => x.value))
-// console.log("Numeric", getGridNumericOperators().map(x => x.value))
-// console.log("Boolean", getGridBooleanOperators().map(x => x.value))
-// console.log(getGridDateOperators().map(x => x.value))
+
 const StringMap = {
     'contains': EOperator.Contains,
     'equals': EOperator.Equal,

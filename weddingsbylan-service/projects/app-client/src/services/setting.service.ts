@@ -63,12 +63,10 @@ export class SettingStore {
     this._data = d
   }
   getData = <Tkey extends keyof ISettingStruct, T>(key: Tkey): TInnerType<ISettingStruct[Tkey]>[] => {
-    // console.log(this._data?.map(x => ({ Id: x.Id, Type: x.Type })), key);
     return this._data.filter((x) => x.Type === key && x.Content).map((x) => JSON.parse(x.Content as any))[0]
     // try {
     //     return this._data.filter(x => x.Type === key && x.Content).map(x => JSON.parse(x.Content as any))[0]
     // } catch (error) {
-    //     console.log("error", key, this._data);
     //     return {} as any
     // }
   }

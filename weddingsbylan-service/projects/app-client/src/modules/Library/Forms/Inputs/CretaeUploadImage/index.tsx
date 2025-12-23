@@ -53,7 +53,7 @@ const createUploadImage = function <TModel>(options: IOptions) {
 
         result = await options.upload(file)
       } catch (error) {
-        console.log({ error })
+        console.warn('UploadImage onChange error:', error)
         message = 'An error has occurred'
       } finally {
         this.setState({ isUpload: false, result: result, message })

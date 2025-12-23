@@ -49,13 +49,12 @@ export async function GET(request: Request) {
   cookieStore.set('edit-mode', 'true')
 
   // Extract locale from URL path
-  const url = new URL(request.url)
-  const pathSegments = url.pathname.split('/').filter((segment) => segment.length > 0)
+  // const url = new URL(request.url)
+  // const pathSegments = url.pathname.split('/').filter((segment) => segment.length > 0)
   // const locale = pathSegments[0] || 'vn' // First segment is locale, default to 'vn'
 
-  const params = new URLSearchParams(request.url.split('?')[1])
+  // const params = new URLSearchParams(request.url.split('?')[1])
   const fullOrigin = getOriginFromRequest(request)
-  console.log('Full origin:', fullOrigin)
 
   // return NextResponse.redirect(new URL(`/${locale}/`, fullOrigin ?? ''))
   return NextResponse.redirect(new URL(fullOrigin ?? ''))

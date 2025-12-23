@@ -5,6 +5,7 @@ import { INavFormData, ISettingForm } from '@/admin-react-app/pages/settings/set
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { ImagePath } from '@/shared/config'
+import Link from 'next/link'
 
 export interface IAppHeaderProps extends ISearchParams {
   data?: ISettingForm[] | null
@@ -77,7 +78,7 @@ const AppHeader: FC<IAppHeaderProps> = (props) => {
             <ul className='app-menu-navs'>
               {defaultNavProps.Navs?.map((nav, index) => (
                 <li className='app-menu-nav' style={{ transitionDelay: `${(index + 1) * 100}ms` }} key={nav.Url}>
-                  <a href={nav.Url} className='typography-h5'>
+                  <a href={nav.Url} className='typography-h5' onClick={() => setIsActive(false)}>
                     {nav.Title}
                   </a>
                 </li>

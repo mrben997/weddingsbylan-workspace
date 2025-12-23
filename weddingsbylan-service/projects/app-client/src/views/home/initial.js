@@ -94,7 +94,6 @@ const appThis = {
       const logoClass = activeSlide?.dataset?.logoClass
       if (logoClass) {
         logoElement.classList.add(logoClass)
-        console.log(`Added logo class: ${logoClass}`)
       }
       // Không cần else case để add default class nữa
     } catch (error) {
@@ -162,14 +161,12 @@ const appThis = {
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         on: {
           init: function () {
-            console.log('Horizontal swiper initialized')
             // Small delay to ensure DOM is ready
             setTimeout(() => {
               appThis.updateNavigationNumbers(this)
             }, 100)
           },
           slideChange: function () {
-            console.log('Slide changed')
             appThis.updateNavigationNumbers(this)
           }
         }
@@ -188,8 +185,6 @@ const appThis = {
       const currentIndex = swiper.activeIndex + 1 // Convert to 1-based index
       const totalSlides = swiper.slides.length
 
-      console.log('Updating navigation numbers:', { currentIndex, totalSlides })
-
       if (prevBtn) {
         const prevNumber = currentIndex === 1 ? totalSlides : currentIndex - 1
         const prevText = `${prevNumber}/${totalSlides}`
@@ -203,8 +198,6 @@ const appThis = {
           prevBtn.appendChild(numberSpan)
         }
         numberSpan.textContent = prevText
-
-        console.log('Set prev number:', prevText)
       } else {
         console.warn('Previous button not found')
       }
@@ -222,8 +215,6 @@ const appThis = {
           nextBtn.appendChild(numberSpan)
         }
         numberSpan.textContent = nextText
-
-        console.log('Set next number:', nextText)
       } else {
         console.warn('Next button not found')
       }

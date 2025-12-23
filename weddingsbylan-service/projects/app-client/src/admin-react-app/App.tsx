@@ -21,7 +21,6 @@ const LayoutModalRoute = {
 
 let baseUrl = document.getElementsByTagName('base').item(0)?.getAttribute('href') ?? ''
 baseUrl = '/' + baseUrl.substring(baseUrl.length - 1, 1)
-console.log(baseUrl)
 
 const renderElement = () => {
   return (

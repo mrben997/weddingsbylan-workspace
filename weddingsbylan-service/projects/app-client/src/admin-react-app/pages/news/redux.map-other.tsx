@@ -30,7 +30,7 @@ const AttachmentCellBase: FC<IAttachmentCellProps> = (props) => {
     <AttachWidget
       value={val}
       onChange={async (x) => {
-        console.log(x)
+        // console.log(x) --- IGNORE ---
       }}
     />
   )

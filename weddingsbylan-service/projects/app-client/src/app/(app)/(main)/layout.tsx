@@ -9,12 +9,16 @@ interface ILayoutProps {
 
 export default async function MainLayout({ children, params }: ILayoutProps) {
   const { locale } = params
-  const dataHomePage = await settingSService.getSettingdata(locale, ['Home', 'Global'], ['Setting', 'Footer'])
+  const dataHomePage = await settingSService.getSettingdata(locale, ['Home', 'Global'], ['Setting', 'Footer', 'SocialLinks'])
 
   return (
     <>
       {children}
-      <Footer footerData={dataHomePage?.getData('Footer')} settingData={dataHomePage?.getData('Setting')} />
+      <Footer
+        footerData={dataHomePage?.getData('Footer')}
+        settingData={dataHomePage?.getData('Setting')}
+        socialLinksData={dataHomePage?.getData('SocialLinks')}
+      />
     </>
   )
 }

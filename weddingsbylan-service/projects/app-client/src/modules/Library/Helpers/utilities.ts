@@ -343,7 +343,7 @@ export const TryParseJson = function <T>(value: any, defaultValue?: any): Partia
   try {
     return JSON.parse(value) ?? {}
   } catch (error) {
-    console.log(error)
+    console.warn('TryParseJson error:', error)
     return defaultValue || {}
   }
 }
@@ -372,7 +372,7 @@ export const tryParseObject = function <T>(value: any, defaultValue: T): T {
     if (!value) return defaultValue
     return JSON.parse(value)
   } catch (error) {
-    console.log(error)
+    console.warn('tryParseObject error:', error)
     return defaultValue
   }
 }

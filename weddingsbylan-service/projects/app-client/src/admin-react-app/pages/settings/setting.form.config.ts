@@ -42,6 +42,18 @@ export const SettingStruct: ISettingStruct = {
       }
     ]
   },
+  SocialLinks: {
+    title: 'Social Links',
+    DefineKey: { Area: 'Global', FormKey: 'SocialLinks' },
+    isSingle: true,
+    renderForm: (data) => [
+      { key: 'FacebookUrl', label: 'Facebook URL' }, // https://www.facebook.com
+      { key: 'InstagramUrl', label: 'Instagram URL' }, // https://www.instagram.com
+      { key: 'PinterestUrl', label: 'Pinterest URL' }, // https://www.pinterest.com
+      { key: 'TikTokUrl', label: 'TikTok URL' }, // https://www.tiktok.com
+      { key: 'YoutubeUrl', label: 'Youtube URL' } // https://www.youtube.com
+    ]
+  },
   Footer: {
     title: 'Footer',
     DefineKey: { Area: 'Global', FormKey: 'Footer' },
@@ -120,7 +132,7 @@ export const SettingStruct: ISettingStruct = {
     title: 'Home Photography Image',
     DefineKey: { Area: 'Home', FormKey: 'HomePhotographyImage' },
     isSingle: true,
-    renderForm: (data) => {
+    renderForm: () => {
       return [
         {
           key: 'ImageUrl',
@@ -228,23 +240,40 @@ export const SettingStruct: ISettingStruct = {
   },
   //#endregion
   //#region Makeup & Hair Page
-  About: {
+  MakeupAndHairAbout: {
     title: 'Makeup & Hair About',
-    DefineKey: { Area: 'Global', FormKey: 'About' },
+    DefineKey: { Area: 'MakeupAndHair', FormKey: 'MakeupAndHairAbout' },
     isSingle: true,
     renderForm: (data) => {
       return [
         { key: 'Title', label: 'Title' },
-        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) }
+        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) },
+        {
+          key: 'ImageUrl',
+          label: 'ImageUrl',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 1920, height: 650 }
+          })
+        }
       ]
     }
   },
-  AboutImage: {
-    title: 'Makeup & Hair About Image',
-    DefineKey: { Area: 'Global', FormKey: 'AboutImage' },
+  //#endregion
+  //#region Photography Page
+  PhotographyAbout: {
+    title: 'Photography About',
+    DefineKey: { Area: 'Photography', FormKey: 'PhotographyAbout' },
     isSingle: true,
     renderForm: (data) => {
       return [
+        { key: 'Title', label: 'Title' },
+        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) },
         {
           key: 'ImageUrl',
           label: 'ImageUrl',

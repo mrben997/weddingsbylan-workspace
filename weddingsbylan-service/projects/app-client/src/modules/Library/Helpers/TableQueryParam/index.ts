@@ -7,8 +7,6 @@ interface ITableQueryParam {
 }
 class TableQueryParamBase {
   setParam = <TModel>(tableInfo: Partial<ITableTemplateState<TModel>>, defaultValue: ITableTemplateState<TModel>) => {
-    // console.log({ tableInfo, defaultValue, quals: this.equals(tableInfo, defaultValue) })
-
     try {
       if (!this.equals(tableInfo, defaultValue)) {
         const data = this.extractData(tableInfo)
@@ -18,7 +16,7 @@ class TableQueryParamBase {
         QueryParam.Deletes<ITableQueryParam>('table')
       }
     } catch (error) {
-      console.log(error)
+      console.warn('TableQueryParam setParam error:', error)
     }
   }
 

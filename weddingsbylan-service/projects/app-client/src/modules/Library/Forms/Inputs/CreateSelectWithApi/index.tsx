@@ -109,7 +109,6 @@ const CreateSelectWithApi = function <TModel, TOption extends ISelectWithApiOpti
           const options = OptionsFilter(res, this.existedIds)
           this.setState({ options })
         } catch (error) {
-          // console.log(error)
           ApiAlertContext.ApiAlert?.PushError('Error from server!')
         } finally {
           this.setState({ statusText: 'no items' })
@@ -135,7 +134,6 @@ const CreateSelectWithApi = function <TModel, TOption extends ISelectWithApiOpti
         this.setState({ options, optionSelected, loading: false })
         return
       } catch (error) {
-        // console.log(error)
         ApiAlertContext.ApiAlert?.PushError('Error from server!')
       } finally {
         this.setState({ statusText: 'no items', loading: false })

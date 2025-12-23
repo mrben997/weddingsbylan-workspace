@@ -27,9 +27,6 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
   }
   class SelectSimple extends Component<IProps, IState> {
     mapProps = (): SelectProps => {
-      console.log('select simple render')
-      console.log(this.getDefaultValue())
-
       const label = this.getLabel()
       const tfp: SelectProps = {
         id: this.props.name?.toString(),
@@ -79,8 +76,6 @@ const CreateSelectSimple = function <TModel = any>(options?: IOptions) {
     }
     getDefaultValue = (currentProps?: IProps) => {
       const { data, name } = currentProps ?? this.props
-      console.log('get default value', data, name, this.props.defaultValue)
-
       const dValue = this.props.defaultValue?.toString() ?? (name ? data?.[name]?.toString() : undefined)
       return dValue ?? this.getOptions()[0].value
     }

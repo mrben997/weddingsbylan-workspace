@@ -7,6 +7,7 @@ import 'swiper/css/effect-fade'
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6'
 import './index.scss'
 import { IAboutForm, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
+import { getEditModeKey } from '@/shared/components/edit.mode'
 import { ImagePath } from '@/shared/config'
 
 export interface ISlide {
@@ -98,7 +99,7 @@ interface IMakeupAndHairProps {
   services?: IPlan[]
   data: {
     setting?: ISettingForm
-    aboutImage?: IAboutForm
+    makeupAndHairAbout?: IAboutForm
   }
 }
 
@@ -204,10 +205,10 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
 
         {/* About */}
         <section className='about-section'>
-          <div className='about-image' style={{ backgroundImage: `url('${configs.image}')` }}></div>
-          <div className='about-content'>
-            <h2 className='typography-h2'>{configs.title}</h2>
-            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{configs.description}</p>
+          <div className='about-image' style={{ backgroundImage: `url('${ImagePath}/${data.makeupAndHairAbout?.ImageUrl}')` }} {...getEditModeKey('MakeupAndHairAbout')}></div>
+          <div className='about-content' {...getEditModeKey('MakeupAndHairAbout')}>
+            <h2 className='typography-h2'>{data.makeupAndHairAbout?.Title || configs.title}</h2>
+            <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{data.makeupAndHairAbout?.Content || configs.description}</p>
             <span className='read-more' onClick={() => setExpanded(!expanded)}>
               {expanded ? 'Read less' : 'Read more'}
             </span>
@@ -217,7 +218,9 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
         {/* Services */}
         <section className='services-section mb--5'>
           <div className='services-title mb--3'>
-            <img src='images/logo.png' alt='Lan logo' className='services-logo' />
+            <div {...getEditModeKey('Setting')}>
+              <img src={`${ImagePath}/${data.setting?.LogoUrl}`} alt='Lan logo' className='services-logo' />
+            </div>
             <h2 className='typography-h2'>SERVICES</h2>
             <span className='typography-subtitle1'>CHOOSE YOURS</span>
           </div>
@@ -231,10 +234,10 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
                     <li className='title'>
                       <h3>{plan.title}</h3>
                     </li>
-                    <li className='price'>
+                    {/* <li className='price'>
                       <div className='value'>{plan.price}</div>
                       <div className='per'>{plan.per}</div>
-                    </li>
+                    </li> */}
                     <li className='features'>
                       <div dangerouslySetInnerHTML={{ __html: plan.features }} />
                     </li>

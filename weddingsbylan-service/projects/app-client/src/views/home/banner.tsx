@@ -17,7 +17,7 @@ const HomeBanner: FC<IHomeBannerProps> = (props) => {
             {data.map((item, index) => (
               <div className='swiper-slide' key={index}>
                 <div className='carousel-item left' style={{ backgroundImage: `url('${ImagePath}/${item.ImageUrl}')` }}>
-                  <div className='carousel-item-content'>
+                  {/* <div className='carousel-item-content'>
                     <h1 className='typography-caption sub-title'>{item.SubTitle}</h1>
                     <h2 className='typography-h1 mt--1 title'>{item.Title}</h2>
                     <svg className='section-divider' width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'>
@@ -26,7 +26,7 @@ const HomeBanner: FC<IHomeBannerProps> = (props) => {
                       <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
                     </svg>
                     <p className='typography-body1 mt--1'>{item.Content}</p>
-                  </div>
+                  </div> */}
                   <div className='carousel-item-overlay'></div>
                 </div>
               </div>

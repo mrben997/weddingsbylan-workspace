@@ -10,7 +10,5 @@ interface IFormEditProps {
   data: IService
 }
 export const FormEdit: FC<IFormEditProps> = (props) => {
-  console.log('FormEdit render', props.data)
-
   return <FormEditInfo tilte={props.title} onCreateSubmit={props.onCreateSubmit} onSubmit={props.onSubmit} data={props.data} />
 }

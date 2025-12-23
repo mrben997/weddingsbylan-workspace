@@ -31,27 +31,26 @@ const getServices = async (signal?: AbortSignal): Promise<{ notes?: INote[]; ser
 const Page: FC<IPageProps> = async (props) => {
   const p = await props.params
   const locale = p.locale ?? 'vn'
-  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global'], ['Setting', 'About', 'AboutImage', 'Footer'])
+  const pageData = await settingSService.getSettingdata(locale ?? 'vn', ['Global', 'Photography'], ['Setting', 'PhotographyAbout', 'Footer'])
 
   const dataSetting = pageData?.getSingleData('Setting')
-  const dataAbout = pageData?.getSingleData('About')
-  const dataAboutImage = pageData?.getSingleData('AboutImage')
+  const dataPhotographyAbout = pageData?.getSingleData('PhotographyAbout')
   const dataFetch = await getServices()
 
   return (
     <PhotographyViewBase
       data={{
         setting: dataSetting,
-        aboutImage: dataAboutImage
+        photographyAbout: dataPhotographyAbout
       }}
       notes={dataFetch.notes}
       services={dataFetch.services}
       configs={{
-        title: dataAbout?.Title ?? '',
-        description: dataAbout?.Content ?? '',
-        image: GetImageUrl('Settings', dataAboutImage?.ImageUrl) ?? '',
-        alt: 'Makeup & Hair',
-        url: '/makeup-and-hair'
+        title: dataPhotographyAbout?.Title ?? '',
+        description: dataPhotographyAbout?.Content ?? '',
+        image: GetImageUrl('Settings', dataPhotographyAbout?.ImageUrl) ?? '',
+        alt: 'Photography',
+        url: '/photography'
       }}
     />
   )

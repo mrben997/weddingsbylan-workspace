@@ -17,7 +17,7 @@ import { defaultCategories, defaultPortfolioItems, defaultPortfolioSlides } from
 import './slider.scss'
 import './index.scss'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+// import { useParams } from 'next/navigation'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 
 interface IPortfolioViewProps {
@@ -33,8 +33,8 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
   const portfolioImages = props.portfolioItems || defaultPortfolioItems
 
   // get locale from the current route params (app router)
-  const params = useParams() as { locale?: string }
-  const locale = params?.locale || 'en'
+  // const params = useParams() as { locale?: string }
+  // const locale = params?.locale || 'en'
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [activeCategory, setActiveCategory] = useState('ALL')
