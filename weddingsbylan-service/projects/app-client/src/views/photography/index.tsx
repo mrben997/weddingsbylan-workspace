@@ -48,12 +48,12 @@ const PhotographyViewBase: React.FC<IPhotographyProps> = (props) => {
 
         {/* Services */}
         <section className='services-section mb--5'>
-          <div className='services-title mb--3'>
+          <div className='services-title my--3'>
             <div {...getEditModeKey('Setting')}>
               <img src={`${ImagePath}/${data.setting?.LogoUrl}`} alt='Lan logo' className='services-logo' />
             </div>
             <h2 className='typography-h2'>SERVICES</h2>
-            <span className='typography-subtitle1'>CHOOSE YOURS</span>
+            {/* <span className='typography-subtitle1'>CHOOSE YOURS</span> */}
           </div>
           {/* <div className='services-list'>
             <div className='service-card'>

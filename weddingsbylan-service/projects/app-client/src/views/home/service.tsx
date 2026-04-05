@@ -26,7 +26,7 @@ const HomeService: FC<IHomeServiceProps> = (props) => {
               <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
             </svg>
             <p className='typography-body1 text-italic mt--1'>{data?.Content || defaultValue.Content}</p>
-            <button className='app-btn app-btn-primary mt--2'>Read more</button>
+            <a href='/makeup-and-hair' className='app-btn app-btn-primary mt--2'>Read more</a>
           </div>
         </div>
       </div>

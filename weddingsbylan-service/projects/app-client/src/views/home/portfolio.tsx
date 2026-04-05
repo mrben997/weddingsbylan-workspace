@@ -29,7 +29,7 @@ const HomePortfolio: FC<IHomePortfolioProps> = ({ portfolioItems, portfolioData 
             </div>
           ))}
         </div>
-        <button className='app-btn app-btn-primary mt--2'>Read more</button>
+        <a href='/portfolio' className='app-btn app-btn-primary mt--2'>Read more</a>
       </div>
     </section>
   )

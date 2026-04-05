@@ -13,13 +13,14 @@ import { unstable_noStore as noStore } from 'next/cache'
 const PortfolioPage: FC<IPageProps> = async (props) => {
   noStore() // Disable caching for edit mode detection
   const p = await props.params
-  const pageData = await settingSService.getSettingdata('vn', ['Global', 'Portfolio'], ['Setting', 'PortfolioSlide'])
+  const pageData = await settingSService.getSettingdata('vn', ['Global', 'Portfolio'], ['Setting', 'PortfolioSlide', 'PortfolioInfo'])
 
   const dataSetting = pageData?.getSingleData('Setting')
+  const info = pageData?.getSingleData('PortfolioInfo')
   const dataPortfolioSlide = pageData?.getData('PortfolioSlide')
   const data = await newsService.Filter({})
 
-  return <PortfolioView portfolioItems={mapData(data ?? [])} portfolioSlides={mapSlideData(dataPortfolioSlide || [])} />
+  return <PortfolioView portfolioItems={mapData(data ?? [])} portfolioSlides={mapSlideData(dataPortfolioSlide || [])} info={info} />
 }
 
 export default PortfolioPage

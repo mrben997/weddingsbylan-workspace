@@ -84,4 +84,11 @@ export interface IPortfolioDetailForm extends IFormModel {
   Description?: string
   ImageUrl?: string
 }
+
+export interface IPortfolioInfoForm extends IFormModel {
+  Title: string
+  Description?: string
+  GalleryTitle?: string
+  ImageUrl?: string
+}
 //#endregion

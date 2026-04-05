@@ -8,7 +8,8 @@ export enum EServiceSettingArea {
 
 export enum EServiceType {
   package = 'package',
-  note = 'note'
+  note = 'note',
+  section = 'section'
 }
 export interface IServiceSetting {
   /**
@@ -23,7 +24,7 @@ export interface IServiceSetting {
 
 export interface IServiceDTO extends IService {
   Area?: string
-  Type?: 'package' | 'note'
+  Type?: 'package' | 'note' | 'section'
 }
 
 export type TServiceReduxState = {} & IReduxState<string, IService>

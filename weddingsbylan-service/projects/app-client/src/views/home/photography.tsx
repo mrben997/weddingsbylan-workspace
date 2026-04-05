@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 // import { ImagePath } from '@/shared/config'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { IHomePhotographyForm } from '@/admin-react-app/pages/settings/setting.form.types'
+import Link from 'next/link'
 
 // const defaultValue: Partial<IHomePhotographyForm> = {
 //   Title: 'About Lan Le',
@@ -27,7 +28,9 @@ const HomePhotography: FC<IHomePhotographyProps> = (props) => {
               <line x1='115' y1='10' x2='200' y2='10' stroke='currentColor' strokeWidth='1' />
             </svg>
             <p className='typography-body1 text-italic mt--1'>{data?.Content || 'Content'}</p>
-            <button className='app-btn app-btn-primary mt--2'>Read more</button>
+            <a href='/photography' className='app-btn app-btn-primary mt--2'>
+              Read more
+            </a>
           </div>
         </div>
       </div>

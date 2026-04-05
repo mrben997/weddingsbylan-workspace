@@ -64,9 +64,9 @@ const Slider = () => {
                 {/* TODO font-size: 18px color: var(--color-bg)*/}
                 {index === 1 && <span className='typography-h5 desc'>{slide.desc}</span>}
                 {/* TODO color: var(--color-bg) text-transform: uppercase*/}
-                <a href='#' className='typography-subtitle2 btn'>
+                {/* <a href='#' className='typography-subtitle2 btn'>
                   {slide.button}
-                </a>
+                </a> */}
               </div>
             </div>
           </SwiperSlide>

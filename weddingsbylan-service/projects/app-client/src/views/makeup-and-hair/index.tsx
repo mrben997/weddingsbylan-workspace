@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
 import 'swiper/css'
@@ -9,94 +9,15 @@ import './index.scss'
 import { IAboutForm, ISettingForm } from '@/admin-react-app/pages/settings/setting.form.types'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { ImagePath } from '@/shared/config'
-
-export interface ISlide {
-  img: string
-  title: string
-  subtitle: string
-  desc?: string
-  button: string
-}
-
-const slides: ISlide[] = [
-  {
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/h1-slide-1-background.jpg',
-    title: 'STYLE & GRACE',
-    subtitle: 'Make your beautiful website with Fleur',
-    button: 'Purchase'
-  },
-  {
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/h1-slide-4-background.jpg',
-    title: 'THIS IS BEAUTY',
-    subtitle: 'Designed with love & care, Fleur is all you ever wanted',
-    desc: 'Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor elit. Duis sed odio sit amet nibh',
-    button: 'Purchase'
-  },
-  {
-    img: 'https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/h1-slide-3-background.jpg',
-    title: 'MODERN ELEGANCE',
-    subtitle: 'Perfect layouts for your portfolio and shop',
-    button: 'Purchase'
-  }
-]
-
-export interface IPlan {
-  title: string
-  price: string
-  per: string
-  features: string
-  ribbon?: {
-    text: string
-    type: 'popular' | 'new'
-  }
-  variant?: 'expert' | 'supreme'
-}
-
-const defaultServices: IPlan[] = [
-  { title: 'BUSINESS', price: '$39', per: 'per month', features: '10 projects, 100 users' },
-  {
-    title: 'EXPERT',
-    price: '$59',
-    per: 'per month',
-    features: '20 projects, 200 users',
-    ribbon: { text: 'POPULAR', type: 'popular' },
-    variant: 'expert'
-  },
-  {
-    title: 'SUPREME',
-    price: '$79',
-    per: 'per month',
-    features: '15 projects, 150 users',
-    ribbon: { text: 'NEW', type: 'new' },
-    variant: 'supreme'
-  }
-]
-
-export interface INote {
-  id: number
-  title: string
-  text: string
-}
-
-const defaultNotes: INote[] = [
-  { id: 1, title: 'Introduction', text: 'Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum.' },
-  { id: 2, title: 'Preparation', text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.' },
-  { id: 3, title: 'Execution', text: 'Praesent laoreet sapien sit amet massa ornare, in pretium ex elementum.' },
-  { id: 4, title: 'Summary', text: 'Curabitur nec arcu nec nulla scelerisque condimentum.' }
-]
-
-export interface IMakeupAndHairConfigs {
-  title: string
-  description: string
-  image: string
-  alt: string
-  url: string
-}
+import { defaultNotes, defaultSlides } from './configs'
+import { IMakeupAndHairConfigs, INote, IPlan } from './types'
+import { MakeupAndHairService } from './service'
 
 interface IMakeupAndHairProps {
   configs: IMakeupAndHairConfigs
   notes?: INote[]
   services?: IPlan[]
+  sections?: IPlan[]
   data: {
     setting?: ISettingForm
     makeupAndHairAbout?: IAboutForm
@@ -104,12 +25,14 @@ interface IMakeupAndHairProps {
 }
 
 const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
-  const { configs, notes = defaultNotes, services = defaultServices, data } = props
+  const { configs, notes = defaultNotes, services, sections, data } = props
   const swiperRef = useRef<any>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
 
   const refs = useRef<(HTMLDivElement | null)[]>([])
+
+  const slideData = useMemo(() => defaultSlides, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -150,7 +73,7 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               className='container'
             >
-              {slides.map((slide, index) => (
+              {slideData.map((slide, index) => (
                 <SwiperSlide key={index}>
                   <div className='slide' style={{ backgroundImage: `url(${slide.img})` }}>
                     <div className='content'>
@@ -168,9 +91,9 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
                       {/* TODO font-size: 18px color: var(--color-bg)*/}
                       {index === 1 && <span className='typography-h5 desc'>{slide.desc}</span>}
                       {/* TODO color: var(--color-bg) text-transform: uppercase*/}
-                      <a href='#' className='typography-subtitle2 btn'>
+                      {/* <a href='#' className='typography-subtitle2 btn'>
                         {slide.button}
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </SwiperSlide>
@@ -184,9 +107,9 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
               </span>
               {/* TODO color: var(--color-bg)*/}
               <span className='typography-h6 count'>
-                <span className='count-top'>{((activeIndex - 1 + slides.length) % slides.length) + 1}</span>
+                <span className='count-top'>{((activeIndex - 1 + slideData.length) % slideData.length) + 1}</span>
                 <span className='count-divider'>/</span>
-                <span className='count-bottom'>{slides.length}</span>
+                <span className='count-bottom'>{slideData.length}</span>
               </span>
             </div>
 
@@ -195,9 +118,9 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
                 <FaArrowRightLong />
               </span>
               <span className='typography-h6 count'>
-                <span className='count-top'>{((activeIndex + 1) % slides.length) + 1}</span>
+                <span className='count-top'>{((activeIndex + 1) % slideData.length) + 1}</span>
                 <span className='count-divider'>/</span>
-                <span className='count-bottom'>{slides.length}</span>
+                <span className='count-bottom'>{slideData.length}</span>
               </span>
             </div>
           </div>
@@ -205,7 +128,11 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
 
         {/* About */}
         <section className='about-section'>
-          <div className='about-image' style={{ backgroundImage: `url('${ImagePath}/${data.makeupAndHairAbout?.ImageUrl}')` }} {...getEditModeKey('MakeupAndHairAbout')}></div>
+          <div
+            className='about-image'
+            style={{ backgroundImage: `url('${ImagePath}/${data.makeupAndHairAbout?.ImageUrl}')` }}
+            {...getEditModeKey('MakeupAndHairAbout')}
+          ></div>
           <div className='about-content' {...getEditModeKey('MakeupAndHairAbout')}>
             <h2 className='typography-h2'>{data.makeupAndHairAbout?.Title || configs.title}</h2>
             <p className={`typography-h6 ${expanded ? 'expanded' : 'collapsed'}`}>{data.makeupAndHairAbout?.Content || configs.description}</p>
@@ -225,32 +152,8 @@ const MakeupAndHairView: React.FC<IMakeupAndHairProps> = (props) => {
             <span className='typography-subtitle1'>CHOOSE YOURS</span>
           </div>
 
-          <div className='service'>
-            {services.map((plan, index) => (
-              <div key={index} className='card-wrapper'>
-                <div className={`card ${plan.variant ?? ''}`}>
-                  {plan.ribbon && <span className={`ribbon ${plan.ribbon.type}`}>{plan.ribbon.text}</span>}
-                  <ul>
-                    <li className='title'>
-                      <h3>{plan.title}</h3>
-                    </li>
-                    {/* <li className='price'>
-                      <div className='value'>{plan.price}</div>
-                      <div className='per'>{plan.per}</div>
-                    </li> */}
-                    <li className='features'>
-                      <div dangerouslySetInnerHTML={{ __html: plan.features }} />
-                    </li>
-                    <li className='button'>
-                      <a href='#' className='btn'>
-                        READ MORE
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+          <MakeupAndHairService data={services} align='center' />
+          <MakeupAndHairService data={sections} align='center' />
         </section>
 
         <section className='note-section'>

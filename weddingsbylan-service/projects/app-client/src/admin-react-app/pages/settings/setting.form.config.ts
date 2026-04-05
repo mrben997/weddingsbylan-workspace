@@ -247,7 +247,7 @@ export const SettingStruct: ISettingStruct = {
     renderForm: (data) => {
       return [
         { key: 'Title', label: 'Title' },
-        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) },
+        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1500 } }) },
         {
           key: 'ImageUrl',
           label: 'ImageUrl',
@@ -273,7 +273,7 @@ export const SettingStruct: ISettingStruct = {
     renderForm: (data) => {
       return [
         { key: 'Title', label: 'Title' },
-        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) },
+        { key: 'Content', label: 'Content', inputElement: CreateInputTextMultiline({ options: { maxLength: 1500 } }) },
         {
           key: 'ImageUrl',
           label: 'ImageUrl',
@@ -320,6 +320,30 @@ export const SettingStruct: ISettingStruct = {
       return [
         { key: 'Title', label: 'Title' },
         { key: 'Description', label: 'Description', inputElement: CreateTextCkEditor({}) }
+      ]
+    }
+  },
+  PortfolioInfo: {
+    title: 'Portfolio Info',
+    DefineKey: { Area: 'Portfolio', FormKey: 'PortfolioInfo' },
+    isSingle: true,
+    renderForm: (data) => {
+      return [
+        { key: 'Title', label: 'Title' },
+        { key: 'Description', label: 'Description', inputElement: CreateInputTextMultiline({ options: { maxLength: 1500 } }) },
+        { key: 'GalleryTitle', label: 'Gallery Title' }
+        // {
+        //   key: 'ImageUrl',
+        //   label: 'ImageUrl',
+        //   inputElement: createUploadImage({
+        //     upload: async (file) => {
+        //       const data = await FetchDelay(() => serviceUpload.uploadSettingImage(file), 1000)
+        //       return await Promise.resolve(data.filename)
+        //     },
+        //     renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+        //     size: { width: 1920, height: 650 }
+        //   })
+        // }
       ]
     }
   }

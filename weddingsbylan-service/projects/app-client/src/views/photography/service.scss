@@ -47,11 +47,11 @@
 }
 
 .service {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  // display: flex;
+  // gap: 20px;
+  // justify-content: center;
+  // flex-wrap: wrap;
+  // margin-top: 20px;
 
   .card-wrapper {
     flex: 1 1 calc(33.333% - 20px);
@@ -60,91 +60,97 @@
     padding: 0 15px;
   }
 
-  .card {
-    background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-1.png');
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    padding: 58px 20px 38px;
-    width: 100%;
-    min-width: 250px;
-    position: relative;
-    overflow: hidden;
+  @media (max-width: 440px) {
+    .card-wrapper {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+}
 
-    ul {
-      font-family: var(--font-secondary);
-      list-style: none;
+.card {
+  background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-1.png');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 58px 20px 38px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  ul {
+    font-family: var(--font-secondary);
+    list-style: none;
+  }
+
+  .title {
+    margin-bottom: 30px;
+
+    h3 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #545454;
+      font-weight: 400;
+    }
+  }
+
+  .price {
+    .value {
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 5px;
+      color: #4a3e5a;
     }
 
-    .title {
-      margin-bottom: 30px;
-
-      h3 {
-        font-size: 32px;
-        margin-bottom: 10px;
-        color: #545454;
-        font-weight: 400;
-      }
-    }
-
-    .price {
-      .value {
-        font-size: 32px;
-        font-weight: 400;
-        margin-bottom: 5px;
-        color: #4a3e5a;
-      }
-
-      .per {
-        font-size: 15px;
-        color: #777;
-        margin-bottom: 20px;
-      }
-    }
-
-    .features {
-      margin-top: 45px;
+    .per {
       font-size: 15px;
-      font-weight: 500;
-      color: grey;
-      line-height: 30px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+  }
 
-      div {
-        margin-bottom: 10px;
+  .features {
+    margin-top: 45px;
+    font-size: 15px;
+    font-weight: 500;
+    color: grey;
+    line-height: 30px;
 
-        &:last-child {
-          margin-bottom: 0;
-        }
+    div {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
+  }
 
-    .button {
-      margin-top: 50px;
-    }
+  .button {
+    margin-top: 50px;
+  }
 
-    /* Modifiers */
-    &.expert {
-      background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-2.jpg');
+  /* Modifiers */
+  &.expert {
+    background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-2.jpg');
+    color: #fff;
+
+    h3,
+    .value,
+    .per,
+    .features,
+    .btn {
       color: #fff;
-
-      h3,
-      .value,
-      .per,
-      .features,
-      .btn {
-        color: #fff;
-        border-color: #fff;
-      }
-
-      .btn:hover {
-        background: #fff;
-        color: #333;
-      }
+      border-color: #fff;
     }
 
-    &.supreme {
-      background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-3.png');
+    .btn:hover {
+      background: #fff;
+      color: #333;
     }
+  }
+
+  &.supreme {
+    background-image: url('https://fleur.qodeinteractive.com/wp-content/uploads/2017/01/pricing-tables-img-3.png');
   }
 
   /* Button */
@@ -183,11 +189,6 @@
 
   /* Mobile */
   @media (max-width: 440px) {
-    .card-wrapper {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-
     .card {
       padding: 40px 15px;
 
@@ -199,5 +200,70 @@
         font-size: 24px;
       }
     }
+  }
+}
+
+/* Masonry grid helpers */
+.Service-root {
+  width: 100%;
+  /* large outer horizontal padding */
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.Service-grid {
+  position: relative;
+  /* grid gutter variable (px) - matches Masonry gutter in Service.tsx */
+  --grid-gutter: 20px;
+  /* clear floats from grid items if using float */
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+.Service-grid-sizer,
+.Service-grid-item {
+  /* calculate column width subtracting gutters so 3 columns fit exactly
+     columnWidth = (100% - (gutter * (cols - 1))) / cols
+     for 3 cols: (100% - 2*--grid-gutter) / 3
+  */
+  width: calc((100% - (var(--grid-gutter) * 2)) / 3);
+  float: left;
+  box-sizing: border-box;
+  padding: 0; /* let Masonry gutter handle horizontal spacing */
+  margin-bottom: var(--grid-gutter); /* vertical gap between items */
+}
+.Service-grid-item {
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  /* 2 columns: subtract 1 gutter */
+  .Service-grid-sizer,
+  .Service-grid-item {
+    width: calc((100% - var(--grid-gutter)) / 2);
+  }
+}
+@media (max-width: 500px) {
+  .Service-grid-sizer,
+  .Service-grid-item {
+    width: 100%;
+  }
+}
+
+/* Responsive adjustments for root padding */
+@media (max-width: 1200px) {
+  .Service-root {
+    padding: 0 48px;
+  }
+}
+@media (max-width: 700px) {
+  .Service-root {
+    padding: 0 20px;
   }
 }

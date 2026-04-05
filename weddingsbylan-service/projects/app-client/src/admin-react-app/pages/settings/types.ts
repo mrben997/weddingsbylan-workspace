@@ -42,6 +42,8 @@ export interface ISettingStruct {
   // Portfolio
   PortfolioSlide: ISettingItemConfig<FormTypes.IPortfolioSlideForm>
   PortfolioDetail: ISettingItemConfig<FormTypes.IPortfolioDetailForm>
+  // Portfolio
+  PortfolioInfo: ISettingItemConfig<FormTypes.IPortfolioInfoForm>
   // common
 }
 

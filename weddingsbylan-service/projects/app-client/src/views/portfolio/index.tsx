@@ -10,6 +10,7 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import DividerIcon from '@/shared/components/divider-icon'
 import TabFilter from '@/shared/components/tab-filter'
+import { CategoryType } from './configs'
 import type { IPortfolioItem, IPortfolioSlide } from './configs'
 import { defaultCategories, defaultPortfolioItems, defaultPortfolioSlides } from './configs'
 
@@ -19,14 +20,17 @@ import './index.scss'
 import Link from 'next/link'
 // import { useParams } from 'next/navigation'
 import { getEditModeKey } from '@/shared/components/edit.mode'
+import { IPortfolioInfoForm } from '@/admin-react-app/pages/settings/setting.form.types'
 
 interface IPortfolioViewProps {
   categories?: string[]
   portfolioItems?: IPortfolioItem[]
   portfolioSlides?: IPortfolioSlide[]
+  info?: IPortfolioInfoForm
 }
 
 export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
+  const { info } = props
   const slides = props.portfolioSlides && props.portfolioSlides.length > 0 ? props.portfolioSlides : defaultPortfolioSlides
 
   const categories = props.categories || defaultCategories
@@ -37,7 +41,7 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
   // const locale = params?.locale || 'en'
 
   const [activeIndex, setActiveIndex] = useState(0)
-  const [activeCategory, setActiveCategory] = useState('ALL')
+  const [activeCategory, setActiveCategory] = useState<CategoryType>(CategoryType.all)
   const [allLoaded, setAllLoaded] = useState(false)
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -96,7 +100,7 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
   }, [])
 
   const handleFilter = useCallback((category: string) => {
-    setActiveCategory(category)
+    setActiveCategory(category as CategoryType)
     const shuffle = shuffleInstance.current
     if (!shuffle) return
     shuffle.filter(category === 'ALL' ? () => true : category)
@@ -105,10 +109,10 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
   return (
     <div className='portfolio-area'>
       <div className='portfolio-content'>
-        <div className='portfolio-header'>
-          <h1 className='typography-h1'>Our Portfolio</h1>
+        <div className='portfolio-header' {...getEditModeKey('PortfolioInfo')}>
+          <h1 className='typography-h1'>{info?.Title || 'Our Portfolio'}</h1>
           <DividerIcon />
-          <p className='typography-body1'>Explore our collection of beautiful wedding moments captured through our lens.</p>
+          <p className='typography-body1'>{info?.Description || 'Explore our collection of beautiful wedding moments captured through our lens.'}</p>
         </div>
 
         {/* Slider */}
@@ -165,7 +169,9 @@ export const PortfolioView: FC<IPortfolioViewProps> = (props) => {
         </div>
 
         <div className='gallery-section'>
-          <h2 className='section-title typography-h2'>Gallery Highlights</h2>
+          <h2 className='section-title typography-h2' {...getEditModeKey('PortfolioInfo')}>
+            {info?.GalleryTitle || 'Gallery Highlights'}
+          </h2>
           <div className='gallery'>
             <TabFilter tabs={categories} activeTab={activeCategory} onTabChange={handleFilter} />
 
