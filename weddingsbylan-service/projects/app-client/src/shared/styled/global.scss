@@ -50,6 +50,8 @@
   --letter-spacing-tight: -0.015em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.05em;
+
+  --height-header: 70px;
 }
 
 @media (max-width: 768px) {
@@ -171,6 +173,17 @@ a {
     height: 100%;
     filter: var(--logo-filter, brightness(0) saturate(100%) invert(0%));
     transition: filter 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-area {
+    width: 120px;
+    height: 60px;
+    &.large {
+      width: 180px;
+      height: 75px;
+    }
   }
 }
 

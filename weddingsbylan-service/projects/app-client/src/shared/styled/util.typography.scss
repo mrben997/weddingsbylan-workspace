@@ -71,6 +71,28 @@ $letter-spacings: (
 @include typography(caption, map.get($font-sizes, caption), map.get($font-weights, caption), default, normal, none, var(--color-text-secondary));
 @include typography(overline, map.get($font-sizes, overline), map.get($font-weights, overline), default, wide, uppercase, var(--color-text-secondary));
 
+@media screen and (max-width: 768px) {
+  .typography-h1 {
+    font-size: 3rem;
+  }
+  .typography-h2 {
+    font-size: 2rem;
+  }
+  .typography-h3 {
+    font-size: 1.5rem;
+  }
+  .typography-h4 {
+    font-size: 1.25rem;
+  }
+  .typography-h5 {
+    font-size: 1.125rem;
+  }
+  .typography-h6 {
+    font-size: 1rem;
+  }
+  
+}
+
 // Color utility classes
 .text-primary {
   color: var(--color-primary) !important;

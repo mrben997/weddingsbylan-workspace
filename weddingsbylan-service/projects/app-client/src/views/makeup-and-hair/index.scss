@@ -5,6 +5,8 @@
   display: flex;
   gap: 70px;
   flex-direction: column;
+  width: 100svw;
+  overflow-y: hidden;
 
   .banner-area {
     position: relative;
@@ -52,6 +54,8 @@
             z-index: 2;
             text-align: center;
             cursor: default;
+            max-width: 100%;
+            padding: 0 20px;
 
             .title,
             .divider,
@@ -60,6 +64,12 @@
             .btn {
               opacity: 0;
               transform: translateY(40px);
+            }
+
+            .title,
+            .subtitle,
+            .desc {
+              color: #fff;
             }
 
             .divider {
@@ -278,6 +288,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 20px;
 
     .services-title {
       text-align: center;
@@ -463,9 +474,12 @@
 
       /* Mobile */
       @media (max-width: 440px) {
-        .service-grid-sizer,
-        .card-wrapper {
-          width: 100%;
+        &.service--two-items,
+        & {
+          .service-grid-sizer,
+          .card-wrapper {
+            width: 100%;
+          }
         }
 
         .card {
@@ -592,5 +606,11 @@
         min-width: 40px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .photography-page .note-section .list .item {
+    max-width: unset;
   }
 }

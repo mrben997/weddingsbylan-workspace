@@ -56,9 +56,9 @@ const AppHeader: FC<IAppHeaderProps> = (props) => {
     <header className='header-area'>
       <div className='header-content'>
         <div className='header-section header-left'>
-          <div className='logo-area theme-dark' {...getEditModeKey('Setting')}>
+          <a href='/' className='logo-area theme-dark' {...getEditModeKey('Setting')}>
             <div className='img-bg' style={{ backgroundImage: `url('${ImagePath}/${data?.LogoUrl}')` }}></div>
-          </div>
+          </a>
         </div>
         <div ref={menuAreaRef} className={`app-menu-area ${isActive ? 'active' : ''}`}>
           <button

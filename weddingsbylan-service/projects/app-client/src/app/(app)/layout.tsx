@@ -71,7 +71,7 @@ interface IRootLayoutProps {
 }
 
 export default async function RootLayout(props: Readonly<IRootLayoutProps>) {
-  const { children } = props
+  // const { children } = props
   const cookieStore = cookies()
   const p = await props.params
   // const locale = p.locale ?? 'vn'

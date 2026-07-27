@@ -284,6 +284,12 @@ $letter-spacings: (
 @include typography(caption, map.get($font-sizes, caption), map.get($font-weights, caption), default, normal, none, var(--color-text-secondary));
 @include typography(overline, map.get($font-sizes, overline), map.get($font-weights, overline), default, wide, uppercase, var(--color-text-secondary));
 
+@media screen and (max-width: 768px) {
+  @include typography(h1, 2.25rem, map.get($font-weights, h1), tight, tight, none, var(--color-text), var(--font-secondary));
+  @include typography(h2, 1.75rem, map.get($font-weights, h2), tight, normal, none, var(--color-text), var(--font-secondary));
+  @include typography(h3, 1.5rem, map.get($font-weights, h3), tight, normal, none, var(--color-text), var(--font-secondary));
+}
+
 // Color utility classes
 .text-primary {
   color: var(--color-primary) !important;
@@ -321,7 +327,12 @@ $letter-spacings: (
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, background-position 0.3s ease, opacity 0.2s ease-out;
+  transition:
+    color 0.2s ease-out,
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out,
+    background-position 0.3s ease,
+    opacity 0.2s ease-out;
   &.app-btn-primary {
     border: 1px solid var(--color-main, #000);
     color: var(--color-main, #000);

@@ -9,6 +9,9 @@
     z-index: 1;
     border-radius: 16px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    iframe {
+      height: 1800px;
+    }
   }
   .gg-map-area {
     width: 100%;
@@ -18,6 +21,18 @@
       width: 100%;
       height: 100%;
       border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contact-us-area {
+    padding-top: var(--height-header, 80px);
+    .contact-us-form-area {
+      padding: 60px 10px;
+      iframe {
+        height: 1900px;
+      }
     }
   }
 }
