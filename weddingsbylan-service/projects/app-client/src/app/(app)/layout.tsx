@@ -2,7 +2,7 @@ import '@/shared/styled/global.scss'
 
 import type { Metadata, ResolvingMetadata } from 'next'
 import NextScript from 'next/script'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { settingSService } from '@/services/setting.service'
 import { getTranslation } from '@/locales/helper'
 import FooterScripts from '@/views/global/footer-script'
