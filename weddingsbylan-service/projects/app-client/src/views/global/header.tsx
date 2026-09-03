@@ -21,6 +21,7 @@ const AppHeader: FC<IAppHeaderProps> = (props) => {
       { Title: 'Photography', Url: '/photography' },
       { Title: 'Makeup & Hair', Url: '/makeup-and-hair' },
       { Title: 'Portfolio', Url: '/portfolio' },
+      { Title: 'Our Team', Url: '/our-team' },
       { Title: 'Contacts Us', Url: '/contact-us' }
     ]
   }
