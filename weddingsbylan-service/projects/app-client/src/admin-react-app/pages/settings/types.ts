@@ -44,6 +44,9 @@ export interface ISettingStruct {
   PortfolioDetail: ISettingItemConfig<FormTypes.IPortfolioDetailForm>
   // Portfolio
   PortfolioInfo: ISettingItemConfig<FormTypes.IPortfolioInfoForm>
+  // Our Team
+  OurTeamInfo: ISettingItemConfig<FormTypes.IOurTeamInfoForm>
+  OurTeamMembers: ISettingItemConfig<FormTypes.IOurTeamMemberForm>
   // common
 }
 

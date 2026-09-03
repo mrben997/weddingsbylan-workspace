@@ -101,7 +101,7 @@ export const SettingStruct: ISettingStruct = {
         { key: 'Href', label: 'Href' },
         {
           key: 'ImageUrl',
-          label: 'ImageUrl',
+          label: 'ImageUrl (Desktop)',
           inputElement: createUploadImage({
             upload: async (file) => {
               await Sleep(1000)
@@ -110,6 +110,19 @@ export const SettingStruct: ISettingStruct = {
             },
             renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
             size: { width: 1920, height: 650 }
+          })
+        },
+        {
+          key: 'ImageMobileUrl',
+          label: 'ImageUrl (Mobile)',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 768, height: 1024 }
           })
         }
       ]
@@ -136,7 +149,7 @@ export const SettingStruct: ISettingStruct = {
       return [
         {
           key: 'ImageUrl',
-          label: 'ImageUrl',
+          label: 'ImageUrl (Desktop)',
           inputElement: createUploadImage({
             upload: async (file) => {
               await Sleep(1000)
@@ -145,6 +158,19 @@ export const SettingStruct: ISettingStruct = {
             },
             renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
             size: { width: 1920, height: 650 }
+          })
+        },
+        {
+          key: 'ImageMobileUrl',
+          label: 'ImageUrl (Mobile)',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 768, height: 1024 }
           })
         }
       ]
@@ -170,7 +196,7 @@ export const SettingStruct: ISettingStruct = {
       return [
         {
           key: 'ImageUrl',
-          label: 'Background Image',
+          label: 'Background Image (Desktop)',
           inputElement: createUploadImage({
             upload: async (file) => {
               await Sleep(1000)
@@ -179,6 +205,19 @@ export const SettingStruct: ISettingStruct = {
             },
             renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
             size: { width: 1920, height: 650 }
+          })
+        },
+        {
+          key: 'ImageMobileUrl',
+          label: 'Background Image (Mobile)',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 768, height: 1024 }
           })
         }
       ]
@@ -224,7 +263,7 @@ export const SettingStruct: ISettingStruct = {
       return [
         {
           key: 'ImageUrl',
-          label: 'ImageUrl',
+          label: 'ImageUrl (Desktop)',
           inputElement: createUploadImage({
             upload: async (file) => {
               await Sleep(1000)
@@ -233,6 +272,19 @@ export const SettingStruct: ISettingStruct = {
             },
             renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
             size: { width: 1920, height: 650 }
+          })
+        },
+        {
+          key: 'ImageMobileUrl',
+          label: 'ImageUrl (Mobile)',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 768, height: 1024 }
           })
         }
       ]
@@ -344,6 +396,42 @@ export const SettingStruct: ISettingStruct = {
         //     size: { width: 1920, height: 650 }
         //   })
         // }
+      ]
+    }
+  },
+  //#endregion
+  //#region Our Team Page
+  OurTeamInfo: {
+    title: 'Our Team Info',
+    DefineKey: { Area: 'OurTeam', FormKey: 'OurTeamInfo' },
+    isSingle: true,
+    renderForm: () => {
+      return [
+        { key: 'Title', label: 'Title' },
+        { key: 'Description', label: 'Description', inputElement: CreateInputTextMultiline({ options: { maxLength: 1000 } }) }
+      ]
+    }
+  },
+  OurTeamMembers: {
+    title: 'Our Team Members',
+    DefineKey: { Area: 'OurTeam', FormKey: 'OurTeamMembers' },
+    renderForm: () => {
+      return [
+        { key: 'Name', label: 'Name' },
+        { key: 'Role', label: 'Role' },
+        {
+          key: 'ImageUrl',
+          label: 'ImageUrl',
+          inputElement: createUploadImage({
+            upload: async (file) => {
+              await Sleep(1000)
+              const data = await serviceUpload.uploadSettingImage(file)
+              return await Promise.resolve(data.filename)
+            },
+            renderUrl: (filename?: string) => `/api/images/settings/${filename}`,
+            size: { width: 800, height: 1000 }
+          })
+        }
       ]
     }
   }

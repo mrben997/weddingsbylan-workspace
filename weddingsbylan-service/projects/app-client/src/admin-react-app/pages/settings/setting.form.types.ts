@@ -27,6 +27,7 @@ export interface IBannerForm extends IFormModel {
   Title: string
   Content: string
   ImageUrl: string
+  ImageMobileUrl?: string
   Href: string
 }
 
@@ -34,6 +35,7 @@ export interface IHomePhotographyForm extends IFormModel {
   Title: string
   Content: string
   ImageUrl: string
+  ImageMobileUrl?: string
   Href: string
 }
 
@@ -41,6 +43,7 @@ export interface IHomeMakeupAndHairForm extends IFormModel {
   Title: string
   Content: string
   ImageUrl: string
+  ImageMobileUrl?: string
   Href: string
 }
 
@@ -49,6 +52,7 @@ export interface IHomePortfolioForm extends IFormModel {
   Description: string
   Href: string
   ImageUrl: string
+  ImageMobileUrl?: string
 }
 
 export interface IServiceForm extends IFormModel {
@@ -69,6 +73,19 @@ export interface IAboutForm extends IFormModel {
   SubTitle: string
   Content: string
   ImageUrl: string
+}
+//#endregion
+
+//#region Our Team Page
+export interface IOurTeamInfoForm extends IFormModel {
+  Title?: string
+  Description?: string
+}
+
+export interface IOurTeamMemberForm extends IFormModel {
+  Name: string
+  Role: string
+  ImageUrl?: string
 }
 //#endregion
 

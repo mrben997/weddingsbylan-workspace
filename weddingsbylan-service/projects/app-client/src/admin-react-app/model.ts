@@ -15,7 +15,7 @@ export interface INews {
 export interface IService extends INews {}
 
 export interface IRecruitment extends INews {}
-export type ESettingAreaBase = 'Global' | 'Home' | 'MakeupAndHair' | 'Photography' | 'Portfolio'
+export type ESettingAreaBase = 'Global' | 'Home' | 'MakeupAndHair' | 'Photography' | 'Portfolio' | 'OurTeam'
 export type ESettingArea = ESettingAreaBase | string
 export interface ISetting {
   Id: number
