@@ -13,12 +13,8 @@ const CustomSwiperSlide: FC<ICustomSwiperSlideProps> = (props) => {
   const isMobile = useMediaQuery('(max-width:768px)')
 
   const imageUrl = useMemo(() => {
-    if (!props.imageUrl || !props.imageMobileUrl) return props.imageUrl
-    let url = props.imageUrl
-    if (isMobile && props.imageMobileUrl) {
-      url = props.imageMobileUrl
-    }
-    return url
+    if (isMobile && props.imageMobileUrl) return props.imageMobileUrl
+    return props.imageUrl
   }, [props.imageUrl, props.imageMobileUrl, isMobile])
 
   const mapProps: Record<string, any> = {}

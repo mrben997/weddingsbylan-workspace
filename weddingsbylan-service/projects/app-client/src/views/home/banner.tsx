@@ -1,4 +1,6 @@
+'use client'
 import React, { FC } from 'react'
+import { useMediaQuery } from '@mui/material'
 import { ImagePath } from '@/shared/config'
 import { getEditModeKey } from '@/shared/components/edit.mode'
 import { IBannerForm } from '@/admin-react-app/pages/settings/setting.form.types'
@@ -8,7 +10,14 @@ interface IHomeBannerProps {
 }
 
 const HomeBanner: FC<IHomeBannerProps> = (props) => {
+  const isMobile = useMediaQuery('(max-width:768px)')
   const data = Array.isArray(props.data) ? props.data : props.data ? [props.data] : []
+
+  const getBgImage = (item: IBannerForm) => {
+    const url = isMobile && item.ImageMobileUrl ? item.ImageMobileUrl : item.ImageUrl
+    return url ? `url('${ImagePath}/${url}')` : undefined
+  }
+
   return (
     <section className='section' {...getEditModeKey('Banner')}>
       <div className='inner-carousel'>
@@ -16,7 +25,7 @@ const HomeBanner: FC<IHomeBannerProps> = (props) => {
           <div className='swiper-wrapper'>
             {data.map((item, index) => (
               <div className='swiper-slide' key={index}>
-                <div className='carousel-item left' style={{ backgroundImage: `url('${ImagePath}/${item.ImageUrl}')` }}>
+                <div className='carousel-item left' style={{ backgroundImage: getBgImage(item) }}>
                   {/* <div className='carousel-item-content'>
                     <h1 className='typography-caption sub-title'>{item.SubTitle}</h1>
                     <h2 className='typography-h1 mt--1 title'>{item.Title}</h2>
